@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthPalace - Confirmación de reserva</title>
+
+  <!-- ================================================
+       COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
+       <link rel="stylesheet" href="css/styles.css" />
+       ================================================ -->
+</head>
+
+<body>
+
+  <!-- ================================================
+       SECCIÓN 1: NAVBAR
+       ================================================ -->
+  <header id="encabezado">
+    <nav id="navbar">
+
+      <a href="index.html" id="logo">NorthPalace</a>
+
+      <ul id="menu-nav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="propiedades.html">Propiedades</a></li>
+        <li><a href="detalle.html">Ver detalle</a></li>
+        <li><a href="confirmacion.html">Mis reservas</a></li>
+      </ul>
+
+      <div id="botones-sesion">
+        <a href="#" id="btn-login">Iniciar sesión</a>
+        <a href="#" id="btn-registro">Registrarse</a>
+      </div>
+
+    </nav>
+  </header>
+  <!-- FIN NAVBAR -->
+
+
+  <!-- ================================================
+       SECCIÓN 2: MENSAJE DE ÉXITO
+       COMPAÑERO DE JS: mostrar este bloque solo si
+       la reserva fue completada correctamente.
+       Ocultar id="seccion-sin-reserva" en ese caso.
+       ================================================ -->
+  <section id="seccion-exito" hidden>
+
+    <div id="icono-exito">&#10003;</div>
+    <h1 id="titulo-exito">¡Reserva confirmada!</h1>
+    <p id="subtitulo-exito">
+      Tu estancia en Chihuahua está lista. Te enviamos los detalles a tu correo.
+    </p>
+
+    <!-- Número de confirmación generado por JS -->
+    <p id="numero-confirmacion">
+      Número de confirmación: <strong id="codigo-reserva"></strong>
+    </p>
+
+  </section>
+  <!-- FIN MENSAJE ÉXITO -->
+
+
+  <!-- ================================================
+       SECCIÓN 3: RESUMEN DE LA RESERVA
+       COMPAÑERO DE JS: llenar todos los campos vacíos
+       con los datos guardados desde detalle.html
+       ================================================ -->
+  <section id="resumen-reserva" hidden>
+    <h2>Resumen de tu reserva</h2>
+
+    <div id="contenido-resumen">
+
+      <!-- Foto e info básica de la propiedad -->
+      <div id="resumen-propiedad">
+        <img src="" alt="" id="resumen-img-propiedad" />
+
+        <div id="resumen-info-propiedad">
+          <!-- JS llena con los datos de la propiedad reservada -->
+          <h3 id="resumen-titulo-propiedad"></h3>
+          <p id="resumen-tipo-propiedad"></p>
+          <address id="resumen-direccion-propiedad"></address>
+
+          <div id="resumen-rating-propiedad" data-rating="">
+            <span id="resumen-estrellas-propiedad"></span>
+            <span id="resumen-num-resenas-propiedad"></span>
+          </div>
+        </div>
+      </div>
+      <!-- FIN INFO PROPIEDAD -->
+
+
+      <!-- Detalles de la estancia -->
+      <div id="resumen-estancia">
+        <h3>Detalles de la estancia</h3>
+
+        <table id="tabla-resumen">
+          <tbody>
+            <tr id="fila-entrada">
+              <th scope="row">Fecha de entrada</th>
+              <!-- JS llena con la fecha seleccionada -->
+              <td id="resumen-fecha-entrada"></td>
+            </tr>
+            <tr id="fila-salida">
+              <th scope="row">Fecha de salida</th>
+              <td id="resumen-fecha-salida"></td>
+            </tr>
+            <tr id="fila-noches">
+              <th scope="row">Número de noches</th>
+              <td id="resumen-noches"></td>
+            </tr>
+            <tr id="fila-huespedes">
+              <th scope="row">Huéspedes</th>
+              <td id="resumen-huespedes"></td>
+            </tr>
+            <tr id="fila-checkin">
+              <th scope="row">Check-in</th>
+              <td>A partir de las 3:00 PM</td>
+            </tr>
+            <tr id="fila-checkout">
+              <th scope="row">Check-out</th>
+              <td>Antes de las 12:00 PM</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- FIN DETALLES ESTANCIA -->
+
+
+      <!-- Desglose del costo -->
+      <div id="resumen-costo">
+        <h3>Desglose del costo</h3>
+
+        <table id="tabla-costo">
+          <tbody>
+            <tr id="fila-costo-noches">
+              <th scope="row" id="resumen-texto-noches"></th>
+              <td id="resumen-costo-noches"></td>
+            </tr>
+            <tr id="fila-costo-limpieza">
+              <th scope="row">Tarifa de limpieza</th>
+              <td id="resumen-costo-limpieza"></td>
+            </tr>
+            <tr id="fila-costo-servicio">
+              <th scope="row">Tarifa de servicio NorthPalace</th>
+              <td id="resumen-costo-servicio"></td>
+            </tr>
+            <tr id="fila-costo-total">
+              <th scope="row"><strong>Total</strong></th>
+              <td><strong id="resumen-costo-total"></strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- FIN DESGLOSE COSTO -->
+
+
+      <!-- Datos del huésped -->
+      <div id="resumen-huesped">
+        <h3>Datos del huésped</h3>
+
+        <table id="tabla-huesped">
+          <tbody>
+            <tr id="fila-nombre-huesped">
+              <th scope="row">Nombre</th>
+              <td id="resumen-nombre-huesped"></td>
+            </tr>
+            <tr id="fila-email-huesped">
+              <th scope="row">Correo electrónico</th>
+              <td id="resumen-email-huesped"></td>
+            </tr>
+            <tr id="fila-telefono-huesped">
+              <th scope="row">Teléfono</th>
+              <td id="resumen-telefono-huesped"></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- FIN DATOS HUÉSPED -->
+
+    </div>
+    <!-- FIN CONTENIDO RESUMEN -->
+
+  </section>
+  <!-- FIN RESUMEN RESERVA -->
+
+
+  <!-- ================================================
+       SECCIÓN 4: FORMULARIO DE DATOS DEL HUÉSPED
+       COMPAÑERO DE JS:
+         - Mostrar esta sección al llegar desde detalle.html
+         - Al hacer clic en id="btn-confirmar-reserva":
+             1. Validar todos los campos
+             2. Generar un código de reserva aleatorio
+             3. Guardar todos los datos
+             4. Ocultar esta sección
+             5. Mostrar id="seccion-exito" y id="resumen-reserva"
+             6. Mostrar alert() con el resumen de la reserva
+       ================================================ -->
+  <section id="seccion-formulario-huesped">
+    <h2>Completa tu reserva</h2>
+
+    <!-- Resumen breve de lo que se va a reservar -->
+    <div id="mini-resumen">
+      <img src="" alt="" id="mini-img-propiedad" />
+      <div id="mini-info">
+        <p id="mini-titulo-propiedad"></p>
+        <p id="mini-fechas"></p>
+        <p id="mini-total"></p>
+      </div>
+    </div>
+
+
+    <!-- Datos personales del huésped -->
+    <fieldset id="fieldset-datos-huesped">
+      <legend>Tus datos</legend>
+
+      <div id="campo-nombre-huesped">
+        <label for="input-nombre-huesped">Nombre completo</label>
+        <input
+          type="text"
+          id="input-nombre-huesped"
+          name="nombreHuesped"
+          placeholder="Ej. Juan Pérez"
+        />
+      </div>
+
+      <div id="campo-email-huesped">
+        <label for="input-email-huesped">Correo electrónico</label>
+        <input
+          type="email"
+          id="input-email-huesped"
+          name="emailHuesped"
+          placeholder="tu@email.com"
+        />
+      </div>
+
+      <div id="campo-telefono-huesped">
+        <label for="input-telefono-huesped">Teléfono</label>
+        <input
+          type="tel"
+          id="input-telefono-huesped"
+          name="telefonoHuesped"
+          placeholder="614 000 0000"
+        />
+      </div>
+
+    </fieldset>
+
+
+    <!-- Solicitudes especiales -->
+    <fieldset id="fieldset-solicitudes">
+      <legend>Solicitudes especiales (opcional)</legend>
+
+      <div id="campo-solicitudes">
+        <label for="textarea-solicitudes">¿Tienes alguna solicitud especial?</label>
+        <textarea
+          id="textarea-solicitudes"
+          name="solicitudesEspeciales"
+          rows="3"
+          placeholder="Ej. llegada tardía, cuna para bebé, etc."
+        ></textarea>
+      </div>
+
+    </fieldset>
+
+
+    <!-- Aceptar términos -->
+    <div id="campo-terminos">
+      <input type="checkbox" id="check-terminos" name="terminos" />
+      <label for="check-terminos">
+        Acepto los <a href="#">términos y condiciones</a> de NorthPalace
+      </label>
+    </div>
+
+
+    <!-- Botón confirmar -->
+    <!-- COMPAÑERO DE JS: validar, generar código, mostrar alert y secciones de éxito -->
+    <button type="button" id="btn-confirmar-reserva">Confirmar reserva</button>
+
+    <!-- COMPAÑERO DE JS: mostrar si hay campos vacíos o términos sin aceptar -->
+    <p id="error-confirmacion" hidden>
+      Por favor completa todos los campos y acepta los términos y condiciones.
+    </p>
+
+  </section>
+  <!-- FIN FORMULARIO HUÉSPED -->
+
+
+  <!-- ================================================
+       SECCIÓN 5: SIN RESERVA ACTIVA
+       COMPAÑERO DE JS: mostrar esta sección si el usuario
+       llega directo a esta página sin haber reservado nada
+       ================================================ -->
+  <section id="seccion-sin-reserva">
+    <h2>No tienes ninguna reserva activa</h2>
+    <p>Explora nuestras propiedades en Chihuahua y haz tu primera reserva.</p>
+    <a href="propiedades.html" id="btn-ir-propiedades">Ver propiedades</a>
+  </section>
+  <!-- FIN SIN RESERVA -->
+
+
+  <!-- ================================================
+       SECCIÓN 6: FOOTER
+       ================================================ -->
+  <footer id="footer-principal">
+
+    <div id="footer-descripcion">
+      <h3>NorthPalace</h3>
+      <p>Las mejores casas y apartamentos de Chihuahua, capital, a tu alcance.</p>
+      <div id="redes-sociales">
+        <a href="#" id="link-facebook" aria-label="Facebook">Facebook</a>
+        <a href="#" id="link-instagram" aria-label="Instagram">Instagram</a>
+        <a href="#" id="link-twitter" aria-label="Twitter">Twitter</a>
+      </div>
+    </div>
+
+    <div id="footer-nav">
+      <h4>Explorar</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="propiedades.html">Propiedades</a></li>
+        <li><a href="detalle.html">Detalle</a></li>
+      </ul>
+    </div>
+
+    <div id="footer-soporte">
+      <h4>Soporte</h4>
+      <ul>
+        <li><a href="#">Ayuda</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Privacidad</a></li>
+      </ul>
+    </div>
+
+    <div id="footer-newsletter">
+      <h4>Novedades</h4>
+      <p>Suscríbete para recibir las mejores ofertas en Chihuahua.</p>
+      <div id="form-newsletter">
+        <input type="email" id="input-newsletter" placeholder="tu@email.com" />
+        <button type="button" id="btn-newsletter">Suscribirse</button>
+      </div>
+      <p id="mensaje-newsletter" hidden>¡Gracias por suscribirte!</p>
+    </div>
+
+    <div id="footer-copyright">
+      <p>© 2025 NorthPalace. Todos los derechos reservados. Chihuahua, Chih., México.</p>
+    </div>
+
+  </footer>
+  <!-- FIN FOOTER -->
+
+  <!-- ================================================
+       COMPAÑERO DE JS: enlaza aquí tu archivo
+       <script src="js/script.js"></script>
+
+       Al cargar esta página JS debe:
+         1. Revisar si hay datos de reserva guardados
+            - Si NO hay datos → mostrar id="seccion-sin-reserva"
+                                ocultar id="seccion-formulario-huesped"
+            - Si SÍ hay datos → ocultar id="seccion-sin-reserva"
+                                mostrar id="seccion-formulario-huesped"
+         2. Llenar el mini resumen:
+              id="mini-img-propiedad"   → foto de la propiedad
+              id="mini-titulo-propiedad"→ nombre
+              id="mini-fechas"          → "12 ene - 15 ene · 3 noches"
+              id="mini-total"           → total a pagar
+         3. Al hacer clic en id="btn-confirmar-reserva":
+              a. Validar nombre, email, teléfono y id="check-terminos"
+              b. Si hay error → mostrar id="error-confirmacion"
+              c. Si todo ok:
+                 - Generar código aleatorio → llenar id="codigo-reserva"
+                 - Llenar todas las celdas del resumen:
+                     id="resumen-titulo-propiedad", id="resumen-direccion-propiedad"
+                     id="resumen-fecha-entrada", id="resumen-fecha-salida"
+                     id="resumen-noches", id="resumen-huespedes"
+                     id="resumen-texto-noches", id="resumen-costo-noches"
+                     id="resumen-costo-limpieza", id="resumen-costo-servicio"
+                     id="resumen-costo-total"
+                     id="resumen-nombre-huesped", id="resumen-email-huesped"
+                     id="resumen-telefono-huesped"
+                 - Ocultar id="seccion-formulario-huesped"
+                 - Mostrar id="seccion-exito" y id="resumen-reserva"
+                 - Mostrar alert() con resumen: nombre, propiedad,
+                   fechas y total
+       ================================================ -->
+
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthPalace - Tu hogar en Chihuahua</title>
+
+  <!-- ================================================
+       COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
+       <link rel="stylesheet" href="css/styles.css" />
+       ================================================ -->
+</head>
+
+<body>
+
+  <!-- ================================================
+       SECCIÓN 1: NAVBAR
+       ================================================ -->
+  <header id="encabezado">
+    <nav id="navbar">
+
+      <a href="index.html" id="logo">NorthPalace</a>
+
+      <ul id="menu-nav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="propiedades.html">Propiedades</a></li>
+        <li><a href="detalle.html">Ver detalle</a></li>
+        <li><a href="confirmacion.html">Mis reservas</a></li>
+      </ul>
+
+      <div id="botones-sesion">
+        <a href="#" id="btn-login">Iniciar sesión</a>
+        <a href="#" id="btn-registro">Registrarse</a>
+      </div>
+
+    </nav>
+  </header>
+  <!-- FIN NAVBAR -->
+
+
+  <!-- ================================================
+       SECCIÓN 2: HERO - Banner con buscador
+       COMPAÑERO DE JS: validar que los campos no estén
+       vacíos al hacer clic en "Buscar"
+       ================================================ -->
+  <section id="hero">
+
+    <div id="hero-texto">
+      <h1>Encuentra tu hogar en Chihuahua</h1>
+      <p>Las mejores casas y apartamentos en la ciudad más grande del norte</p>
+    </div>
+
+    <div id="buscador">
+
+      <div id="campo-destino">
+        <label for="input-destino">¿En qué colonia o zona?</label>
+        <input
+          type="text"
+          id="input-destino"
+          name="destino"
+          placeholder="Ej. Centro, Campestre, Mirador..."
+        />
+      </div>
+
+      <div id="campo-entrada">
+        <label for="input-fecha-entrada">Fecha de entrada</label>
+        <input
+          type="date"
+          id="input-fecha-entrada"
+          name="fechaEntrada"
+        />
+      </div>
+
+      <div id="campo-salida">
+        <label for="input-fecha-salida">Fecha de salida</label>
+        <input
+          type="date"
+          id="input-fecha-salida"
+          name="fechaSalida"
+        />
+      </div>
+
+      <div id="campo-huespedes">
+        <label for="input-huespedes">Huéspedes</label>
+        <input
+          type="number"
+          id="input-huespedes"
+          name="huespedes"
+          min="1"
+          max="20"
+          placeholder="1"
+        />
+      </div>
+
+      <!-- COMPAÑERO DE JS: conectar id="btn-buscar" para validar -->
+      <button type="button" id="btn-buscar">Buscar</button>
+
+      <!-- COMPAÑERO DE JS: mostrar u ocultar según validación -->
+      <p id="error-busqueda" hidden>
+        Por favor completa todos los campos antes de buscar.
+      </p>
+
+    </div>
+
+  </section>
+  <!-- FIN HERO -->
+
+
+  <!-- ================================================
+       SECCIÓN 3: FILTROS RÁPIDOS
+       COMPAÑERO DE JS: al hacer clic en un filtro,
+       resaltar el botón activo y filtrar las cards
+       usando el atributo data-tipo de cada card
+       ================================================ -->
+  <section id="filtros-rapidos">
+    <div id="lista-filtros">
+      <button type="button" id="filtro-todos"       data-filtro="todos">Todos</button>
+      <button type="button" id="filtro-casa"        data-filtro="casa">Casas</button>
+      <button type="button" id="filtro-apartamento" data-filtro="apartamento">Apartamentos</button>
+      <button type="button" id="filtro-centro"      data-filtro="centro">Centro</button>
+      <button type="button" id="filtro-norte"       data-filtro="norte">Zona Norte</button>
+      <button type="button" id="filtro-sur"         data-filtro="sur">Zona Sur</button>
+    </div>
+  </section>
+  <!-- FIN FILTROS -->
+
+
+  <!-- ================================================
+       SECCIÓN 4: PROPIEDADES DESTACADAS
+       COMPAÑERO DE JS:
+         - Filtrar cards por data-tipo
+         - Botón favorito: alternar entre corazón vacío/lleno
+         - Generar estrellas dinámicamente con data-rating
+       ================================================ -->
+  <section id="propiedades-destacadas">
+    <h2>Propiedades destacadas en Chihuahua</h2>
+
+    <div id="grid-propiedades">
+
+      <!-- CARD 1 -->
+      <article id="card-prop-1" data-tipo="casa">
+        <img src="img/casa1.jpg" alt="Casa en Fraccionamiento Campestre Chihuahua" />
+        <button type="button" id="fav-1" data-id="1" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-1">Casa</span>
+
+        <h3>Casa en Frac. Campestre</h3>
+        <address id="direccion-1">
+          Calle Nogal 415, Frac. Campestre, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-1" data-rating="4.8">
+          &#9733;&#9733;&#9733;&#9733;&#9734;
+          <span>4.8 (32 reseñas)</span>
+        </div>
+
+        <p id="precio-1"><strong>$850</strong> / noche</p>
+
+        <ul id="caracteristicas-1">
+          <li>3 cuartos</li>
+          <li>6 huéspedes</li>
+          <li>WiFi</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-1">Ver propiedad</a>
+      </article>
+
+      <!-- CARD 2 -->
+      <article id="card-prop-2" data-tipo="apartamento">
+        <img src="img/apartamento1.jpg" alt="Apartamento en Centro Histórico Chihuahua" />
+        <button type="button" id="fav-2" data-id="2" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-2">Apartamento</span>
+
+        <h3>Apartamento en el Centro Histórico</h3>
+        <address id="direccion-2">
+          Av. Independencia 732, Centro, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-2" data-rating="4.5">
+          &#9733;&#9733;&#9733;&#9733;&#9734;
+          <span>4.5 (18 reseñas)</span>
+        </div>
+
+        <p id="precio-2"><strong>$620</strong> / noche</p>
+
+        <ul id="caracteristicas-2">
+          <li>2 cuartos</li>
+          <li>4 huéspedes</li>
+          <li>WiFi</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-2">Ver propiedad</a>
+      </article>
+
+      <!-- CARD 3 -->
+      <article id="card-prop-3" data-tipo="casa">
+        <img src="img/casa2.jpg" alt="Casa residencial en El Mirador Chihuahua" />
+        <button type="button" id="fav-3" data-id="3" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-3">Casa</span>
+
+        <h3>Casa residencial en El Mirador</h3>
+        <address id="direccion-3">
+          Calle Petirrojo 108, Col. El Mirador, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-3" data-rating="5.0">
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+          <span>5.0 (47 reseñas)</span>
+        </div>
+
+        <p id="precio-3"><strong>$1,500</strong> / noche</p>
+
+        <ul id="caracteristicas-3">
+          <li>4 cuartos</li>
+          <li>8 huéspedes</li>
+          <li>WiFi</li>
+          <li>Alberca</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-3">Ver propiedad</a>
+      </article>
+
+      <!-- CARD 4 -->
+      <article id="card-prop-4" data-tipo="apartamento">
+        <img src="img/apartamento2.jpg" alt="Apartamento moderno en San Felipe Chihuahua" />
+        <button type="button" id="fav-4" data-id="4" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-4">Apartamento</span>
+
+        <h3>Apartamento moderno en San Felipe</h3>
+        <address id="direccion-4">
+          Blvd. Ortiz Mena 1540, Col. San Felipe, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-4" data-rating="4.7">
+          &#9733;&#9733;&#9733;&#9733;&#9734;
+          <span>4.7 (25 reseñas)</span>
+        </div>
+
+        <p id="precio-4"><strong>$750</strong> / noche</p>
+
+        <ul id="caracteristicas-4">
+          <li>2 cuartos</li>
+          <li>4 huéspedes</li>
+          <li>WiFi</li>
+          <li>Estacionamiento</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-4">Ver propiedad</a>
+      </article>
+
+      <!-- CARD 5 -->
+      <article id="card-prop-5" data-tipo="casa">
+        <img src="img/casa3.jpg" alt="Casa amplia en Las Granjas Chihuahua" />
+        <button type="button" id="fav-5" data-id="5" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-5">Casa</span>
+
+        <h3>Casa amplia en Las Granjas</h3>
+        <address id="direccion-5">
+          Calle Durazno 223, Col. Las Granjas, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-5" data-rating="4.3">
+          &#9733;&#9733;&#9733;&#9733;&#9734;
+          <span>4.3 (11 reseñas)</span>
+        </div>
+
+        <p id="precio-5"><strong>$700</strong> / noche</p>
+
+        <ul id="caracteristicas-5">
+          <li>3 cuartos</li>
+          <li>6 huéspedes</li>
+          <li>WiFi</li>
+          <li>Jardín</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-5">Ver propiedad</a>
+      </article>
+
+      <!-- CARD 6 -->
+      <article id="card-prop-6" data-tipo="apartamento">
+        <img src="img/apartamento3.jpg" alt="Penthouse en Zona Dorada Chihuahua" />
+        <button type="button" id="fav-6" data-id="6" aria-label="Agregar a favoritos">&#9825;</button>
+        <span id="badge-6">Apartamento</span>
+
+        <h3>Penthouse en Zona Dorada</h3>
+        <address id="direccion-6">
+          Av. Valle Escondido 3210, Zona Dorada, Chihuahua, Chih.
+        </address>
+
+        <div id="rating-6" data-rating="4.9">
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+          <span>4.9 (61 reseñas)</span>
+        </div>
+
+        <p id="precio-6"><strong>$1,800</strong> / noche</p>
+
+        <ul id="caracteristicas-6">
+          <li>3 cuartos</li>
+          <li>6 huéspedes</li>
+          <li>WiFi</li>
+          <li>Aire acondicionado</li>
+        </ul>
+
+        <a href="detalle.html" id="btn-ver-6">Ver propiedad</a>
+      </article>
+
+    </div>
+    <!-- FIN GRID -->
+
+    <div id="ver-todas">
+      <a href="propiedades.html" id="btn-ver-todas">Ver todas las propiedades en Chihuahua</a>
+    </div>
+
+  </section>
+  <!-- FIN PROPIEDADES DESTACADAS -->
+
+
+  <!-- ================================================
+       SECCIÓN 5: BANNER - LLAMADA A LA ACCIÓN
+       El botón abre el modal de publicar propiedad
+       COMPAÑERO DE JS: llamar dialog.showModal()
+       sobre id="modal-publicar"
+       ================================================ -->
+  <section id="banner-cta">
+    <h2>¿Tienes una propiedad en Chihuahua para rentar?</h2>
+    <p>Publica tu casa o apartamento en NorthPalace y empieza a generar ingresos. Es gratis y fácil.</p>
+
+    <!-- COMPAÑERO DE JS: al hacer clic → document.getElementById('modal-publicar').showModal() -->
+    <button type="button" id="btn-publicar">Publicar mi propiedad</button>
+  </section>
+  <!-- FIN BANNER CTA -->
+
+
+  <!-- ================================================
+       MODAL: FORMULARIO PUBLICAR PROPIEDAD
+       Se abre al hacer clic en id="btn-publicar"
+       COMPAÑERO DE JS:
+         - Abrir  → id="btn-publicar" llama a modal.showModal()
+         - Cerrar → id="btn-cerrar-modal" llama a modal.close()
+         - Validar campos al enviar → id="btn-enviar-publicar"
+         - Mostrar mensaje de éxito → id="mensaje-publicar-ok"
+       ================================================ -->
+  <dialog id="modal-publicar">
+
+    <div id="modal-encabezado">
+      <h2>Publica tu propiedad en NorthPalace</h2>
+      <!-- COMPAÑERO DE JS: cerrar el modal -->
+      <button type="button" id="btn-cerrar-modal" aria-label="Cerrar">X</button>
+    </div>
+
+    <div id="modal-cuerpo">
+
+      <!-- Datos del propietario -->
+      <fieldset id="fieldset-propietario">
+        <legend>Tus datos</legend>
+
+        <div id="campo-nombre-prop">
+          <label for="input-nombre-prop">Nombre completo</label>
+          <input
+            type="text"
+            id="input-nombre-prop"
+            name="nombrePropietario"
+            placeholder="Ej. Juan Pérez"
+          />
+        </div>
+
+        <div id="campo-email-prop">
+          <label for="input-email-prop">Correo electrónico</label>
+          <input
+            type="email"
+            id="input-email-prop"
+            name="emailPropietario"
+            placeholder="tu@email.com"
+          />
+        </div>
+
+        <div id="campo-telefono-prop">
+          <label for="input-telefono-prop">Teléfono</label>
+          <input
+            type="tel"
+            id="input-telefono-prop"
+            name="telefonoPropietario"
+            placeholder="614 000 0000"
+          />
+        </div>
+      </fieldset>
+
+      <!-- Datos de la propiedad -->
+      <fieldset id="fieldset-propiedad">
+        <legend>Datos de la propiedad</legend>
+
+        <div id="campo-titulo-prop">
+          <label for="input-titulo-prop">Título del anuncio</label>
+          <input
+            type="text"
+            id="input-titulo-prop"
+            name="tituloPropiedad"
+            placeholder="Ej. Casa amplia con jardín en Campestre"
+          />
+        </div>
+
+        <div id="campo-tipo-prop">
+          <label for="select-tipo-prop">Tipo de propiedad</label>
+          <select id="select-tipo-prop" name="tipoPropiedad">
+            <option value="">-- Selecciona --</option>
+            <option value="casa">Casa</option>
+            <option value="apartamento">Apartamento</option>
+          </select>
+        </div>
+
+        <div id="campo-direccion-prop">
+          <label for="input-direccion-prop">Dirección completa</label>
+          <input
+            type="text"
+            id="input-direccion-prop"
+            name="direccionPropiedad"
+            placeholder="Ej. Calle Nogal 415, Frac. Campestre, Chihuahua, Chih."
+          />
+        </div>
+
+        <div id="campo-zona-prop">
+          <label for="select-zona-prop">Zona de la ciudad</label>
+          <select id="select-zona-prop" name="zonaPropiedad">
+            <option value="">-- Selecciona --</option>
+            <option value="centro">Centro Histórico</option>
+            <option value="norte">Zona Norte</option>
+            <option value="sur">Zona Sur</option>
+            <option value="oriente">Zona Oriente</option>
+            <option value="poniente">Zona Poniente</option>
+          </select>
+        </div>
+
+        <div id="campo-cuartos-prop">
+          <label for="input-cuartos-prop">Número de cuartos</label>
+          <input
+            type="number"
+            id="input-cuartos-prop"
+            name="cuartosPropiedad"
+            min="1"
+            max="20"
+            placeholder="1"
+          />
+        </div>
+
+        <div id="campo-huespedes-max">
+          <label for="input-huespedes-max">Capacidad máxima de huéspedes</label>
+          <input
+            type="number"
+            id="input-huespedes-max"
+            name="huespedesMax"
+            min="1"
+            max="30"
+            placeholder="1"
+          />
+        </div>
+
+        <div id="campo-precio-prop">
+          <label for="input-precio-prop">Precio por noche ($)</label>
+          <input
+            type="number"
+            id="input-precio-prop"
+            name="precioPropiedad"
+            min="1"
+            placeholder="Ej. 800"
+          />
+        </div>
+
+        <div id="campo-descripcion-prop">
+          <label for="textarea-descripcion-prop">Descripción de la propiedad</label>
+          <textarea
+            id="textarea-descripcion-prop"
+            name="descripcionPropiedad"
+            rows="4"
+            placeholder="Describe los espacios, el entorno y lo que hace especial a tu propiedad..."
+          ></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Amenidades disponibles -->
+      <fieldset id="fieldset-amenidades">
+        <legend>Amenidades disponibles</legend>
+
+        <div>
+          <input type="checkbox" id="am-wifi" name="amenidades" value="wifi" />
+          <label for="am-wifi">WiFi</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-estacionamiento" name="amenidades" value="estacionamiento" />
+          <label for="am-estacionamiento">Estacionamiento</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-alberca" name="amenidades" value="alberca" />
+          <label for="am-alberca">Alberca</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-cocina" name="amenidades" value="cocina" />
+          <label for="am-cocina">Cocina equipada</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-mascotas" name="amenidades" value="mascotas" />
+          <label for="am-mascotas">Se admiten mascotas</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-aire" name="amenidades" value="aire" />
+          <label for="am-aire">Aire acondicionado</label>
+        </div>
+        <div>
+          <input type="checkbox" id="am-jardin" name="amenidades" value="jardin" />
+          <label for="am-jardin">Jardín</label>
+        </div>
+      </fieldset>
+
+      <!-- Botón enviar -->
+      <!-- COMPAÑERO DE JS: validar todos los campos y mostrar mensaje de éxito -->
+      <div id="modal-acciones">
+        <button type="button" id="btn-enviar-publicar">Publicar propiedad</button>
+        <button type="button" id="btn-cancelar-modal">Cancelar</button>
+      </div>
+
+      <!-- COMPAÑERO DE JS: mostrar este mensaje tras envío exitoso -->
+      <p id="mensaje-publicar-ok" hidden>
+        ¡Tu propiedad fue enviada con éxito! Nos pondremos en contacto contigo pronto.
+      </p>
+
+      <!-- COMPAÑERO DE JS: mostrar si hay campos vacíos -->
+      <p id="error-publicar" hidden>
+        Por favor completa todos los campos obligatorios.
+      </p>
+
+    </div>
+    <!-- FIN MODAL CUERPO -->
+
+  </dialog>
+  <!-- FIN MODAL -->
+
+
+  <!-- ================================================
+       SECCIÓN 6: POR QUÉ ELEGIRNOS
+       ================================================ -->
+  <section id="beneficios">
+    <h2>¿Por qué elegir NorthPalace?</h2>
+
+    <div id="grid-beneficios">
+
+      <article id="beneficio-1">
+        <h3>Reservas seguras</h3>
+        <p>Tu pago está protegido hasta que llegues a la propiedad.</p>
+      </article>
+
+      <article id="beneficio-2">
+        <h3>Soporte 24/7</h3>
+        <p>Estamos contigo en cada paso de tu estancia en Chihuahua.</p>
+      </article>
+
+      <article id="beneficio-3">
+        <h3>Propiedades verificadas</h3>
+        <p>Cada propiedad en Chihuahua pasa por nuestro proceso de verificación.</p>
+      </article>
+
+    </div>
+  </section>
+  <!-- FIN BENEFICIOS -->
+
+
+  <!-- ================================================
+       SECCIÓN 7: FOOTER
+       COMPAÑERO DE JS: id="btn-newsletter" → validar
+       email y mostrar id="mensaje-newsletter"
+       ================================================ -->
+  <footer id="footer-principal">
+
+    <div id="footer-descripcion">
+      <h3>NorthPalace</h3>
+      <p>Las mejores casas y apartamentos de Chihuahua, capital, a tu alcance.</p>
+      <div id="redes-sociales">
+        <a href="#" id="link-facebook" aria-label="Facebook">Facebook</a>
+        <a href="#" id="link-instagram" aria-label="Instagram">Instagram</a>
+        <a href="#" id="link-twitter" aria-label="Twitter">Twitter</a>
+      </div>
+    </div>
+
+    <div id="footer-nav">
+      <h4>Explorar</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="propiedades.html">Propiedades</a></li>
+        <li><a href="detalle.html">Detalle</a></li>
+      </ul>
+    </div>
+
+    <div id="footer-soporte">
+      <h4>Soporte</h4>
+      <ul>
+        <li><a href="#">Ayuda</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Privacidad</a></li>
+      </ul>
+    </div>
+
+    <div id="footer-newsletter">
+      <h4>Novedades</h4>
+      <p>Suscríbete para recibir las mejores ofertas en Chihuahua.</p>
+      <div id="form-newsletter">
+        <input
+          type="email"
+          id="input-newsletter"
+          placeholder="tu@email.com"
+        />
+        <button type="button" id="btn-newsletter">Suscribirse</button>
+      </div>
+      <p id="mensaje-newsletter" hidden>¡Gracias por suscribirte!</p>
+    </div>
+
+    <div id="footer-copyright">
+      <p>© 2025 NorthPalace. Todos los derechos reservados. Chihuahua, Chih., México.</p>
+    </div>
+
+  </footer>
+  <!-- FIN FOOTER -->
+
+  <!-- ================================================
+       COMPAÑERO DE JS: enlaza aquí tu archivo
+       <script src="js/script.js"></script>
+
+       Funciones que el HTML espera:
+         - Validar buscador        → id="btn-buscar"
+         - Filtrar cards           → botones id="filtro-*" + data-tipo
+         - Favoritos               → botones id="fav-*"
+         - Newsletter              → id="btn-newsletter"
+         - Abrir modal             → id="btn-publicar" → modal.showModal()
+         - Cerrar modal            → id="btn-cerrar-modal" y id="btn-cancelar-modal" → modal.close()
+         - Validar y enviar modal  → id="btn-enviar-publicar"
+         - Éxito publicar          → mostrar id="mensaje-publicar-ok"
+         - Error publicar          → mostrar id="error-publicar"
+       ================================================ -->
+
+</body>
+</html>
