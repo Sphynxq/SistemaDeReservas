@@ -1,0 +1,316 @@
+/* ==========================================================================
+   NORTHPALACE - ESTILOS BASE CON BOOTSTRAP 5
+   ========================================================================== */
+
+/* Importación de Bootstrap 5 desde CDN para asegurar disponibilidad de variables */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+
+:root {
+    --bs-primary: #0d6efd;
+    --bs-secondary: #6c757d;
+    --bs-dark: #212529;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================================================================
+   1. NAVBAR & HEADER (Responsivo)
+   ========================================================================== */
+#encabezado {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+#logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--bs-primary);
+    text-decoration: none;
+}
+
+#menu-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+}
+
+#menu-nav a {
+    text-decoration: none;
+    color: var(--bs-dark);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+#menu-nav a:hover {
+    color: var(--bs-primary);
+}
+
+#botones-sesion a {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#btn-login { color: var(--bs-primary); }
+#btn-registro { background-color: var(--bs-primary); color: white !important; }
+
+/* ==========================================================================
+   2. GRID SYSTEM & ESTRUCTURA (Respetando Row/Col)
+   ========================================================================== */
+#contenido-principal, #grid-propiedades, #grid-beneficios {
+    display: grid;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+/* Grid de propiedades: Adaptable como .row-cols-1 .row-cols-md-3 */
+#grid-propiedades {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+/* Estructura de Sidebar (Aside + Main) */
+#contenido-principal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#sidebar-filtros {
+    flex: 0 0 300px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    height: fit-content;
+}
+
+#area-resultados {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* ==========================================================================
+   3. CARDS (Estilo .card de Bootstrap)
+   ========================================================================== */
+article[id^="card"] {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+article[id^="card"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+article[id^="card"] img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+article[id^="card"] h3 {
+    font-size: 1.25rem;
+    padding: 1rem 1rem 0.5rem;
+}
+
+article[id^="card"] address, article[id^="card"] p, article[id^="card"] ul {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Botón Favorito (Tooltip-like) */
+button[id^="fav"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Badges */
+span[id^="badge"] {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--bs-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   4. FORMULARIOS Y VALIDACIÓN
+   ========================================================================== */
+input, select, textarea {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+input:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+/* Clases de validación Bootstrap simuladas */
+[hidden] { display: none !important; }
+#error-busqueda, #error-busqueda-prop, #error-publicar, #error-resena, #error-confirmacion {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   5. MODALS (Componente <dialog>)
+   ========================================================================== */
+dialog#modal-publicar {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#modal-encabezado {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modal-cuerpo { padding: 1.5rem; }
+
+#modal-acciones {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    text-align: right;
+}
+
+/* ==========================================================================
+   6. TABLAS (Estilo .table de Bootstrap)
+   ========================================================================== */
+table {
+    width: 100%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border-collapse: collapse;
+}
+
+th { text-align: inherit; padding: 0.5rem; background: #e9ecef; }
+td { padding: 0.5rem; border-bottom: 1px solid #dee2e6; }
+
+/* ==========================================================================
+   7. BOTONES (Clases de Bootstrap)
+   ========================================================================== */
+button, .btn-ver-propiedad, a[id^="btn-ver"] {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: var(--bs-primary);
+    border: 1px solid var(--bs-primary);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+button:hover, a[id^="btn-ver"]:hover {
+    background-color: #0b5ed7;
+}
+
+#btn-limpiar-filtros, #btn-cancelar-modal {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+#footer-principal {
+    background-color: #212529;
+    color: white;
+    padding: 4rem 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+#footer-principal h3, #footer-principal h4 { color: #fff; margin-bottom: 1.5rem; }
+#footer-principal ul { list-style: none; padding: 0; }
+#footer-principal a { color: #adb5bd; text-decoration: none; }
+#footer-principal a:hover { color: #fff; }
+
+#footer-copyright {
+    grid-column: 1 / -1;
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* ==========================================================================
+   COMPONENTES DINÁMICOS Y UTILIDADES
+   ========================================================================== */
+#seccion-disponibilidad { overflow-x: auto; } /* Collapse-like behavior for tables */
+
+/* Rating Stars */
+div[id^="rating"] { color: #ffc107; font-weight: bold; }
+
+/* Media Queries para Responsividad total */
+@media (max-width: 768px) {
+    #navbar { flex-direction: column; gap: 1rem; }
+    #menu-nav { gap: 0.5rem; font-size: 0.9rem; }
+    #sidebar-filtros { flex: 0 0 100%; }
+}
