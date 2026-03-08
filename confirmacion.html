@@ -7,8 +7,8 @@
 
   <!-- ================================================
        COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
-       <link rel="stylesheet" href="css/styles.css" />
        ================================================ -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
@@ -181,6 +181,10 @@
       </div>
       <!-- FIN DATOS HUÉSPED -->
 
+      <div id="resumen-acciones">
+        <button type="button" id="btn-cancelar-reserva-completada" class="btn-cancelar-reserva">Cancelar reserva</button>
+      </div>
+
     </div>
     <!-- FIN CONTENIDO RESUMEN -->
 
@@ -272,7 +276,7 @@
     <div id="campo-terminos">
       <input type="checkbox" id="check-terminos" name="terminos" />
       <label for="check-terminos">
-        Acepto los <a href="#">términos y condiciones</a> de NorthPalace
+        Acepto los <a href="#" id="link-terminos-modal" class="link-terminos-modal">términos y condiciones</a> de NorthPalace
       </label>
     </div>
 
@@ -285,6 +289,8 @@
     <p id="error-confirmacion" hidden>
       Por favor completa todos los campos y acepta los términos y condiciones.
     </p>
+
+    <button type="button" id="btn-cancelar-reserva-pendiente" class="btn-cancelar-reserva">Cancelar reserva</button>
 
   </section>
   <!-- FIN FORMULARIO HUÉSPED -->
@@ -331,7 +337,7 @@
       <h4>Soporte</h4>
       <ul>
         <li><a href="#">Ayuda</a></li>
-        <li><a href="#">Términos</a></li>
+        <li><a href="#" class="link-terminos-modal">Términos</a></li>
         <li><a href="#">Privacidad</a></li>
       </ul>
     </div>

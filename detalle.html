@@ -7,8 +7,8 @@
 
   <!-- ================================================
        COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
-       <link rel="stylesheet" href="css/styles.css" />
        ================================================ -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
@@ -336,10 +336,14 @@
 
       </div>
 
-      <!-- Mini calendario: JS renderiza aquí la disponibilidad -->
+      <!-- Calendario anual y reservas: JS renderiza aquí -->
       <div id="disponibilidad-rapida">
-        <h3>Disponibilidad del mes</h3>
+        <h3>Disponibilidad del año</h3>
         <div id="mini-calendario"></div>
+        <div id="calendario-reservas-acciones">
+          <button type="button" id="btn-anadir-reserva-calendario">Añadir reserva</button>
+        </div>
+        <div id="lista-reservas-calendario"></div>
       </div>
 
     </aside>
@@ -377,7 +381,7 @@
       <h4>Soporte</h4>
       <ul>
         <li><a href="#">Ayuda</a></li>
-        <li><a href="#">Términos</a></li>
+        <li><a href="#" class="link-terminos-modal">Términos</a></li>
         <li><a href="#">Privacidad</a></li>
       </ul>
     </div>

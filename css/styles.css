@@ -1,0 +1,227 @@
+/* ============================================
+   NorthPalace - CSS mínimo para pruebas
+   ============================================ */
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-height: 1.5; }
+
+/* ----- NAVBAR ----- */
+#encabezado { background: #eee; padding: 0.5rem 1rem; border-bottom: 1px solid #ccc; }
+#navbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; max-width: 1200px; margin: 0 auto; }
+#logo { font-weight: bold; font-size: 1.25rem; text-decoration: none; color: #333; }
+#menu-nav { display: flex; list-style: none; margin: 0; padding: 0; gap: 1rem; }
+#menu-nav a { color: #333; text-decoration: none; }
+#botones-sesion { display: flex; gap: 0.5rem; }
+#botones-sesion a { padding: 0.4rem 0.8rem; background: #ddd; border-radius: 4px; text-decoration: none; color: #333; }
+
+/* ----- HERO / BUSCADOR ----- */
+#hero { padding: 2rem 1rem; background: #f5f5f5; }
+#hero-texto { text-align: center; margin-bottom: 1.5rem; }
+#hero-texto h1 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+#buscador { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-end; max-width: 900px; margin: 0 auto; }
+#buscador > div { display: flex; flex-direction: column; }
+#buscador label { font-size: 0.85rem; margin-bottom: 0.25rem; }
+#buscador input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#btn-buscar { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#error-busqueda { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+
+/* ----- FILTROS RÁPIDOS ----- */
+#filtros-rapidos { padding: 1rem; border-bottom: 1px solid #ddd; }
+#lista-filtros { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+#lista-filtros button { padding: 0.5rem 1rem; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer; }
+#lista-filtros button.activo { background: #333; color: #fff; border-color: #333; }
+
+/* ----- PROPIEDADES DESTACADAS ----- */
+#propiedades-destacadas { padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; }
+#propiedades-destacadas h2 { margin: 0 0 1rem; }
+#grid-propiedades { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+#grid-propiedades article { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; padding: 1rem; }
+#grid-propiedades article.hidden { display: none; }
+#grid-propiedades img { width: 100%; height: 160px; object-fit: cover; display: block; }
+#grid-propiedades h3 { margin: 0.5rem 0; font-size: 1rem; }
+#grid-propiedades address { font-style: normal; font-size: 0.85rem; color: #666; margin: 0.25rem 0; }
+#grid-propiedades ul { list-style: none; padding: 0; margin: 0.5rem 0; font-size: 0.9rem; }
+#grid-propiedades ul li { margin: 0.2rem 0; }
+#grid-propiedades [id^="badge"] { display: inline-block; padding: 0.2rem 0.5rem; background: #eee; font-size: 0.8rem; border-radius: 4px; margin: 0.5rem 0; }
+#grid-propiedades [id^="btn-ver"] { display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
+#grid-propiedades button[aria-label] { position: absolute; top: 0.5rem; right: 0.5rem; background: #fff; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.25rem; }
+#grid-propiedades article { position: relative; }
+#ver-todas { text-align: center; margin-top: 2rem; }
+#btn-ver-todas { padding: 0.6rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; }
+
+/* ----- BANNER CTA ----- */
+#banner-cta { padding: 2rem 1rem; text-align: center; background: #e8e8e8; }
+#banner-cta h2 { margin: 0 0 0.5rem; }
+#btn-publicar { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+
+/* ----- MODAL ----- */
+#modal-publicar { max-width: 500px; width: 90%; padding: 0; border: 1px solid #ccc; border-radius: 8px; }
+#modal-encabezado { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #ddd; }
+#modal-encabezado h2 { margin: 0; font-size: 1.1rem; }
+#btn-cerrar-modal { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 0 0.5rem; }
+#modal-cuerpo { padding: 1rem; }
+#modal-cuerpo fieldset { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; }
+#modal-cuerpo legend { padding: 0 0.5rem; }
+#modal-cuerpo label { display: block; margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+#modal-cuerpo input[type="text"],
+#modal-cuerpo input[type="email"],
+#modal-cuerpo input[type="tel"],
+#modal-cuerpo input[type="number"],
+#modal-cuerpo select,
+#modal-cuerpo textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#modal-cuerpo textarea { min-height: 80px; resize: vertical; }
+#modal-cuerpo #fieldset-amenidades div { margin: 0.5rem 0; }
+#modal-cuerpo #fieldset-amenidades label { display: inline; margin-left: 0.5rem; }
+#modal-acciones { display: flex; gap: 0.5rem; margin-top: 1rem; }
+#modal-acciones button { padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+#btn-enviar-publicar { background: #333; color: #fff; border: none; }
+#btn-cancelar-modal { background: #ddd; border: 1px solid #ccc; }
+#mensaje-publicar-ok { color: #060; margin-top: 0.5rem; }
+#error-publicar { color: #c00; margin-top: 0.5rem; }
+
+/* ----- BENEFICIOS ----- */
+#beneficios { padding: 2rem 1rem; background: #f9f9f9; }
+#beneficios h2 { margin: 0 0 1rem; text-align: center; }
+#grid-beneficios { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+#grid-beneficios article { padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+#grid-beneficios h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+
+/* ----- FOOTER ----- */
+#footer-principal { background: #333; color: #eee; padding: 2rem 1rem; margin-top: 2rem; }
+#footer-principal a { color: #ccc; text-decoration: none; }
+#footer-principal a:hover { color: #fff; }
+#footer-descripcion, #footer-nav, #footer-soporte, #footer-newsletter { margin-bottom: 1rem; }
+#footer-principal h3, #footer-principal h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+#footer-principal ul { list-style: none; padding: 0; margin: 0; }
+#footer-principal li { margin: 0.25rem 0; }
+#redes-sociales { display: flex; gap: 1rem; margin-top: 0.5rem; }
+#form-newsletter { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+#form-newsletter input { flex: 1; padding: 0.5rem; border: 1px solid #555; border-radius: 4px; background: #444; color: #fff; }
+#form-newsletter button { padding: 0.5rem 1rem; background: #555; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#footer-copyright { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #555; font-size: 0.85rem; color: #999; }
+
+/* ----- PÁGINA PROPIEDADES ----- */
+#encabezado-pagina { padding: 1.5rem 1rem; text-align: center; }
+#encabezado-pagina h1 { margin: 0 0 0.5rem; }
+#barra-busqueda { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; background: #f5f5f5; justify-content: center; align-items: flex-end; }
+#barra-busqueda > div { display: flex; flex-direction: column; }
+#barra-busqueda input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#barra-busqueda label { font-size: 0.85rem; margin-bottom: 0.25rem; }
+#btn-buscar-prop { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#contenido-principal { display: flex; flex-wrap: wrap; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 1rem; }
+#sidebar-filtros { flex: 0 0 220px; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; height: fit-content; }
+#sidebar-filtros h2 { margin: 0 0 1rem; font-size: 1rem; }
+#sidebar-filtros h3 { margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+#sidebar-filtros div { margin: 0.4rem 0; }
+#sidebar-filtros label { margin-left: 0.5rem; }
+#botones-filtro { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+#botones-filtro button { padding: 0.5rem; border-radius: 4px; cursor: pointer; }
+#btn-aplicar-filtros { background: #333; color: #fff; border: none; }
+#btn-limpiar-filtros { background: #ddd; border: 1px solid #ccc; }
+#area-resultados { flex: 1; min-width: 0; }
+#resultados-encabezado { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+#ordenar-por select { padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; }
+#seccion-disponibilidad { overflow-x: auto; margin-bottom: 1.5rem; }
+#tabla-disponibilidad { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+#tabla-disponibilidad th, #tabla-disponibilidad td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+#tabla-disponibilidad th { background: #f5f5f5; }
+#sin-resultados { padding: 1rem; color: #666; }
+
+/* ----- PÁGINA DETALLE ----- */
+#galeria { padding: 1rem; }
+#foto-principal { max-width: 800px; margin: 0 auto; }
+#img-principal { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; }
+#galeria-miniaturas { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+#galeria-miniaturas img { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid transparent; }
+#galeria-miniaturas img:hover, #galeria-miniaturas img.activa { border-color: #333; }
+#contenido-detalle { display: flex; flex-wrap: wrap; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 1rem; }
+#info-propiedad { flex: 1; min-width: 280px; }
+#info-propiedad h2 { margin: 1.5rem 0 0.5rem; font-size: 1.1rem; }
+#prop-encabezado { margin-bottom: 1rem; }
+#prop-subtitulo { display: flex; gap: 1rem; margin: 0.5rem 0; font-size: 0.9rem; color: #666; }
+#btn-favorito-detalle { padding: 0.5rem 1rem; margin-top: 0.5rem; background: #eee; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+#panel-reserva { flex: 0 0 320px; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; height: fit-content; }
+#reserva-formulario label { display: block; margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+#reserva-formulario input { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#reserva-fechas { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+#reserva-desglose { margin: 1rem 0; font-size: 0.9rem; }
+#reserva-desglose hr { margin: 0.5rem 0; border: none; border-top: 1px solid #ddd; }
+#desglose-total { display: flex; justify-content: space-between; margin-top: 0.5rem; }
+#btn-reservar { width: 100%; padding: 0.75rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
+#error-fechas, #error-reserva { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+#disponibilidad-rapida h3 { margin: 1rem 0 0.5rem; font-size: 1rem; }
+#mini-calendario { margin-bottom: 1rem; }
+.calendario-anual-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+.calendario-mes { border: 1px solid #ddd; border-radius: 8px; padding: 0.5rem; background: #fafafa; min-width: 200px; }
+.calendario-mes-titulo { font-size: 0.85rem; font-weight: bold; margin-bottom: 0.4rem; text-align: center; }
+.calendario-mes-tabla { width: 100%; border-collapse: collapse; font-size: 0.7rem; }
+.calendario-mes-tabla th, .calendario-mes-tabla td { padding: 2px 4px; text-align: center; border: 1px solid #eee; }
+.calendario-mes-tabla th { background: #eee; }
+.calendario-dia { cursor: default; background: #d4edda; color: #155724; }
+.calendario-dia.ocupado { background: #f8d7da; color: #721c24; }
+.calendario-dia.hoy { font-weight: bold; box-shadow: inset 0 0 0 2px #333; background: #c3e6cb; }
+.calendario-dia.hoy.ocupado { background: #f5c6cb; }
+.calendario-dia-vacio { background: #f5f5f5; }
+.calendario-leyenda { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px solid #eee; font-size: 0.8rem; }
+.calendario-leyenda-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+.calendario-leyenda-cuadro { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); }
+.calendario-leyenda-cuadro.disponible { background: #d4edda; }
+.calendario-leyenda-cuadro.ocupado { background: #f8d7da; }
+.calendario-leyenda-cuadro.hoy { background: #c3e6cb; box-shadow: inset 0 0 0 1px #333; }
+#calendario-reservas-acciones { margin: 0.75rem 0; }
+#btn-anadir-reserva-calendario { padding: 0.5rem 1rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+#lista-reservas-calendario { font-size: 0.9rem; }
+.calendario-lista-titulo { margin: 0 0 0.5rem; font-weight: bold; }
+.calendario-lista-ul { list-style: none; padding: 0; margin: 0; }
+.calendario-reserva-item { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid #eee; }
+.btn-eliminar-reserva { padding: 0.25rem 0.5rem; font-size: 0.75rem; background: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+.btn-eliminar-reserva:hover { background: #c82333; }
+.calendario-sin-reservas { color: #666; font-size: 0.9rem; margin: 0.5rem 0; }
+.campo-calendario-reserva { margin: 0.5rem 0; }
+.campo-calendario-reserva label { display: block; margin-bottom: 0.2rem; font-size: 0.9rem; }
+.campo-calendario-reserva input { width: 100%; padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; }
+.calendario-modal-error { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+.terminos-modal-cerrar-btn { padding: 0.5rem 1rem; background: #ddd; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; margin-left: 0.5rem; }
+#categorias-calificacion > div { margin: 0.75rem 0; }
+#categorias-calificacion [role="progressbar"] { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+#categorias-calificacion [id^="progreso"] { height: 100%; background: #333; }
+#form-resena label { display: block; margin: 0.5rem 0 0.2rem; }
+#form-resena input[type="text"], #form-resena textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#form-resena textarea { min-height: 80px; resize: vertical; }
+#estrellas-interactivas { font-size: 1.5rem; cursor: pointer; }
+#btn-enviar-resena { padding: 0.5rem 1rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
+#error-resena { color: #c00; }
+#mensaje-resena-ok { color: #060; }
+
+/* ----- PÁGINA CONFIRMACIÓN ----- */
+#seccion-exito { padding: 2rem 1rem; text-align: center; }
+#icono-exito { font-size: 3rem; color: #060; margin-bottom: 0.5rem; }
+#seccion-exito h1 { margin: 0 0 0.5rem; }
+#numero-confirmacion { margin-top: 1rem; }
+#resumen-reserva { padding: 1rem; max-width: 800px; margin: 0 auto; }
+#resumen-reserva h2 { margin: 0 0 1rem; }
+#contenido-resumen { display: flex; flex-direction: column; gap: 1.5rem; }
+#resumen-propiedad { display: flex; gap: 1rem; }
+#resumen-img-propiedad { width: 120px; height: 90px; object-fit: cover; border-radius: 8px; }
+#resumen-estancia table, #resumen-costo table, #resumen-huesped table { width: 100%; border-collapse: collapse; }
+#resumen-estancia th, #resumen-estancia td, #resumen-costo th, #resumen-costo td, #resumen-huesped th, #resumen-huesped td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+#resumen-estancia th, #resumen-costo th, #resumen-huesped th { background: #f5f5f5; width: 40%; }
+#seccion-formulario-huesped { padding: 1rem; max-width: 500px; margin: 0 auto; }
+#seccion-formulario-huesped h2 { margin: 0 0 1rem; }
+#mini-resumen { display: flex; gap: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; }
+#mini-img-propiedad { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; }
+#seccion-formulario-huesped fieldset { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; }
+#seccion-formulario-huesped label { display: block; margin: 0.5rem 0 0.2rem; }
+#seccion-formulario-huesped input[type="text"],
+#seccion-formulario-huesped input[type="email"],
+#seccion-formulario-huesped input[type="tel"],
+#seccion-formulario-huesped textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#campo-terminos { margin: 1rem 0; }
+#btn-confirmar-reserva { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#error-confirmacion { color: #c00; margin-top: 0.5rem; }
+#seccion-sin-reserva { padding: 2rem 1rem; text-align: center; }
+#btn-ir-propiedades { display: inline-block; padding: 0.6rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; }
+
+.btn-cancelar-reserva { margin-top: 1rem; padding: 0.5rem 1rem; background: transparent; color: #666; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.btn-cancelar-reserva:hover { background: #f5f5f5; color: #333; }
+#resumen-acciones { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ddd; }

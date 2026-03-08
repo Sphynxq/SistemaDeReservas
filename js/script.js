@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletter();
   initModalesAuth();
   crearEstilosModales();
+  initTerminosModal();
   initSelectorIdioma();
-  
+
   const currentPage = getCurrentPage();
   
   switch (currentPage) {
@@ -225,6 +226,171 @@ const propiedadesData = [
     disponibilidad: { lun: false, mar: true, mie: true, jue: false, vie: true, sab: true, dom: true }
   }
 ];
+
+// Reservas de calendario por propiedad: hardcodeadas (se pueden eliminar solo si son futuras)
+const STORAGE_CALENDARIO = 'calendarioReservas';
+const STORAGE_ELIMINADOS = 'calendarioEliminados';
+
+const reservasHardcodeadas = {
+  1: [
+    { id: 'h1-1', fechaEntrada: '2025-01-05', fechaSalida: '2025-01-10' },
+    { id: 'h1-2', fechaEntrada: '2025-03-01', fechaSalida: '2025-03-10' },
+    { id: 'h1-3', fechaEntrada: '2025-04-12', fechaSalida: '2025-04-18' },
+    { id: 'h1-4', fechaEntrada: '2025-06-20', fechaSalida: '2025-06-25' },
+    { id: 'h1-mar26-1', fechaEntrada: '2026-03-05', fechaSalida: '2026-03-12' },
+    { id: 'h1-mar26-2', fechaEntrada: '2026-03-20', fechaSalida: '2026-03-25' }
+  ],
+  2: [
+    { id: 'h2-1', fechaEntrada: '2025-01-15', fechaSalida: '2025-01-20' },
+    { id: 'h2-2', fechaEntrada: '2025-02-10', fechaSalida: '2025-02-15' },
+    { id: 'h2-3', fechaEntrada: '2025-05-01', fechaSalida: '2025-05-07' },
+    { id: 'h2-mar26-1', fechaEntrada: '2026-03-01', fechaSalida: '2026-03-07' },
+    { id: 'h2-mar26-2', fechaEntrada: '2026-03-15', fechaSalida: '2026-03-22' }
+  ],
+  3: [
+    { id: 'h3-1', fechaEntrada: '2025-02-01', fechaSalida: '2025-02-08' },
+    { id: 'h3-2', fechaEntrada: '2025-03-15', fechaSalida: '2025-03-22' },
+    { id: 'h3-3', fechaEntrada: '2025-07-01', fechaSalida: '2025-07-10' },
+    { id: 'h3-mar26-1', fechaEntrada: '2026-03-08', fechaSalida: '2026-03-14' },
+    { id: 'h3-mar26-2', fechaEntrada: '2026-03-25', fechaSalida: '2026-03-31' }
+  ],
+  4: [
+    { id: 'h4-1', fechaEntrada: '2025-01-20', fechaSalida: '2025-01-25' },
+    { id: 'h4-2', fechaEntrada: '2025-04-01', fechaSalida: '2025-04-05' },
+    { id: 'h4-3', fechaEntrada: '2025-08-10', fechaSalida: '2025-08-15' },
+    { id: 'h4-mar26-1', fechaEntrada: '2026-03-10', fechaSalida: '2026-03-18' }
+  ],
+  5: [
+    { id: 'h5-1', fechaEntrada: '2025-02-14', fechaSalida: '2025-02-18' },
+    { id: 'h5-2', fechaEntrada: '2025-05-20', fechaSalida: '2025-05-25' },
+    { id: 'h5-mar26-1', fechaEntrada: '2026-03-01', fechaSalida: '2026-03-05' },
+    { id: 'h5-mar26-2', fechaEntrada: '2026-03-22', fechaSalida: '2026-03-28' }
+  ],
+  6: [
+    { id: 'h6-1', fechaEntrada: '2025-03-20', fechaSalida: '2025-03-27' },
+    { id: 'h6-2', fechaEntrada: '2025-06-01', fechaSalida: '2025-06-08' },
+    { id: 'h6-3', fechaEntrada: '2025-09-01', fechaSalida: '2025-09-07' },
+    { id: 'h6-mar26-1', fechaEntrada: '2026-03-12', fechaSalida: '2026-03-19' }
+  ],
+  7: [
+    { id: 'h7-1', fechaEntrada: '2025-01-08', fechaSalida: '2025-01-12' },
+    { id: 'h7-2', fechaEntrada: '2025-04-20', fechaSalida: '2025-04-25' },
+    { id: 'h7-3', fechaEntrada: '2025-10-01', fechaSalida: '2025-10-06' },
+    { id: 'h7-mar26-1', fechaEntrada: '2026-03-03', fechaSalida: '2026-03-09' },
+    { id: 'h7-mar26-2', fechaEntrada: '2026-03-26', fechaSalida: '2026-03-31' }
+  ],
+  8: [
+    { id: 'h8-1', fechaEntrada: '2025-02-20', fechaSalida: '2025-02-24' },
+    { id: 'h8-2', fechaEntrada: '2025-05-10', fechaSalida: '2025-05-14' },
+    { id: 'h8-3', fechaEntrada: '2025-11-15', fechaSalida: '2025-11-20' },
+    { id: 'h8-mar26-1', fechaEntrada: '2026-03-14', fechaSalida: '2026-03-21' }
+  ]
+};
+
+function getCalendarioReservas() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_CALENDARIO) || '{}');
+  } catch (_) {
+    return {};
+  }
+}
+
+function getCalendarioEliminados() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_ELIMINADOS) || '{}');
+  } catch (_) {
+    return {};
+  }
+}
+
+function getReservasPropiedad(propiedadId) {
+  const id = Number(propiedadId);
+  const hardcodeadas = (reservasHardcodeadas[id] || []).map(r => ({ ...r, esHardcodeada: true }));
+  const eliminados = getCalendarioEliminados()[id] || [];
+  const usuario = (getCalendarioReservas()[id] || []).map(r => ({ ...r, esHardcodeada: false }));
+  return [...hardcodeadas.filter(r => !eliminados.includes(r.id)), ...usuario];
+}
+
+function isDiaOcupado(propiedadId, fechaStr) {
+  const reservas = getReservasPropiedad(propiedadId);
+  const d = fechaStr.replace(/-/g, '');
+  return reservas.some(r => {
+    const ent = r.fechaEntrada.replace(/-/g, '');
+    const sal = r.fechaSalida.replace(/-/g, '');
+    return d >= ent && d < sal;
+  });
+}
+
+/** Devuelve true si el rango [fechaEntrada, fechaSalida) se solapa con alguna reserva existente de la propiedad. */
+function haySolapamientoReserva(propiedadId, fechaEntrada, fechaSalida) {
+  const reservas = getReservasPropiedad(propiedadId);
+  const ent = fechaEntrada.replace(/-/g, '');
+  const sal = fechaSalida.replace(/-/g, '');
+  return reservas.some(r => {
+    const re = r.fechaEntrada.replace(/-/g, '');
+    const rs = r.fechaSalida.replace(/-/g, '');
+    return ent < rs && re < sal;
+  });
+}
+
+function isReservaPasadaOEnCurso(reserva) {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const salida = new Date(reserva.fechaSalida);
+  salida.setHours(0, 0, 0, 0);
+  const entrada = new Date(reserva.fechaEntrada);
+  entrada.setHours(0, 0, 0, 0);
+  if (hoy > salida) return true;
+  if (hoy >= entrada && hoy < salida) return true;
+  return false;
+}
+
+function estadoReserva(reserva) {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const salida = new Date(reserva.fechaSalida);
+  salida.setHours(0, 0, 0, 0);
+  const entrada = new Date(reserva.fechaEntrada);
+  entrada.setHours(0, 0, 0, 0);
+  if (hoy > salida) return 'pasada';
+  if (hoy >= entrada && hoy < salida) return 'en_curso';
+  return 'futura';
+}
+
+function puedeEliminarReserva(reserva) {
+  return estadoReserva(reserva) === 'futura';
+}
+
+function addReservaPropiedad(propiedadId, fechaEntrada, fechaSalida) {
+  const data = getCalendarioReservas();
+  const id = Number(propiedadId);
+  if (!data[id]) data[id] = [];
+  const nueva = {
+    id: 'u-' + Date.now(),
+    fechaEntrada,
+    fechaSalida
+  };
+  data[id].push(nueva);
+  localStorage.setItem(STORAGE_CALENDARIO, JSON.stringify(data));
+  return nueva;
+}
+
+function removeReservaPropiedad(propiedadId, reservaId) {
+  if (String(reservaId).startsWith('u-')) {
+    const data = getCalendarioReservas();
+    const id = Number(propiedadId);
+    if (data[id]) {
+      data[id] = data[id].filter(r => r.id !== reservaId);
+      localStorage.setItem(STORAGE_CALENDARIO, JSON.stringify(data));
+    }
+  } else {
+    const elim = getCalendarioEliminados();
+    const id = Number(propiedadId);
+    if (!elim[id]) elim[id] = [];
+    elim[id].push(reservaId);
+    localStorage.setItem(STORAGE_ELIMINADOS, JSON.stringify(elim));
+  }
+}
 
 // ============================================================
 // SISTEMA DE MODALES Y NOTIFICACIONES
@@ -499,6 +665,64 @@ function crearEstilosModales() {
     .notificacion-btn:hover {
       transform: translateY(-2px);
     }
+
+    .terminos-modal-box {
+      max-width: 560px;
+      width: 92%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .terminos-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      background: #f8f9fa;
+    }
+    .terminos-modal-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #333;
+    }
+    .terminos-modal-cerrar {
+      background: none;
+      border: none;
+      font-size: 1.75rem;
+      line-height: 1;
+      color: #666;
+      cursor: pointer;
+      padding: 0 4px;
+    }
+    .terminos-modal-cerrar:hover {
+      color: #333;
+    }
+    .terminos-modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+      text-align: left;
+    }
+    .terminos-modal-body h3 {
+      margin: 1em 0 0.4em;
+      font-size: 1rem;
+      color: #333;
+    }
+    .terminos-modal-body h3:first-child {
+      margin-top: 0;
+    }
+    .terminos-modal-body p {
+      margin: 0 0 0.5em;
+      color: #555;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .terminos-modal-footer {
+      padding: 12px 20px;
+      border-top: 1px solid #eee;
+      background: #f8f9fa;
+    }
   `;
   document.head.appendChild(estilos);
 }
@@ -585,6 +809,72 @@ function mostrarConfirmacionModal(titulo, mensaje, onConfirm, onCancel = null) {
   overlay.querySelector('#btn-cancelar-modal').addEventListener('click', () => cerrar(false));
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) cerrar(false);
+  });
+}
+
+function mostrarModalTerminos() {
+  const contenidoTerminos = `
+    <h3>1. Aceptación</h3>
+    <p>Al usar NorthPalace y completar una reserva usted acepta estos términos y condiciones.</p>
+    <h3>2. Servicio</h3>
+    <p>NorthPalace actúa como intermediario entre huéspedes y propietarios de propiedades en Chihuahua. No somos propietarios de las propiedades listadas.</p>
+    <h3>3. Reservas y pagos</h3>
+    <p>Las reservas quedan sujetas a disponibilidad. Los precios mostrados incluyen la tarifa por noche indicada; pueden aplicarse tarifas de limpieza y de servicio según se indique en el desglose.</p>
+    <h3>4. Cancelación</h3>
+    <p>El huésped puede cancelar una reserva antes de confirmarla sin cargo. Una vez confirmada, las políticas de cancelación del anunciante aplican; NorthPalace puede aplicar cargos según dichas políticas.</p>
+    <h3>5. Check-in y check-out</h3>
+    <p>El horario de entrada y salida será el indicado en cada propiedad (por ejemplo: check-in a partir de las 15:00, check-out antes de las 12:00).</p>
+    <h3>6. Uso de la propiedad</h3>
+    <p>El huésped se compromete a usar la propiedad de forma responsable, respetando las normas de la casa y las leyes aplicables.</p>
+    <h3>7. Privacidad</h3>
+    <p>Los datos personales se tratan conforme a nuestra política de privacidad y solo para gestionar reservas y comunicación con el usuario.</p>
+    <h3>8. Contacto</h3>
+    <p>Para dudas o incidencias: NorthPalace, Chihuahua, Chih., México.</p>
+  `;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'notificacion-overlay terminos-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-label', 'Términos y condiciones');
+  overlay.innerHTML = `
+    <div class="notificacion-box terminos-modal-box">
+      <div class="terminos-modal-header">
+        <h2>Términos y condiciones</h2>
+        <button type="button" class="terminos-modal-cerrar" aria-label="Cerrar">×</button>
+      </div>
+      <div class="terminos-modal-body">${contenidoTerminos}</div>
+      <div class="terminos-modal-footer">
+        <button type="button" class="notificacion-btn info terminos-btn-cerrar">Cerrar</button>
+      </div>
+    </div>
+  `;
+
+  const cerrar = () => {
+    overlay.style.animation = 'fadeIn 0.2s ease reverse';
+    setTimeout(() => overlay.remove(), 200);
+  };
+
+  overlay.querySelector('.terminos-modal-cerrar').addEventListener('click', cerrar);
+  overlay.querySelector('.terminos-btn-cerrar').addEventListener('click', cerrar);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) cerrar();
+  });
+  document.addEventListener('keydown', function escHandler(e) {
+    if (e.key === 'Escape') {
+      cerrar();
+      document.removeEventListener('keydown', escHandler);
+    }
+  });
+
+  document.body.appendChild(overlay);
+}
+
+function initTerminosModal() {
+  document.querySelectorAll('.link-terminos-modal').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      mostrarModalTerminos();
+    });
   });
 }
 
@@ -1909,24 +2199,45 @@ function initFavoritosPropiedades() {
 }
 
 function initTablaDisponibilidad() {
-  const tabla = document.getElementById('tabla-disponibilidad');
-  
-  if (!tabla) return;
-  
-  const celdas = tabla.querySelectorAll('td');
-  
-  celdas.forEach(celda => {
-    const texto = celda.textContent.trim().toLowerCase();
-    
-    if (texto === 'disponible') {
-      celda.style.backgroundColor = '#d4edda';
-      celda.style.color = '#155724';
-      celda.setAttribute('title', 'Esta propiedad está disponible este día');
-    } else if (texto === 'ocupado') {
-      celda.style.backgroundColor = '#f8d7da';
-      celda.style.color = '#721c24';
-      celda.setAttribute('title', 'Esta propiedad no está disponible este día');
-    }
+  const tbody = document.getElementById('tabla-disponibilidad-body');
+  const theadDias = document.querySelectorAll('#tabla-disponibilidad thead th.tabla-disp-dia');
+  if (!tbody || !theadDias.length) return;
+
+  const colonias = { 1: 'Campestre', 2: 'Centro', 3: 'El Mirador', 4: 'San Felipe', 5: 'Las Granjas', 6: 'Zona Dorada', 7: 'Quintas del Sol', 8: 'Industrial' };
+  const diasNombres = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  const fechas = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(hoy);
+    d.setDate(hoy.getDate() + i);
+    fechas.push(d);
+  }
+
+  theadDias.forEach((th, i) => {
+    const d = fechas[i];
+    th.textContent = `${diasNombres[d.getDay()]} ${d.getDate()}/${d.getMonth() + 1}`;
+    th.title = d.toISOString().split('T')[0];
+  });
+
+  tbody.innerHTML = propiedadesData.map(prop => {
+    const fechaStrs = fechas.map(d => d.toISOString().split('T')[0]);
+    const celdas = fechaStrs.map(fs => {
+      const ocupado = isDiaOcupado(prop.id, fs);
+      return `<td class="${ocupado ? 'disp-ocupado' : 'disp-disponible'}" title="${ocupado ? 'Ocupado' : 'Disponible'}">${ocupado ? 'Ocupado' : 'Disponible'}</td>`;
+    }).join('');
+    const colonia = colonias[prop.id] || prop.zona || '—';
+    return `<tr id="disp-prop-${prop.id}"><td>${prop.titulo}</td><td>${colonia}</td>${celdas}</tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('.disp-disponible').forEach(td => {
+    td.style.backgroundColor = '#d4edda';
+    td.style.color = '#155724';
+  });
+  tbody.querySelectorAll('.disp-ocupado').forEach(td => {
+    td.style.backgroundColor = '#f8d7da';
+    td.style.color = '#721c24';
   });
 }
 
@@ -2211,94 +2522,146 @@ function initPanelReserva(propiedad) {
   const fechaSalida = document.getElementById('reserva-fecha-salida');
   const inputHuespedes = document.getElementById('reserva-huespedes');
   const btnReservar = document.getElementById('btn-reservar');
-  
-  // Establecer fecha de entrada en el día actual
+  const errorReserva = document.getElementById('error-reserva');
+  const errorFechas = document.getElementById('error-fechas');
+  const panelReserva = document.getElementById('panel-reserva');
+  const campoEntrada = document.getElementById('reserva-campo-entrada');
+  const campoSalida = document.getElementById('reserva-campo-salida');
+  const campoHuespedes = document.getElementById('reserva-campo-huespedes');
+
+  const aplicarErrorCampo = (el) => {
+    if (!el) return;
+    el.style.border = '2px solid #c00';
+    el.style.borderRadius = '4px';
+  };
+  const quitarErrorCampo = (el) => {
+    if (!el) return;
+    el.style.border = '';
+    el.style.borderRadius = '';
+  };
+  const quitarTodosErroresReserva = () => {
+    if (errorReserva) errorReserva.hidden = true;
+    if (errorFechas) errorFechas.hidden = true;
+    quitarErrorCampo(campoEntrada);
+    quitarErrorCampo(campoSalida);
+    quitarErrorCampo(campoHuespedes);
+  };
+
+  // Establecer fecha de entrada en el día actual y salida = entrada + 1 para desglose visible
   const hoy = new Date().toISOString().split('T')[0];
   if (fechaEntrada) {
     fechaEntrada.value = hoy;
     fechaEntrada.min = hoy;
   }
-  if (fechaSalida) fechaSalida.min = hoy;
-  
+  if (fechaSalida) {
+    fechaSalida.min = hoy;
+    const manana = new Date();
+    manana.setDate(manana.getDate() + 1);
+    fechaSalida.value = manana.toISOString().split('T')[0];
+  }
+
   if (inputHuespedes) {
     inputHuespedes.max = propiedad.huespedes;
     inputHuespedes.value = 1;
   }
-  
+
   const calcularCosto = () => {
-    const errorFechas = document.getElementById('error-fechas');
-    
-    if (!fechaEntrada.value || !fechaSalida.value) {
+    quitarTodosErroresReserva();
+
+    if (!fechaEntrada?.value || !fechaSalida?.value) {
       limpiarDesglose();
       return;
     }
-    
+
     if (new Date(fechaSalida.value) <= new Date(fechaEntrada.value)) {
       if (errorFechas) errorFechas.hidden = false;
+      aplicarErrorCampo(campoEntrada);
+      aplicarErrorCampo(campoSalida);
       limpiarDesglose();
       return;
     }
-    
-    if (errorFechas) errorFechas.hidden = true;
-    
+
     const noches = calcularNoches(fechaEntrada.value, fechaSalida.value);
     const costoNoches = propiedad.precio * noches;
     const costoLimpieza = 350;
     const costoServicio = Math.round(costoNoches * 0.12);
     const total = costoNoches + costoLimpieza + costoServicio;
-    
+
     const setTexto = (id, texto) => {
       const el = document.getElementById(id);
       if (el) el.textContent = texto;
     };
-    
+
     setTexto('texto-noches', `${formatearPrecio(propiedad.precio)} x ${noches} noche${noches > 1 ? 's' : ''}`);
     setTexto('costo-noches', formatearPrecio(costoNoches));
     setTexto('costo-limpieza', formatearPrecio(costoLimpieza));
     setTexto('costo-servicio', formatearPrecio(costoServicio));
     setTexto('costo-total', formatearPrecio(total));
   };
-  
+
   const limpiarDesglose = () => {
     ['texto-noches', 'costo-noches', 'costo-limpieza', 'costo-servicio', 'costo-total'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.textContent = '--';
     });
   };
-  
+
   if (fechaEntrada) fechaEntrada.addEventListener('change', calcularCosto);
   if (fechaSalida) fechaSalida.addEventListener('change', calcularCosto);
   if (inputHuespedes) inputHuespedes.addEventListener('change', calcularCosto);
-  
+
+  // Desglose visible desde el inicio
+  calcularCosto();
+
   if (btnReservar) {
     btnReservar.addEventListener('click', () => {
-      const errorReserva = document.getElementById('error-reserva');
-      
-      if (!fechaEntrada.value || !fechaSalida.value || !inputHuespedes.value) {
+      quitarTodosErroresReserva();
+
+      if (!fechaEntrada?.value || !fechaSalida?.value || !inputHuespedes?.value) {
         if (errorReserva) errorReserva.hidden = false;
+        if (!fechaEntrada?.value) aplicarErrorCampo(campoEntrada);
+        if (!fechaSalida?.value) aplicarErrorCampo(campoSalida);
+        if (!inputHuespedes?.value) aplicarErrorCampo(campoHuespedes);
+        if (panelReserva) panelReserva.scrollIntoView({ behavior: 'smooth', block: 'center' });
         mostrarNotificacion('warning', 'Campos Incompletos', 'Por favor selecciona las fechas y el número de huéspedes antes de reservar.');
         return;
       }
-      
+
       if (new Date(fechaSalida.value) <= new Date(fechaEntrada.value)) {
+        if (errorFechas) errorFechas.hidden = false;
+        aplicarErrorCampo(campoEntrada);
+        aplicarErrorCampo(campoSalida);
+        if (panelReserva) panelReserva.scrollIntoView({ behavior: 'smooth', block: 'center' });
         mostrarNotificacion('error', 'Fechas Inválidas', 'La fecha de salida debe ser posterior a la fecha de entrada.');
         return;
       }
-      
-      const huespedes = parseInt(inputHuespedes.value);
+
+      const huespedes = parseInt(inputHuespedes.value, 10);
       if (huespedes > propiedad.huespedes) {
+        aplicarErrorCampo(campoHuespedes);
+        if (panelReserva) panelReserva.scrollIntoView({ behavior: 'smooth', block: 'center' });
         mostrarNotificacion('warning', 'Límite de Huéspedes', `Esta propiedad tiene un máximo de ${propiedad.huespedes} huéspedes.`);
         return;
       }
-      
-      if (errorReserva) errorReserva.hidden = true;
-      
+
+      if (haySolapamientoReserva(propiedad.id, fechaEntrada.value, fechaSalida.value)) {
+        aplicarErrorCampo(campoEntrada);
+        aplicarErrorCampo(campoSalida);
+        if (panelReserva) panelReserva.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        mostrarNotificacion('error', 'Fechas ocupadas', 'Algunas de las fechas seleccionadas ya están reservadas. Revisa el calendario de disponibilidad y elige otras fechas.');
+        return;
+      }
+
+      const textoOriginal = btnReservar.textContent;
+      btnReservar.textContent = 'Reservando...';
+      btnReservar.disabled = true;
+
       const noches = calcularNoches(fechaEntrada.value, fechaSalida.value);
       const costoNoches = propiedad.precio * noches;
       const costoLimpieza = 350;
       const costoServicio = Math.round(costoNoches * 0.12);
       const total = costoNoches + costoLimpieza + costoServicio;
-      
+
       const reserva = {
         propiedad: {
           id: propiedad.id,
@@ -2321,49 +2684,201 @@ function initPanelReserva(propiedad) {
           total
         }
       };
-      
+
       localStorage.setItem('reservaActiva', JSON.stringify(reserva));
-      
-      mostrarNotificacion('success', '¡Excelente Elección!', 
+
+      mostrarNotificacion('success', '¡Excelente Elección!',
         `<strong>${propiedad.titulo}</strong><br>
         Fechas: ${formatearFecha(fechaEntrada.value)} - ${formatearFecha(fechaSalida.value)}<br>
         Total: ${formatearPrecio(total)}<br><br>
-        Procede a completar tu reserva.`, 
+        Procede a completar tu reserva.`,
         () => {
           window.location.href = 'confirmacion.html';
         }
       );
+
+      btnReservar.textContent = textoOriginal;
+      btnReservar.disabled = false;
     });
   }
 }
 
 function initMiniCalendario(propiedad) {
-  const miniCalendario = document.getElementById('mini-calendario');
-  
-  if (!miniCalendario) return;
-  
-  const dias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-  const disponibilidad = propiedad.disponibilidad;
-  const claves = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
-  
-  let html = '<table style="width: 100%; text-align: center; border-collapse: collapse;">';
-  html += '<thead><tr>';
-  dias.forEach(dia => {
-    html += `<th style="padding: 8px; font-size: 12px;">${dia}</th>`;
-  });
-  html += '</tr></thead><tbody><tr>';
-  
-  claves.forEach((clave, idx) => {
-    const disponible = disponibilidad[clave];
-    const color = disponible ? '#d4edda' : '#f8d7da';
-    const texto = disponible ? '✓' : '✗';
-    const titulo = disponible ? 'Disponible' : 'Ocupado';
-    
-    html += `<td style="padding: 10px; background-color: ${color}; cursor: pointer;" title="${titulo}">${texto}</td>`;
-  });
-  
-  html += '</tr></tbody></table>';
-  miniCalendario.innerHTML = html;
+  const contenedor = document.getElementById('mini-calendario');
+  const acciones = document.getElementById('calendario-reservas-acciones');
+  const listaReservas = document.getElementById('lista-reservas-calendario');
+  const btnAnadir = document.getElementById('btn-anadir-reserva-calendario');
+
+  if (!contenedor) return;
+
+  const propiedadId = propiedad.id;
+  const hoy = new Date();
+  const anio = hoy.getFullYear();
+  const mesActual = hoy.getMonth();
+  const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const diasSemana = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+
+  function renderizarCalendarioAnual() {
+    const h3Titulo = document.querySelector('#disponibilidad-rapida h3');
+    if (h3Titulo) h3Titulo.textContent = `Disponibilidad de ${nombresMeses[mesActual]} ${anio}`;
+
+    const mes = mesActual;
+    const primerDia = new Date(anio, mes, 1);
+    const ultimoDia = new Date(anio, mes + 1, 0);
+    const numDias = ultimoDia.getDate();
+    const inicioSemana = primerDia.getDay();
+
+    let html = '<div class="calendario-anual-grid">';
+    html += `<div class="calendario-mes">
+      <div class="calendario-mes-titulo">${nombresMeses[mes]} ${anio}</div>
+      <table class="calendario-mes-tabla"><thead><tr>`;
+    diasSemana.forEach(d => { html += `<th>${d}</th>`; });
+    html += '</tr></thead><tbody><tr>';
+
+    let col = 0;
+    for (let i = 0; i < inicioSemana; i++) {
+      html += '<td class="calendario-dia-vacio"></td>';
+      col++;
+    }
+    for (let dia = 1; dia <= numDias; dia++) {
+      const fechaStr = `${anio}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+      const ocupado = isDiaOcupado(propiedadId, fechaStr);
+      const esHoy = hoy.getFullYear() === anio && hoy.getMonth() === mes && hoy.getDate() === dia;
+      let cls = 'calendario-dia';
+      if (ocupado) cls += ' ocupado';
+      if (esHoy) cls += ' hoy';
+      html += `<td class="${cls}" title="${fechaStr}${ocupado ? ' (Ocupado)' : ' (Disponible)'}" data-fecha="${fechaStr}">${dia}</td>`;
+      col++;
+      if (col === 7) {
+        html += '</tr><tr>';
+        col = 0;
+      }
+    }
+    while (col > 0 && col < 7) {
+      html += '<td class="calendario-dia-vacio"></td>';
+      col++;
+    }
+    html += '</tr></tbody></table></div>';
+    html += '<div class="calendario-leyenda">';
+    html += '<span class="calendario-leyenda-item"><span class="calendario-leyenda-cuadro disponible"></span> Disponible</span>';
+    html += '<span class="calendario-leyenda-item"><span class="calendario-leyenda-cuadro ocupado"></span> Ocupado</span>';
+    html += '<span class="calendario-leyenda-item"><span class="calendario-leyenda-cuadro hoy"></span> Hoy</span>';
+    html += '</div>';
+    html += '</div>';
+    contenedor.innerHTML = html;
+  }
+
+  function formatearFechaCorta(str) {
+    const d = new Date(str + 'T12:00:00');
+    const opts = { day: 'numeric', month: 'short' };
+    return d.toLocaleDateString('es-MX', opts);
+  }
+
+  function renderizarListaReservas() {
+    const primerDiaMes = `${anio}-${String(mesActual + 1).padStart(2, '0')}-01`;
+    const ultimoDiaMes = new Date(anio, mesActual + 1, 0);
+    const ultimoDiaMesStr = `${anio}-${String(mesActual + 1).padStart(2, '0')}-${String(ultimoDiaMes.getDate()).padStart(2, '0')}`;
+
+    const todasReservas = getReservasPropiedad(propiedadId);
+    const reservasDelMes = todasReservas.filter(r => r.fechaEntrada <= ultimoDiaMesStr && r.fechaSalida >= primerDiaMes);
+    const reservas = reservasDelMes.sort((a, b) => a.fechaEntrada.localeCompare(b.fechaEntrada));
+
+    if (reservas.length === 0) {
+      listaReservas.innerHTML = `<p class="calendario-sin-reservas">No hay reservas en ${nombresMeses[mesActual]} ${anio}.</p>`;
+      return;
+    }
+    listaReservas.innerHTML = `<p class="calendario-lista-titulo">Reservas en ${nombresMeses[mesActual]} ${anio}:</p><ul class="calendario-lista-ul">` +
+      reservas.map(r => {
+        const puedeElim = puedeEliminarReserva(r);
+        const est = estadoReserva(r);
+        const estado = est === 'pasada' ? ' (pasada)' : est === 'en_curso' ? ' (en curso)' : '';
+        return `<li class="calendario-reserva-item" data-id="${r.id}">
+          ${formatearFechaCorta(r.fechaEntrada)} – ${formatearFechaCorta(r.fechaSalida)}${estado}
+          ${puedeElim ? `<button type="button" class="btn-eliminar-reserva" data-id="${r.id}" aria-label="Eliminar reserva">Eliminar</button>` : ''}
+        </li>`;
+      }).join('') +
+      '</ul>';
+    listaReservas.querySelectorAll('.btn-eliminar-reserva').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const reserva = getReservasPropiedad(propiedadId).find(r => r.id === id);
+        if (!reserva || !puedeEliminarReserva(reserva)) return;
+        mostrarConfirmacionModal('Eliminar reserva', '¿Eliminar esta reserva del calendario?', () => {
+          removeReservaPropiedad(propiedadId, id);
+          renderizarCalendarioAnual();
+          renderizarListaReservas();
+        });
+      });
+    });
+  }
+
+  function abrirModalAnadirReserva() {
+    const overlay = document.createElement('div');
+    overlay.className = 'notificacion-overlay';
+    const hoyStr = new Date().toISOString().split('T')[0];
+    overlay.innerHTML = `
+      <div class="notificacion-box terminos-modal-box">
+        <div class="terminos-modal-header">
+          <h2>Añadir reserva</h2>
+          <button type="button" class="terminos-modal-cerrar" aria-label="Cerrar">×</button>
+        </div>
+        <div class="terminos-modal-body">
+          <div class="campo-calendario-reserva">
+            <label for="modal-reserva-entrada">Fecha entrada</label>
+            <input type="date" id="modal-reserva-entrada" value="${hoyStr}" />
+          </div>
+          <div class="campo-calendario-reserva">
+            <label for="modal-reserva-salida">Fecha salida</label>
+            <input type="date" id="modal-reserva-salida" value="${hoyStr}" />
+          </div>
+          <p id="modal-reserva-error" class="calendario-modal-error" style="display:none;"></p>
+        </div>
+        <div class="terminos-modal-footer">
+          <button type="button" class="notificacion-btn info" id="modal-reserva-guardar">Guardar</button>
+          <button type="button" class="terminos-modal-cerrar-btn">Cancelar</button>
+        </div>
+      </div>
+    `;
+    const cerrar = () => {
+      overlay.style.animation = 'fadeIn 0.2s ease reverse';
+      setTimeout(() => overlay.remove(), 200);
+    };
+    overlay.querySelector('.terminos-modal-cerrar').addEventListener('click', cerrar);
+    overlay.querySelector('.terminos-modal-cerrar-btn').addEventListener('click', cerrar);
+    overlay.addEventListener('click', e => { if (e.target === overlay) cerrar(); });
+    const ent = overlay.querySelector('#modal-reserva-entrada');
+    const sal = overlay.querySelector('#modal-reserva-salida');
+    const errEl = overlay.querySelector('#modal-reserva-error');
+    overlay.querySelector('#modal-reserva-guardar').addEventListener('click', () => {
+      const fe = ent.value;
+      const fs = sal.value;
+      if (!fe || !fs) {
+        errEl.textContent = 'Indica entrada y salida.';
+        errEl.style.display = 'block';
+        return;
+      }
+      if (new Date(fs) <= new Date(fe)) {
+        errEl.textContent = 'La fecha de salida debe ser posterior a la de entrada.';
+        errEl.style.display = 'block';
+        return;
+      }
+      if (haySolapamientoReserva(propiedadId, fe, fs)) {
+        errEl.textContent = 'Esas fechas se solapan con una reserva existente. Elige otras fechas.';
+        errEl.style.display = 'block';
+        return;
+      }
+      addReservaPropiedad(propiedadId, fe, fs);
+      cerrar();
+      renderizarCalendarioAnual();
+      renderizarListaReservas();
+      mostrarNotificacion('success', 'Reserva añadida', 'La reserva se ha añadido al calendario.');
+    });
+    document.body.appendChild(overlay);
+  }
+
+  renderizarCalendarioAnual();
+  renderizarListaReservas();
+  if (btnAnadir) btnAnadir.addEventListener('click', abrirModalAnadirReserva);
 }
 
 // ============================================================
@@ -2371,28 +2886,71 @@ function initMiniCalendario(propiedad) {
 // ============================================================
 
 function initConfirmacionPage() {
-  const reserva = JSON.parse(localStorage.getItem('reservaActiva'));
-  
+  const reservaActiva = JSON.parse(localStorage.getItem('reservaActiva'));
+  const reservaConfirmada = JSON.parse(localStorage.getItem('reservaConfirmada'));
+
   const seccionFormulario = document.getElementById('seccion-formulario-huesped');
   const seccionSinReserva = document.getElementById('seccion-sin-reserva');
   const seccionExito = document.getElementById('seccion-exito');
   const resumenReserva = document.getElementById('resumen-reserva');
-  
-  if (!reserva) {
+  const btnCancelarPendiente = document.getElementById('btn-cancelar-reserva-pendiente');
+  const btnCancelarCompletada = document.getElementById('btn-cancelar-reserva-completada');
+
+  const mostrarSinReserva = () => {
     if (seccionFormulario) seccionFormulario.hidden = true;
     if (seccionSinReserva) seccionSinReserva.hidden = false;
     if (seccionExito) seccionExito.hidden = true;
     if (resumenReserva) resumenReserva.hidden = true;
+  };
+
+  if (reservaConfirmada) {
+    if (seccionFormulario) seccionFormulario.hidden = true;
+    if (seccionSinReserva) seccionSinReserva.hidden = true;
+    if (seccionExito) seccionExito.hidden = false;
+    if (resumenReserva) resumenReserva.hidden = false;
+    mostrarConfirmacion(reservaConfirmada);
+    if (btnCancelarCompletada) {
+      btnCancelarCompletada.onclick = () => {
+        mostrarConfirmacionModal(
+          'Cancelar reserva',
+          '¿Eliminar esta reserva confirmada? Se borrarán todos los datos de la reserva.',
+          () => {
+            localStorage.removeItem('reservaConfirmada');
+            mostrarSinReserva();
+            mostrarNotificacion('info', 'Reserva cancelada', 'La reserva ha sido eliminada correctamente.');
+          }
+        );
+      };
+    }
     return;
   }
-  
+
+  if (!reservaActiva) {
+    mostrarSinReserva();
+    return;
+  }
+
   if (seccionFormulario) seccionFormulario.hidden = false;
   if (seccionSinReserva) seccionSinReserva.hidden = true;
   if (seccionExito) seccionExito.hidden = true;
   if (resumenReserva) resumenReserva.hidden = true;
-  
-  cargarMiniResumen(reserva);
-  initFormularioHuesped(reserva);
+
+  if (btnCancelarPendiente) {
+    btnCancelarPendiente.onclick = () => {
+      mostrarConfirmacionModal(
+        'Cancelar reserva',
+        '¿Seguro que quieres cancelar? Se borrarán los datos de tu reserva y tendrás que volver a elegir propiedad y fechas.',
+        () => {
+          localStorage.removeItem('reservaActiva');
+          mostrarSinReserva();
+          mostrarNotificacion('info', 'Reserva cancelada', 'Tu reserva pendiente ha sido cancelada. Puedes elegir otra propiedad cuando quieras.');
+        }
+      );
+    };
+  }
+
+  cargarMiniResumen(reservaActiva);
+  initFormularioHuesped(reservaActiva);
 }
 
 function cargarMiniResumen(reserva) {
@@ -2423,38 +2981,89 @@ function cargarMiniResumen(reserva) {
 
 function initFormularioHuesped(reserva) {
   const btnConfirmar = document.getElementById('btn-confirmar-reserva');
-  
+  const campoNombre = document.getElementById('campo-nombre-huesped');
+  const campoEmail = document.getElementById('campo-email-huesped');
+  const campoTelefono = document.getElementById('campo-telefono-huesped');
+  const campoTerminos = document.getElementById('campo-terminos');
+  const inputNombre = document.getElementById('input-nombre-huesped');
+  const inputEmail = document.getElementById('input-email-huesped');
+  const inputTelefono = document.getElementById('input-telefono-huesped');
+  const checkTerminos = document.getElementById('check-terminos');
+  const errorConfirmacion = document.getElementById('error-confirmacion');
+
+  const aplicarErrorCampoConfirmacion = (el) => {
+    if (!el) return;
+    el.style.border = '2px solid #c00';
+    el.style.borderRadius = '4px';
+  };
+  const quitarErrorCampoConfirmacion = (el) => {
+    if (!el) return;
+    el.style.border = '';
+    el.style.borderRadius = '';
+  };
+  const quitarTodosErroresConfirmacion = () => {
+    if (errorConfirmacion) errorConfirmacion.hidden = true;
+    quitarErrorCampoConfirmacion(campoNombre);
+    quitarErrorCampoConfirmacion(campoEmail);
+    quitarErrorCampoConfirmacion(campoTelefono);
+    quitarErrorCampoConfirmacion(campoTerminos);
+  };
+
+  if (inputNombre) {
+    inputNombre.addEventListener('input', () => quitarErrorCampoConfirmacion(campoNombre));
+    inputNombre.addEventListener('change', () => quitarErrorCampoConfirmacion(campoNombre));
+  }
+  if (inputEmail) {
+    inputEmail.addEventListener('input', () => quitarErrorCampoConfirmacion(campoEmail));
+    inputEmail.addEventListener('change', () => quitarErrorCampoConfirmacion(campoEmail));
+  }
+  if (inputTelefono) {
+    inputTelefono.addEventListener('input', () => quitarErrorCampoConfirmacion(campoTelefono));
+    inputTelefono.addEventListener('change', () => quitarErrorCampoConfirmacion(campoTelefono));
+  }
+  if (checkTerminos) {
+    checkTerminos.addEventListener('change', () => quitarErrorCampoConfirmacion(campoTerminos));
+  }
+
   if (!btnConfirmar) return;
-  
+
   btnConfirmar.addEventListener('click', () => {
-    const nombre = document.getElementById('input-nombre-huesped').value.trim();
-    const email = document.getElementById('input-email-huesped').value.trim();
-    const telefono = document.getElementById('input-telefono-huesped').value.trim();
-    const terminos = document.getElementById('check-terminos').checked;
+    const nombre = inputNombre?.value.trim() || '';
+    const email = inputEmail?.value.trim() || '';
+    const telefono = inputTelefono?.value.trim() || '';
+    const terminos = checkTerminos?.checked || false;
     const solicitudes = document.getElementById('textarea-solicitudes')?.value.trim() || '';
-    
-    const errorConfirmacion = document.getElementById('error-confirmacion');
-    
+
+    quitarTodosErroresConfirmacion();
+
     if (!nombre || !email || !telefono || !terminos) {
       if (errorConfirmacion) errorConfirmacion.hidden = false;
+      const primerError = !nombre ? campoNombre : !email ? campoEmail : !telefono ? campoTelefono : campoTerminos;
+      if (!nombre) aplicarErrorCampoConfirmacion(campoNombre);
+      if (!email) aplicarErrorCampoConfirmacion(campoEmail);
+      if (!telefono) aplicarErrorCampoConfirmacion(campoTelefono);
+      if (!terminos) aplicarErrorCampoConfirmacion(campoTerminos);
+      if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       mostrarNotificacion('warning', 'Campos Requeridos', 'Por favor completa todos los campos y acepta los términos y condiciones.');
       return;
     }
-    
+
     if (!isValidEmail(email)) {
+      aplicarErrorCampoConfirmacion(campoEmail);
+      campoEmail?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       mostrarNotificacion('error', 'Email Inválido', 'Por favor ingresa un correo electrónico válido.');
       return;
     }
-    
+
     if (!isValidPhone(telefono)) {
+      aplicarErrorCampoConfirmacion(campoTelefono);
+      campoTelefono?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       mostrarNotificacion('error', 'Teléfono Inválido', 'Por favor ingresa un número de teléfono válido (mínimo 10 dígitos).');
       return;
     }
-    
-    if (errorConfirmacion) errorConfirmacion.hidden = true;
-    
+
     const codigoReserva = generarCodigoReserva();
-    
+
     const reservaCompleta = {
       ...reserva,
       huesped: {
@@ -2466,13 +3075,18 @@ function initFormularioHuesped(reserva) {
       codigo: codigoReserva,
       fechaConfirmacion: new Date().toISOString()
     };
-    
+
     localStorage.setItem('reservaConfirmada', JSON.stringify(reservaCompleta));
     localStorage.removeItem('reservaActiva');
-    
+
     mostrarConfirmacion(reservaCompleta);
-    
-    mostrarNotificacion('success', '¡Reserva Confirmada!', 
+
+    setTimeout(() => {
+      const seccionExito = document.getElementById('seccion-exito');
+      if (seccionExito) seccionExito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
+    mostrarNotificacion('success', '¡Reserva Confirmada!',
       `<strong>Código: ${codigoReserva}</strong><br><br>
       <strong>${reservaCompleta.propiedad.titulo}</strong><br>
       ${formatearFecha(reservaCompleta.fechaEntrada)} - ${formatearFecha(reservaCompleta.fechaSalida)}<br>
@@ -2535,4 +3149,23 @@ function mostrarConfirmacion(reserva) {
   setTexto('resumen-nombre-huesped', reserva.huesped.nombre);
   setTexto('resumen-email-huesped', reserva.huesped.email);
   setTexto('resumen-telefono-huesped', reserva.huesped.telefono);
+
+  const btnCancelarCompletada = document.getElementById('btn-cancelar-reserva-completada');
+  const seccionSinReserva = document.getElementById('seccion-sin-reserva');
+  if (btnCancelarCompletada) {
+    btnCancelarCompletada.onclick = () => {
+      mostrarConfirmacionModal(
+        'Cancelar reserva',
+        '¿Eliminar esta reserva confirmada? Se borrarán todos los datos de la reserva.',
+        () => {
+          localStorage.removeItem('reservaConfirmada');
+          if (seccionFormulario) seccionFormulario.hidden = true;
+          if (seccionSinReserva) seccionSinReserva.hidden = false;
+          if (seccionExito) seccionExito.hidden = true;
+          if (resumenReserva) resumenReserva.hidden = true;
+          mostrarNotificacion('info', 'Reserva cancelada', 'La reserva ha sido eliminada correctamente.');
+        }
+      );
+    };
+  }
 }

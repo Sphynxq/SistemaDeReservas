@@ -7,8 +7,8 @@
 
   <!-- ================================================
        COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
-       <link rel="stylesheet" href="css/styles.css" />
        ================================================ -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
@@ -261,7 +261,7 @@
            (requisito del proyecto: uso de <table>)
            ========================================== -->
       <div id="seccion-disponibilidad">
-        <h2>Disponibilidad esta semana</h2>
+        <h2>Disponibilidad (próximos 7 días)</h2>
 
         <table id="tabla-disponibilidad">
           <caption>Disponibilidad de propiedades en Chihuahua por día</caption>
@@ -269,104 +269,17 @@
             <tr>
               <th scope="col">Propiedad</th>
               <th scope="col">Colonia</th>
-              <th scope="col">Lunes</th>
-              <th scope="col">Martes</th>
-              <th scope="col">Miércoles</th>
-              <th scope="col">Jueves</th>
-              <th scope="col">Viernes</th>
-              <th scope="col">Sábado</th>
-              <th scope="col">Domingo</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
+              <th scope="col" class="tabla-disp-dia">--</th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="disp-prop-1">
-              <td>Casa en Frac. Campestre</td>
-              <td>Campestre</td>
-              <td id="disp-1-lun">Disponible</td>
-              <td id="disp-1-mar">Disponible</td>
-              <td id="disp-1-mie">Ocupado</td>
-              <td id="disp-1-jue">Ocupado</td>
-              <td id="disp-1-vie">Ocupado</td>
-              <td id="disp-1-sab">Disponible</td>
-              <td id="disp-1-dom">Disponible</td>
-            </tr>
-            <tr id="disp-prop-2">
-              <td>Apto. Centro Histórico</td>
-              <td>Centro</td>
-              <td id="disp-2-lun">Ocupado</td>
-              <td id="disp-2-mar">Disponible</td>
-              <td id="disp-2-mie">Disponible</td>
-              <td id="disp-2-jue">Disponible</td>
-              <td id="disp-2-vie">Ocupado</td>
-              <td id="disp-2-sab">Ocupado</td>
-              <td id="disp-2-dom">Disponible</td>
-            </tr>
-            <tr id="disp-prop-3">
-              <td>Casa en El Mirador</td>
-              <td>El Mirador</td>
-              <td id="disp-3-lun">Disponible</td>
-              <td id="disp-3-mar">Disponible</td>
-              <td id="disp-3-mie">Disponible</td>
-              <td id="disp-3-jue">Ocupado</td>
-              <td id="disp-3-vie">Ocupado</td>
-              <td id="disp-3-sab">Ocupado</td>
-              <td id="disp-3-dom">Ocupado</td>
-            </tr>
-            <tr id="disp-prop-4">
-              <td>Apto. San Felipe</td>
-              <td>San Felipe</td>
-              <td id="disp-4-lun">Disponible</td>
-              <td id="disp-4-mar">Ocupado</td>
-              <td id="disp-4-mie">Ocupado</td>
-              <td id="disp-4-jue">Disponible</td>
-              <td id="disp-4-vie">Disponible</td>
-              <td id="disp-4-sab">Ocupado</td>
-              <td id="disp-4-dom">Disponible</td>
-            </tr>
-            <tr id="disp-prop-5">
-              <td>Casa en Las Granjas</td>
-              <td>Las Granjas</td>
-              <td id="disp-5-lun">Ocupado</td>
-              <td id="disp-5-mar">Ocupado</td>
-              <td id="disp-5-mie">Disponible</td>
-              <td id="disp-5-jue">Disponible</td>
-              <td id="disp-5-vie">Disponible</td>
-              <td id="disp-5-sab">Disponible</td>
-              <td id="disp-5-dom">Ocupado</td>
-            </tr>
-            <tr id="disp-prop-6">
-              <td>Penthouse Zona Dorada</td>
-              <td>Zona Dorada</td>
-              <td id="disp-6-lun">Disponible</td>
-              <td id="disp-6-mar">Disponible</td>
-              <td id="disp-6-mie">Ocupado</td>
-              <td id="disp-6-jue">Disponible</td>
-              <td id="disp-6-vie">Disponible</td>
-              <td id="disp-6-sab">Ocupado</td>
-              <td id="disp-6-dom">Ocupado</td>
-            </tr>
-            <tr id="disp-prop-7">
-              <td>Casa en Quintas del Sol</td>
-              <td>Quintas del Sol</td>
-              <td id="disp-7-lun">Disponible</td>
-              <td id="disp-7-mar">Disponible</td>
-              <td id="disp-7-mie">Disponible</td>
-              <td id="disp-7-jue">Disponible</td>
-              <td id="disp-7-vie">Ocupado</td>
-              <td id="disp-7-sab">Ocupado</td>
-              <td id="disp-7-dom">Ocupado</td>
-            </tr>
-            <tr id="disp-prop-8">
-              <td>Estudio Col. Industrial</td>
-              <td>Industrial</td>
-              <td id="disp-8-lun">Ocupado</td>
-              <td id="disp-8-mar">Disponible</td>
-              <td id="disp-8-mie">Disponible</td>
-              <td id="disp-8-jue">Ocupado</td>
-              <td id="disp-8-vie">Disponible</td>
-              <td id="disp-8-sab">Disponible</td>
-              <td id="disp-8-dom">Disponible</td>
-            </tr>
+          <tbody id="tabla-disponibilidad-body">
+            <!-- JS rellena las filas según reservas del calendario -->
           </tbody>
         </table>
 
@@ -732,7 +645,7 @@
       <h4>Soporte</h4>
       <ul>
         <li><a href="#">Ayuda</a></li>
-        <li><a href="#">Términos</a></li>
+        <li><a href="#" class="link-terminos-modal">Términos</a></li>
         <li><a href="#">Privacidad</a></li>
       </ul>
     </div>
