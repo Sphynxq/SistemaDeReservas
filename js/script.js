@@ -44,355 +44,6 @@ function getCurrentPage() {
 }
 
 // ============================================================
-// DATOS DE PROPIEDADES (simulando base de datos)
-// ============================================================
-const propiedadesData = [
-  {
-    id: 1,
-    titulo: 'Casa en Frac. Campestre',
-    tipo: 'Casa',
-    direccion: 'Calle Nogal 415, Frac. Campestre, Chihuahua, Chih.',
-    zona: 'norte',
-    cuartos: 3,
-    huespedes: 6,
-    precio: 850,
-    rating: 4.8,
-    resenas: 32,
-    imagen: 'img/casa1.jpg',
-    imagenes: ['img/casa1.jpg', 'img/casa1-2.jpg', 'img/casa1-3.jpg'],
-    descripcion: 'Hermosa casa en el exclusivo Fraccionamiento Campestre, perfecta para familias. Cuenta con amplios espacios, jardín privado y todas las comodidades para una estancia placentera en Chihuahua.',
-    amenidades: ['WiFi', 'Estacionamiento', 'Cocina equipada', 'Aire acondicionado', 'TV', 'Lavadora'],
-    normas: ['No fumar', 'No fiestas', 'Check-in después de 3 PM', 'Check-out antes de 12 PM', 'Mascotas no permitidas'],
-    referencia: 'A 5 minutos del centro comercial Fashion Mall',
-    calificaciones: { limpieza: 4.9, comunicacion: 4.8, ubicacion: 4.7, valor: 4.8 },
-    resenasData: [
-      { autor: 'María García', rating: 5, texto: 'Excelente lugar, muy limpio y cómodo. El anfitrión fue muy amable.', fecha: '2025-01-15' },
-      { autor: 'Carlos López', rating: 4, texto: 'Buena ubicación, cerca de todo. Recomendado.', fecha: '2025-01-10' }
-    ],
-    disponibilidad: { lun: true, mar: true, mie: false, jue: false, vie: false, sab: true, dom: true }
-  },
-  {
-    id: 2,
-    titulo: 'Apartamento en el Centro Histórico',
-    tipo: 'Apartamento',
-    direccion: 'Av. Independencia 732, Centro, Chihuahua, Chih.',
-    zona: 'centro',
-    cuartos: 2,
-    huespedes: 4,
-    precio: 620,
-    rating: 4.5,
-    resenas: 18,
-    imagen: 'img/apartamento1.jpg',
-    imagenes: ['img/apartamento1.jpg', 'img/apartamento1-2.jpg', 'img/apartamento1-3.jpg'],
-    descripcion: 'Moderno apartamento en el corazón del Centro Histórico de Chihuahua. Ideal para turistas que quieren explorar la ciudad a pie. A pasos de la Catedral y el Palacio de Gobierno.',
-    amenidades: ['WiFi', 'Cocina equipada', 'Aire acondicionado', 'TV', 'Calefacción'],
-    normas: ['No fumar', 'No fiestas', 'Check-in después de 2 PM', 'Check-out antes de 11 AM'],
-    referencia: 'Frente a la Plaza de Armas',
-    calificaciones: { limpieza: 4.6, comunicacion: 4.5, ubicacion: 4.8, valor: 4.4 },
-    resenasData: [
-      { autor: 'Ana Martínez', rating: 5, texto: 'Ubicación perfecta para conocer el centro de Chihuahua.', fecha: '2025-02-01' }
-    ],
-    disponibilidad: { lun: false, mar: true, mie: true, jue: true, vie: false, sab: false, dom: true }
-  },
-  {
-    id: 3,
-    titulo: 'Casa residencial en El Mirador',
-    tipo: 'Casa',
-    direccion: 'Calle Petirrojo 108, Col. El Mirador, Chihuahua, Chih.',
-    zona: 'poniente',
-    cuartos: 4,
-    huespedes: 8,
-    precio: 1500,
-    rating: 5.0,
-    resenas: 47,
-    imagen: 'img/casa2.jpg',
-    imagenes: ['img/casa2.jpg', 'img/casa2-2.jpg', 'img/casa2-3.jpg'],
-    descripcion: 'Espectacular residencia con alberca privada y vista panorámica de la ciudad. Casa de lujo con acabados de primera, perfecta para eventos especiales o vacaciones familiares.',
-    amenidades: ['WiFi', 'Alberca', 'Estacionamiento', 'Cocina equipada', 'Se admiten mascotas', 'Aire acondicionado', 'Jardín', 'Asador'],
-    normas: ['No fumar dentro', 'Fiestas previa autorización', 'Check-in después de 4 PM', 'Check-out antes de 12 PM'],
-    referencia: 'En la zona más exclusiva del poniente de Chihuahua',
-    calificaciones: { limpieza: 5.0, comunicacion: 5.0, ubicacion: 5.0, valor: 4.9 },
-    resenasData: [
-      { autor: 'Roberto Sánchez', rating: 5, texto: '¡Increíble propiedad! La alberca y el jardín son espectaculares.', fecha: '2025-02-10' },
-      { autor: 'Laura Hernández', rating: 5, texto: 'La mejor experiencia. Todo perfecto.', fecha: '2025-02-05' }
-    ],
-    disponibilidad: { lun: true, mar: true, mie: true, jue: false, vie: false, sab: false, dom: false }
-  },
-  {
-    id: 4,
-    titulo: 'Apartamento moderno en San Felipe',
-    tipo: 'Apartamento',
-    direccion: 'Blvd. Ortiz Mena 1540, Col. San Felipe, Chihuahua, Chih.',
-    zona: 'oriente',
-    cuartos: 2,
-    huespedes: 4,
-    precio: 750,
-    rating: 4.7,
-    resenas: 25,
-    imagen: 'img/apartamento2.jpg',
-    imagenes: ['img/apartamento2.jpg', 'img/apartamento2-2.jpg'],
-    descripcion: 'Apartamento contemporáneo con diseño moderno y todas las amenidades. Excelente ubicación cerca de restaurantes y comercios.',
-    amenidades: ['WiFi', 'Estacionamiento', 'Aire acondicionado', 'TV', 'Cocina equipada'],
-    normas: ['No fumar', 'No fiestas', 'Check-in después de 3 PM', 'Check-out antes de 11 AM'],
-    referencia: 'Sobre el Boulevard Ortiz Mena',
-    calificaciones: { limpieza: 4.8, comunicacion: 4.7, ubicacion: 4.6, valor: 4.7 },
-    resenasData: [],
-    disponibilidad: { lun: true, mar: false, mie: false, jue: true, vie: true, sab: false, dom: true }
-  },
-  {
-    id: 5,
-    titulo: 'Casa amplia en Las Granjas',
-    tipo: 'Casa',
-    direccion: 'Calle Durazno 223, Col. Las Granjas, Chihuahua, Chih.',
-    zona: 'sur',
-    cuartos: 3,
-    huespedes: 6,
-    precio: 700,
-    rating: 4.3,
-    resenas: 11,
-    imagen: 'img/casa3.jpg',
-    imagenes: ['img/casa3.jpg', 'img/casa3-2.jpg'],
-    descripcion: 'Casa familiar con amplio jardín, perfecta para quienes viajan con mascotas. Ambiente tranquilo y acogedor.',
-    amenidades: ['WiFi', 'Cocina equipada', 'Se admiten mascotas', 'Jardín', 'Estacionamiento'],
-    normas: ['Mascotas bienvenidas', 'No fumar dentro', 'Check-in después de 2 PM'],
-    referencia: 'Zona residencial tranquila al sur de la ciudad',
-    calificaciones: { limpieza: 4.4, comunicacion: 4.2, ubicacion: 4.1, valor: 4.5 },
-    resenasData: [],
-    disponibilidad: { lun: false, mar: false, mie: true, jue: true, vie: true, sab: true, dom: false }
-  },
-  {
-    id: 6,
-    titulo: 'Penthouse en Zona Dorada',
-    tipo: 'Apartamento',
-    direccion: 'Av. Valle Escondido 3210, Zona Dorada, Chihuahua, Chih.',
-    zona: 'norte',
-    cuartos: 3,
-    huespedes: 6,
-    precio: 1800,
-    rating: 4.9,
-    resenas: 61,
-    imagen: 'img/apartamento3.jpg',
-    imagenes: ['img/apartamento3.jpg', 'img/apartamento3-2.jpg', 'img/apartamento3-3.jpg'],
-    descripcion: 'Lujoso penthouse con terraza y vista espectacular. Acabados de lujo y ubicación premium en la Zona Dorada de Chihuahua.',
-    amenidades: ['WiFi', 'Estacionamiento', 'Cocina equipada', 'Aire acondicionado', 'Terraza', 'Gimnasio'],
-    normas: ['No fumar', 'No fiestas', 'Check-in después de 4 PM', 'Check-out antes de 12 PM'],
-    referencia: 'En el edificio más exclusivo de la Zona Dorada',
-    calificaciones: { limpieza: 5.0, comunicacion: 4.9, ubicacion: 4.8, valor: 4.9 },
-    resenasData: [
-      { autor: 'Diana Torres', rating: 5, texto: 'Experiencia de lujo. El penthouse superó todas mis expectativas.', fecha: '2025-02-15' }
-    ],
-    disponibilidad: { lun: true, mar: true, mie: false, jue: true, vie: true, sab: false, dom: false }
-  },
-  {
-    id: 7,
-    titulo: 'Casa en Quintas del Sol',
-    tipo: 'Casa',
-    direccion: 'Calle Girasol 890, Quintas del Sol, Chihuahua, Chih.',
-    zona: 'poniente',
-    cuartos: 4,
-    huespedes: 8,
-    precio: 1200,
-    rating: 4.6,
-    resenas: 39,
-    imagen: 'img/casa4.jpg',
-    imagenes: ['img/casa4.jpg', 'img/casa4-2.jpg'],
-    descripcion: 'Casa familiar con alberca privada en fraccionamiento cerrado. Ideal para reuniones familiares y celebraciones.',
-    amenidades: ['WiFi', 'Alberca privada', 'Estacionamiento', 'Cocina equipada', 'Se admiten mascotas', 'Aire acondicionado', 'Jardín', 'Asador'],
-    normas: ['Fiestas con autorización', 'No fumar dentro', 'Check-in después de 3 PM'],
-    referencia: 'Fraccionamiento con vigilancia las 24 horas',
-    calificaciones: { limpieza: 4.7, comunicacion: 4.5, ubicacion: 4.6, valor: 4.6 },
-    resenasData: [],
-    disponibilidad: { lun: true, mar: true, mie: true, jue: true, vie: false, sab: false, dom: false }
-  },
-  {
-    id: 8,
-    titulo: 'Estudio en Col. Industrial',
-    tipo: 'Apartamento',
-    direccion: 'Calle 38 Sur 615, Col. Industrial, Chihuahua, Chih.',
-    zona: 'centro',
-    cuartos: 1,
-    huespedes: 2,
-    precio: 480,
-    rating: 4.1,
-    resenas: 8,
-    imagen: 'img/apartamento4.jpg',
-    imagenes: ['img/apartamento4.jpg'],
-    descripcion: 'Estudio económico y funcional, perfecto para viajeros solos o parejas. Bien ubicado y con todas las comodidades básicas.',
-    amenidades: ['WiFi', 'Aire acondicionado', 'TV', 'Cocina básica'],
-    normas: ['No fumar', 'No fiestas', 'Check-in después de 2 PM'],
-    referencia: 'Cerca de la central de autobuses',
-    calificaciones: { limpieza: 4.2, comunicacion: 4.0, ubicacion: 4.0, valor: 4.3 },
-    resenasData: [],
-    disponibilidad: { lun: false, mar: true, mie: true, jue: false, vie: true, sab: true, dom: true }
-  }
-];
-
-// Reservas de calendario por propiedad: hardcodeadas (se pueden eliminar solo si son futuras)
-const STORAGE_CALENDARIO = 'calendarioReservas';
-const STORAGE_ELIMINADOS = 'calendarioEliminados';
-
-const reservasHardcodeadas = {
-  1: [
-    { id: 'h1-1', fechaEntrada: '2025-01-05', fechaSalida: '2025-01-10' },
-    { id: 'h1-2', fechaEntrada: '2025-03-01', fechaSalida: '2025-03-10' },
-    { id: 'h1-3', fechaEntrada: '2025-04-12', fechaSalida: '2025-04-18' },
-    { id: 'h1-4', fechaEntrada: '2025-06-20', fechaSalida: '2025-06-25' },
-    { id: 'h1-mar26-1', fechaEntrada: '2026-03-05', fechaSalida: '2026-03-12' },
-    { id: 'h1-mar26-2', fechaEntrada: '2026-03-20', fechaSalida: '2026-03-25' }
-  ],
-  2: [
-    { id: 'h2-1', fechaEntrada: '2025-01-15', fechaSalida: '2025-01-20' },
-    { id: 'h2-2', fechaEntrada: '2025-02-10', fechaSalida: '2025-02-15' },
-    { id: 'h2-3', fechaEntrada: '2025-05-01', fechaSalida: '2025-05-07' },
-    { id: 'h2-mar26-1', fechaEntrada: '2026-03-01', fechaSalida: '2026-03-07' },
-    { id: 'h2-mar26-2', fechaEntrada: '2026-03-15', fechaSalida: '2026-03-22' }
-  ],
-  3: [
-    { id: 'h3-1', fechaEntrada: '2025-02-01', fechaSalida: '2025-02-08' },
-    { id: 'h3-2', fechaEntrada: '2025-03-15', fechaSalida: '2025-03-22' },
-    { id: 'h3-3', fechaEntrada: '2025-07-01', fechaSalida: '2025-07-10' },
-    { id: 'h3-mar26-1', fechaEntrada: '2026-03-08', fechaSalida: '2026-03-14' },
-    { id: 'h3-mar26-2', fechaEntrada: '2026-03-25', fechaSalida: '2026-03-31' }
-  ],
-  4: [
-    { id: 'h4-1', fechaEntrada: '2025-01-20', fechaSalida: '2025-01-25' },
-    { id: 'h4-2', fechaEntrada: '2025-04-01', fechaSalida: '2025-04-05' },
-    { id: 'h4-3', fechaEntrada: '2025-08-10', fechaSalida: '2025-08-15' },
-    { id: 'h4-mar26-1', fechaEntrada: '2026-03-10', fechaSalida: '2026-03-18' }
-  ],
-  5: [
-    { id: 'h5-1', fechaEntrada: '2025-02-14', fechaSalida: '2025-02-18' },
-    { id: 'h5-2', fechaEntrada: '2025-05-20', fechaSalida: '2025-05-25' },
-    { id: 'h5-mar26-1', fechaEntrada: '2026-03-01', fechaSalida: '2026-03-05' },
-    { id: 'h5-mar26-2', fechaEntrada: '2026-03-22', fechaSalida: '2026-03-28' }
-  ],
-  6: [
-    { id: 'h6-1', fechaEntrada: '2025-03-20', fechaSalida: '2025-03-27' },
-    { id: 'h6-2', fechaEntrada: '2025-06-01', fechaSalida: '2025-06-08' },
-    { id: 'h6-3', fechaEntrada: '2025-09-01', fechaSalida: '2025-09-07' },
-    { id: 'h6-mar26-1', fechaEntrada: '2026-03-12', fechaSalida: '2026-03-19' }
-  ],
-  7: [
-    { id: 'h7-1', fechaEntrada: '2025-01-08', fechaSalida: '2025-01-12' },
-    { id: 'h7-2', fechaEntrada: '2025-04-20', fechaSalida: '2025-04-25' },
-    { id: 'h7-3', fechaEntrada: '2025-10-01', fechaSalida: '2025-10-06' },
-    { id: 'h7-mar26-1', fechaEntrada: '2026-03-03', fechaSalida: '2026-03-09' },
-    { id: 'h7-mar26-2', fechaEntrada: '2026-03-26', fechaSalida: '2026-03-31' }
-  ],
-  8: [
-    { id: 'h8-1', fechaEntrada: '2025-02-20', fechaSalida: '2025-02-24' },
-    { id: 'h8-2', fechaEntrada: '2025-05-10', fechaSalida: '2025-05-14' },
-    { id: 'h8-3', fechaEntrada: '2025-11-15', fechaSalida: '2025-11-20' },
-    { id: 'h8-mar26-1', fechaEntrada: '2026-03-14', fechaSalida: '2026-03-21' }
-  ]
-};
-
-function getCalendarioReservas() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_CALENDARIO) || '{}');
-  } catch (_) {
-    return {};
-  }
-}
-
-function getCalendarioEliminados() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_ELIMINADOS) || '{}');
-  } catch (_) {
-    return {};
-  }
-}
-
-function getReservasPropiedad(propiedadId) {
-  const id = Number(propiedadId);
-  const hardcodeadas = (reservasHardcodeadas[id] || []).map(r => ({ ...r, esHardcodeada: true }));
-  const eliminados = getCalendarioEliminados()[id] || [];
-  const usuario = (getCalendarioReservas()[id] || []).map(r => ({ ...r, esHardcodeada: false }));
-  return [...hardcodeadas.filter(r => !eliminados.includes(r.id)), ...usuario];
-}
-
-function isDiaOcupado(propiedadId, fechaStr) {
-  const reservas = getReservasPropiedad(propiedadId);
-  const d = fechaStr.replace(/-/g, '');
-  return reservas.some(r => {
-    const ent = r.fechaEntrada.replace(/-/g, '');
-    const sal = r.fechaSalida.replace(/-/g, '');
-    return d >= ent && d < sal;
-  });
-}
-
-/** Devuelve true si el rango [fechaEntrada, fechaSalida) se solapa con alguna reserva existente de la propiedad. */
-function haySolapamientoReserva(propiedadId, fechaEntrada, fechaSalida) {
-  const reservas = getReservasPropiedad(propiedadId);
-  const ent = fechaEntrada.replace(/-/g, '');
-  const sal = fechaSalida.replace(/-/g, '');
-  return reservas.some(r => {
-    const re = r.fechaEntrada.replace(/-/g, '');
-    const rs = r.fechaSalida.replace(/-/g, '');
-    return ent < rs && re < sal;
-  });
-}
-
-function isReservaPasadaOEnCurso(reserva) {
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-  const salida = new Date(reserva.fechaSalida);
-  salida.setHours(0, 0, 0, 0);
-  const entrada = new Date(reserva.fechaEntrada);
-  entrada.setHours(0, 0, 0, 0);
-  if (hoy > salida) return true;
-  if (hoy >= entrada && hoy < salida) return true;
-  return false;
-}
-
-function estadoReserva(reserva) {
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-  const salida = new Date(reserva.fechaSalida);
-  salida.setHours(0, 0, 0, 0);
-  const entrada = new Date(reserva.fechaEntrada);
-  entrada.setHours(0, 0, 0, 0);
-  if (hoy > salida) return 'pasada';
-  if (hoy >= entrada && hoy < salida) return 'en_curso';
-  return 'futura';
-}
-
-function puedeEliminarReserva(reserva) {
-  return estadoReserva(reserva) === 'futura';
-}
-
-function addReservaPropiedad(propiedadId, fechaEntrada, fechaSalida) {
-  const data = getCalendarioReservas();
-  const id = Number(propiedadId);
-  if (!data[id]) data[id] = [];
-  const nueva = {
-    id: 'u-' + Date.now(),
-    fechaEntrada,
-    fechaSalida
-  };
-  data[id].push(nueva);
-  localStorage.setItem(STORAGE_CALENDARIO, JSON.stringify(data));
-  return nueva;
-}
-
-function removeReservaPropiedad(propiedadId, reservaId) {
-  if (String(reservaId).startsWith('u-')) {
-    const data = getCalendarioReservas();
-    const id = Number(propiedadId);
-    if (data[id]) {
-      data[id] = data[id].filter(r => r.id !== reservaId);
-      localStorage.setItem(STORAGE_CALENDARIO, JSON.stringify(data));
-    }
-  } else {
-    const elim = getCalendarioEliminados();
-    const id = Number(propiedadId);
-    if (!elim[id]) elim[id] = [];
-    elim[id].push(reservaId);
-    localStorage.setItem(STORAGE_ELIMINADOS, JSON.stringify(elim));
-  }
-}
-
-// ============================================================
 // SISTEMA DE MODALES Y NOTIFICACIONES
 // ============================================================
 
@@ -1180,478 +831,6 @@ function actualizarUIUsuario(usuario) {
 })();
 
 // ============================================================
-// SISTEMA DE TRADUCCIÓN E INTERNACIONALIZACIÓN
-// ============================================================
-
-const TIPO_CAMBIO_USD = 17.80; // Tipo de cambio MXN a USD (marzo 2026)
-
-const traducciones = [
-  // IMPORTANTE: Ordenar de frases más largas a más cortas para evitar conflictos
-  
-  // Frases completas largas primero
-  ['Propiedades destacadas en Chihuahua', 'Featured Properties in Chihuahua'],
-  ['Ver todas las propiedades en Chihuahua', 'View All Properties in Chihuahua'],
-  ['Las mejores casas y apartamentos en la ciudad más grande del norte', 'The best houses and apartments in the largest city in the north'],
-  ['Encuentra tu hogar en Chihuahua', 'Find Your Home in Chihuahua'],
-  ['Las mejores casas y apartamentos de Chihuahua, capital, a tu alcance.', 'The best houses and apartments in Chihuahua, capital, at your fingertips.'],
-  ['Por favor completa todos los campos antes de buscar.', 'Please fill in all fields before searching.'],
-  ['¿En qué colonia o zona?', 'Which neighborhood or area?'],
-  ['Ej. Centro, Campestre, Mirador...', 'E.g. Downtown, Campestre, Mirador...'],
-  
-  // Títulos de propiedades
-  ['Casa en Frac. Campestre', 'House in Frac. Campestre'],
-  ['Apartamento en el Centro Histórico', 'Apartment in Historic Downtown'],
-  ['Casa residencial en El Mirador', 'Residential House in El Mirador'],
-  ['Apartamento moderno en San Felipe', 'Modern Apartment in San Felipe'],
-  ['Casa amplia en Las Granjas', 'Spacious House in Las Granjas'],
-  ['Penthouse en Zona Dorada', 'Penthouse in Zona Dorada'],
-  ['Casa en Quintas del Sol', 'House in Quintas del Sol'],
-  ['Estudio en Col. Industrial', 'Studio in Col. Industrial'],
-  
-  // Reseñas (antes de palabras sueltas)
-  ['reseñas)', 'reviews)'],
-  ['reseñas', 'reviews'],
-  ['reseña', 'review'],
-  
-  // Navbar
-  ['Iniciar sesión', 'Sign In'],
-  ['Registrarse', 'Sign Up'],
-  ['Ver detalle', 'View Details'],
-  ['Mis reservas', 'My Bookings'],
-  ['Propiedades', 'Properties'],
-  ['Inicio', 'Home'],
-  
-  // Fechas
-  ['Fecha de entrada', 'Check-in Date'],
-  ['Fecha de salida', 'Check-out Date'],
-  
-  // Filtros
-  ['Zona Norte', 'North Zone'],
-  ['Zona Sur', 'South Zone'],
-  ['Zona Oriente', 'East Zone'],
-  ['Zona Poniente', 'West Zone'],
-  ['Centro Histórico', 'Historic Downtown'],
-  ['Apartamentos', 'Apartments'],
-  ['Casas', 'Houses'],
-  ['Todos', 'All'],
-  
-  // Propiedades - características
-  ['Ver propiedad', 'View Property'],
-  ['Apartamento', 'Apartment'],
-  ['Casa', 'House'],
-  ['cuartos', 'rooms'],
-  ['cuarto', 'room'],
-  ['huéspedes', 'guests'],
-  ['huésped', 'guest'],
-  ['/ noche', '/ night'],
-  ['Huéspedes', 'Guests'],
-  
-  // Banner CTA
-  ['¿Tienes una propiedad en Chihuahua para rentar?', 'Do you have a property in Chihuahua for rent?'],
-  ['Publica tu casa o apartamento en NorthPalace y empieza a generar ingresos. Es gratis y fácil.', 'List your house or apartment on NorthPalace and start earning. It\'s free and easy.'],
-  ['Publicar mi propiedad', 'List My Property'],
-  
-  // Beneficios
-  ['¿Por qué elegir NorthPalace?', 'Why Choose NorthPalace?'],
-  ['Reservas seguras', 'Secure Bookings'],
-  ['Tu pago está protegido hasta que llegues a la propiedad.', 'Your payment is protected until you arrive at the property.'],
-  ['Soporte 24/7', '24/7 Support'],
-  ['Estamos contigo en cada paso de tu estancia en Chihuahua.', 'We\'re with you every step of your stay in Chihuahua.'],
-  ['Propiedades verificadas', 'Verified Properties'],
-  ['Cada propiedad en Chihuahua pasa por nuestro proceso de verificación.', 'Every property in Chihuahua goes through our verification process.'],
-  
-  // Footer
-  ['Explorar', 'Explore'],
-  ['Detalle', 'Details'],
-  ['Soporte', 'Support'],
-  ['Ayuda', 'Help'],
-  ['Términos', 'Terms'],
-  ['Privacidad', 'Privacy'],
-  ['Novedades', 'Newsletter'],
-  ['Suscríbete para recibir las mejores ofertas en Chihuahua.', 'Subscribe to receive the best deals in Chihuahua.'],
-  ['Suscribirse', 'Subscribe'],
-  ['¡Gracias por suscribirte!', 'Thanks for subscribing!'],
-  ['© 2025 NorthPalace. Todos los derechos reservados. Chihuahua, Chih., México.', '© 2025 NorthPalace. All rights reserved. Chihuahua, Chih., Mexico.'],
-  
-  // Modal Publicar
-  ['Publica tu propiedad en NorthPalace', 'List Your Property on NorthPalace'],
-  ['Tus datos', 'Your Information'],
-  ['Nombre completo', 'Full Name'],
-  ['Ej. Juan Pérez', 'E.g. John Smith'],
-  ['Correo electrónico', 'Email Address'],
-  ['Teléfono', 'Phone'],
-  ['Datos de la propiedad', 'Property Information'],
-  ['Título del anuncio', 'Listing Title'],
-  ['Ej. Casa amplia con jardín en Campestre', 'E.g. Spacious house with garden in Campestre'],
-  ['Tipo de propiedad', 'Property Type'],
-  ['-- Selecciona --', '-- Select --'],
-  ['Dirección completa', 'Full Address'],
-  ['Zona de la ciudad', 'City Zone'],
-  ['Número de cuartos', 'Number of Rooms'],
-  ['Capacidad máxima de huéspedes', 'Maximum Guest Capacity'],
-  ['Precio por noche ($)', 'Price per Night ($)'],
-  ['Descripción de la propiedad', 'Property Description'],
-  ['Describe los espacios, el entorno y lo que hace especial a tu propiedad...', 'Describe the spaces, surroundings, and what makes your property special...'],
-  ['Amenidades disponibles', 'Available Amenities'],
-  ['Estacionamiento', 'Parking'],
-  ['Alberca', 'Pool'],
-  ['Cocina equipada', 'Equipped Kitchen'],
-  ['Se admiten mascotas', 'Pets Allowed'],
-  ['Aire acondicionado', 'Air Conditioning'],
-  ['Jardín', 'Garden'],
-  ['Publicar propiedad', 'Publish Property'],
-  ['Cancelar', 'Cancel'],
-  ['¡Tu propiedad fue enviada con éxito! Nos pondremos en contacto contigo pronto.', 'Your property was submitted successfully! We\'ll contact you soon.'],
-  ['Por favor completa todos los campos obligatorios.', 'Please fill in all required fields.'],
-  
-  // Propiedades.html
-  ['Propiedades en Chihuahua', 'Properties in Chihuahua'],
-  ['Encuentra la casa o apartamento ideal en la capital del estado', 'Find the ideal house or apartment in the state capital'],
-  ['Colonia o zona', 'Neighborhood or Area'],
-  ['Entrada', 'Check-in'],
-  ['Salida', 'Check-out'],
-  ['Filtrar por', 'Filter by'],
-  ['Precio por noche', 'Price per Night'],
-  ['Mínimo ($)', 'Minimum ($)'],
-  ['Máximo ($)', 'Maximum ($)'],
-  ['Cualquiera', 'Any'],
-  ['Aplicar filtros', 'Apply Filters'],
-  ['Limpiar filtros', 'Clear Filters'],
-  ['Mostrando', 'Showing'],
-  ['propiedades en Chihuahua', 'properties in Chihuahua'],
-  ['Ordenar por:', 'Sort by:'],
-  ['Recomendados', 'Recommended'],
-  ['Precio: menor a mayor', 'Price: Low to High'],
-  ['Precio: mayor a menor', 'Price: High to Low'],
-  ['Mejor calificación', 'Best Rating'],
-  ['Disponibilidad esta semana', 'Availability This Week'],
-  ['Disponibilidad de propiedades en Chihuahua por día', 'Property availability in Chihuahua by day'],
-  ['Propiedad', 'Property'],
-  ['Colonia', 'Neighborhood'],
-  ['Lunes', 'Monday'],
-  ['Martes', 'Tuesday'],
-  ['Miércoles', 'Wednesday'],
-  ['Jueves', 'Thursday'],
-  ['Viernes', 'Friday'],
-  ['Sábado', 'Saturday'],
-  ['Domingo', 'Sunday'],
-  ['Disponible', 'Available'],
-  ['Ocupado', 'Occupied'],
-  ['No se encontraron propiedades con los filtros seleccionados.', 'No properties found with the selected filters.'],
-  
-  // Detalle.html
-  ['Sobre esta propiedad', 'About This Property'],
-  ['Amenidades', 'Amenities'],
-  ['Normas de la casa', 'House Rules'],
-  ['Ubicación', 'Location'],
-  ['Reseñas de huéspedes', 'Guest Reviews'],
-  ['Limpieza', 'Cleanliness'],
-  ['Comunicación', 'Communication'],
-  ['Valor', 'Value'],
-  ['Deja tu reseña', 'Leave Your Review'],
-  ['Tu nombre', 'Your Name'],
-  ['Tu calificación', 'Your Rating'],
-  ['Tu comentario', 'Your Comment'],
-  ['Cuéntanos tu experiencia en esta propiedad...', 'Tell us about your experience at this property...'],
-  ['Publicar reseña', 'Submit Review'],
-  ['Por favor completa todos los campos y selecciona una calificación.', 'Please fill in all fields and select a rating.'],
-  ['¡Gracias por tu reseña! Se publicará en breve.', 'Thanks for your review! It will be published shortly.'],
-  ['Llegada', 'Check-in'],
-  ['Reservar ahora', 'Book Now'],
-  ['No se te cobrará nada por ahora', 'You won\'t be charged yet'],
-  ['Por favor selecciona las fechas y el número de huéspedes.', 'Please select dates and number of guests.'],
-  ['La fecha de salida debe ser posterior a la de entrada.', 'Check-out date must be after check-in date.'],
-  ['Disponibilidad del mes', 'Monthly Availability'],
-  ['Tarifa de limpieza', 'Cleaning Fee'],
-  ['Tarifa de servicio NorthPalace', 'NorthPalace Service Fee'],
-  ['Total', 'Total'],
-  ['Guardar', 'Save'],
-  ['Máximo', 'Maximum'],
-  
-  // Confirmación
-  ['¡Reserva confirmada!', 'Booking Confirmed!'],
-  ['Tu estancia en Chihuahua está lista. Te enviamos los detalles a tu correo.', 'Your stay in Chihuahua is ready. We sent the details to your email.'],
-  ['Número de confirmación:', 'Confirmation Number:'],
-  ['Resumen de tu reserva', 'Your Booking Summary'],
-  ['Detalles de la estancia', 'Stay Details'],
-  ['Número de noches', 'Number of Nights'],
-  ['A partir de las 3:00 PM', 'From 3:00 PM'],
-  ['Antes de las 12:00 PM', 'Before 12:00 PM'],
-  ['Desglose del costo', 'Cost Breakdown'],
-  ['Datos del huésped', 'Guest Information'],
-  ['Nombre', 'Name'],
-  ['Completa tu reserva', 'Complete Your Booking'],
-  ['Solicitudes especiales (opcional)', 'Special Requests (optional)'],
-  ['¿Tienes alguna solicitud especial?', 'Do you have any special requests?'],
-  ['Ej. llegada tardía, cuna para bebé, etc.', 'E.g. late arrival, baby crib, etc.'],
-  ['Acepto los', 'I accept the'],
-  ['términos y condiciones', 'terms and conditions'],
-  ['de NorthPalace', 'of NorthPalace'],
-  ['Confirmar reserva', 'Confirm Booking'],
-  ['Por favor completa todos los campos y acepta los términos y condiciones.', 'Please fill in all fields and accept the terms and conditions.'],
-  ['No tienes ninguna reserva activa', 'You have no active bookings'],
-  ['Explora nuestras propiedades en Chihuahua y haz tu primera reserva.', 'Explore our properties in Chihuahua and make your first booking.'],
-  ['Ver propiedades', 'View Properties'],
-  
-  // Modales Auth
-  ['Iniciar Sesión', 'Sign In'],
-  ['Crear Cuenta', 'Create Account'],
-  ['Contraseña', 'Password'],
-  ['Tu contraseña', 'Your password'],
-  ['Recordar mi sesión', 'Remember me'],
-  ['¿No tienes cuenta?', 'Don\'t have an account?'],
-  ['Regístrate aquí', 'Sign up here'],
-  ['¿Olvidaste tu contraseña?', 'Forgot your password?'],
-  ['¿Ya tienes cuenta?', 'Already have an account?'],
-  ['Inicia sesión', 'Sign in'],
-  ['Mínimo 6 caracteres', 'Minimum 6 characters'],
-  ['Repite tu contraseña', 'Repeat your password'],
-  ['Confirmar contraseña', 'Confirm password'],
-  ['Cerrar sesión', 'Sign out'],
-  ['¿Estás seguro que deseas cerrar tu sesión?', 'Are you sure you want to sign out?'],
-  ['Hola,', 'Hello,'],
-  
-  // Palabras sueltas al final (para evitar conflictos)
-  ['noches', 'nights'],
-  ['noche', 'night'],
-  ['Centro', 'Downtown'],
-  ['Buscar', 'Search']
-];
-
-// Traducciones que solo deben aplicarse cuando la palabra aparece completa
-// (evita que "Vie" cambie "View" → "Friw", o "Mar" afecte "March", etc.)
-const traduccionesSoloPalabraCompleta = [
-  ['Lun', 'Mon'],
-  ['Mar', 'Tue'],
-  ['Mié', 'Wed'],
-  ['Jue', 'Thu'],
-  ['Vie', 'Fri'],
-  ['Sáb', 'Sat'],
-  ['Dom', 'Sun']
-];
-
-let idiomaActual = 'es';
-
-function initSelectorIdioma() {
-  // Crear el botón selector de idioma
-  const selectorHTML = `
-    <div id="selector-idioma" style="
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      gap: 5px;
-      background: white;
-      padding: 8px 12px;
-      border-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    ">
-      <button id="btn-idioma-es" class="btn-idioma activo" title="Español" style="
-        border: none;
-        background: ${idiomaActual === 'es' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0'};
-        color: ${idiomaActual === 'es' ? 'white' : '#333'};
-        padding: 8px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.3s;
-      ">🇲🇽 ES</button>
-      <button id="btn-idioma-en" class="btn-idioma" title="English" style="
-        border: none;
-        background: ${idiomaActual === 'en' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0'};
-        color: ${idiomaActual === 'en' ? 'white' : '#333'};
-        padding: 8px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.3s;
-      ">🇺🇸 EN</button>
-    </div>
-  `;
-  
-  document.body.insertAdjacentHTML('beforeend', selectorHTML);
-  
-  document.getElementById('btn-idioma-es').addEventListener('click', () => {
-    aplicarIdioma('es');
-  });
-  
-  document.getElementById('btn-idioma-en').addEventListener('click', () => {
-    aplicarIdioma('en');
-  });
-}
-
-function aplicarIdioma(idioma) {
-  idiomaActual = idioma;
-  localStorage.setItem('idioma', idioma);
-  
-  // Actualizar botones
-  const btnEs = document.getElementById('btn-idioma-es');
-  const btnEn = document.getElementById('btn-idioma-en');
-  
-  if (btnEs && btnEn) {
-    btnEs.style.background = idioma === 'es' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0';
-    btnEs.style.color = idioma === 'es' ? 'white' : '#333';
-    btnEn.style.background = idioma === 'en' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0';
-    btnEn.style.color = idioma === 'en' ? 'white' : '#333';
-  }
-  
-  if (idioma === 'en') {
-    traducirPagina();
-    convertirPreciosADolares();
-  } else {
-    // Recargar página para volver al español original
-    location.reload();
-  }
-}
-
-function aplicarTraduccionSoloPalabraCompleta(texto) {
-  let resultado = texto;
-  traduccionesSoloPalabraCompleta.forEach(([es, en]) => {
-    const regex = new RegExp('\\b' + escapeRegex(es) + '\\b', 'g');
-    resultado = resultado.replace(regex, en);
-  });
-  return resultado;
-}
-
-function traducirPagina() {
-  // Traducir elementos de texto
-  const elementosTexto = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, label, th, td, li, legend, option, address, caption');
-  
-  elementosTexto.forEach(el => {
-    // Guardar texto original si no existe
-    if (!el.dataset.textoOriginal) {
-      el.dataset.textoOriginal = el.innerHTML;
-    }
-    
-    let textoActual = el.innerHTML;
-    
-    // 1) Traducciones normales (frases completas primero; así "Ver propiedad" → "View Property")
-    traducciones.forEach(([es, en]) => {
-      if (textoActual.includes(es)) {
-        textoActual = textoActual.split(es).join(en);
-      }
-    });
-    
-    // 2) Abreviaturas (solo como palabra completa: "Vie" en tabla → "Fri", pero no dentro de "View")
-    textoActual = aplicarTraduccionSoloPalabraCompleta(textoActual);
-    
-    el.innerHTML = textoActual;
-  });
-  
-  // Traducir placeholders
-  const inputs = document.querySelectorAll('input[placeholder], textarea[placeholder]');
-  inputs.forEach(input => {
-    if (!input.dataset.placeholderOriginal) {
-      input.dataset.placeholderOriginal = input.placeholder;
-    }
-    
-    let placeholder = input.placeholder;
-    traducciones.forEach(([es, en]) => {
-      if (placeholder.includes(es)) {
-        placeholder = placeholder.split(es).join(en);
-      }
-    });
-    placeholder = aplicarTraduccionSoloPalabraCompleta(placeholder);
-    input.placeholder = placeholder;
-  });
-  
-  // Traducir titles (tooltips)
-  const elementsWithTitle = document.querySelectorAll('[title]');
-  elementsWithTitle.forEach(el => {
-    if (!el.dataset.titleOriginal) {
-      el.dataset.titleOriginal = el.title;
-    }
-    
-    let title = el.title;
-    traducciones.forEach(([es, en]) => {
-      if (title.includes(es)) {
-        title = title.split(es).join(en);
-      }
-    });
-    title = aplicarTraduccionSoloPalabraCompleta(title);
-    el.title = title;
-  });
-  
-  // Actualizar título de la página
-  if (document.title.includes('NorthPalace')) {
-    const titulos = {
-      'NorthPalace - Tu hogar en Chihuahua': 'NorthPalace - Your Home in Chihuahua',
-      'NorthPalace - Propiedades en Chihuahua': 'NorthPalace - Properties in Chihuahua',
-      'NorthPalace - Detalle de propiedad': 'NorthPalace - Property Details',
-      'NorthPalace - Confirmación de reserva': 'NorthPalace - Booking Confirmation'
-    };
-    if (titulos[document.title]) {
-      document.title = titulos[document.title];
-    }
-  }
-}
-
-function convertirPreciosADolares() {
-  // Buscar todos los elementos que contienen precios en MXN
-  const elementosConPrecio = document.querySelectorAll('p, span, td, strong, div');
-  
-  elementosConPrecio.forEach(el => {
-    // Guardar contenido original
-    if (!el.dataset.precioOriginal && el.innerHTML.includes('$')) {
-      el.dataset.precioOriginal = el.innerHTML;
-    }
-    
-    // Buscar patrones de precio: $X,XXX o $XXX
-    const regexPrecio = /\$[\d,]+(\.\d{2})?/g;
-    let contenido = el.innerHTML;
-    
-    const matches = contenido.match(regexPrecio);
-    if (matches) {
-      matches.forEach(match => {
-        // Extraer número
-        const numero = parseFloat(match.replace(/[$,]/g, ''));
-        if (!isNaN(numero) && numero > 50) { // Solo convertir si parece ser MXN (mayor a $50)
-          const enDolares = (numero / TIPO_CAMBIO_USD).toFixed(0);
-          const nuevoTexto = `$${parseInt(enDolares).toLocaleString('en-US')} USD`;
-          contenido = contenido.replace(match, nuevoTexto);
-        }
-      });
-      el.innerHTML = contenido;
-    }
-  });
-  
-  // Actualizar data-precio en cards
-  const cards = document.querySelectorAll('[data-precio]');
-  cards.forEach(card => {
-    if (!card.dataset.precioMxn) {
-      card.dataset.precioMxn = card.dataset.precio;
-    }
-    const precioMxn = parseFloat(card.dataset.precioMxn);
-    card.dataset.precio = Math.round(precioMxn / TIPO_CAMBIO_USD);
-  });
-}
-
-function escapeRegex(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function traducir(texto) {
-  if (idiomaActual === 'en') {
-    const traduccion = traducciones.find(([es, en]) => es === texto);
-    if (traduccion) {
-      return traduccion[1];
-    }
-  }
-  return texto;
-}
-
-function formatearPrecioIdioma(precio) {
-  if (idiomaActual === 'en') {
-    const precioUsd = Math.round(precio / TIPO_CAMBIO_USD);
-    return '$' + precioUsd.toLocaleString('en-US') + ' USD';
-  }
-  return '$' + precio.toLocaleString('es-MX');
-}
-
-// ============================================================
 // UTILIDADES COMUNES
 // ============================================================
 
@@ -2298,10 +1477,10 @@ function cargarDatosPropiedad(propiedad) {
     setTexto('prop-rating-numero', propiedad.rating.toFixed(1));
     
     const linkResenas = document.getElementById('link-resenas');
-    if (linkResenas) linkResenas.textContent = `(${propiedad.resenas} reseñas)`;
+    if (linkResenas) linkResenas.textContent = `(${propiedad.resenas} ${traducir('reseñas')})`;
   }
   
-  setTexto('prop-descripcion-texto', propiedad.descripcion);
+  setTexto('prop-descripcion-texto', traducir(propiedad.descripcion));
   
   const listaAmenidades = document.getElementById('lista-amenidades');
   if (listaAmenidades) {
@@ -2325,11 +1504,11 @@ function cargarDatosPropiedad(propiedad) {
   if (reservaRating) {
     reservaRating.dataset.rating = propiedad.rating;
     setHTML('reserva-estrellas', generarEstrellas(propiedad.rating));
-    setTexto('reserva-num-resenas', `(${propiedad.resenas} reseñas)`);
+    setTexto('reserva-num-resenas', `(${propiedad.resenas} ${traducir('reseñas')})`);
   }
   
   setTexto('calificacion-general', propiedad.rating.toFixed(1));
-  setTexto('total-resenas', `${propiedad.resenas} reseñas`);
+  setTexto('total-resenas', `${propiedad.resenas} ${traducir('reseñas')}`);
   
   const resumenEstrellas = document.getElementById('resumen-estrellas');
   if (resumenEstrellas) {
@@ -2410,84 +1589,96 @@ function initFavoritoDetalle(propiedad) {
   });
 }
 
+/**
+ * Actualiza el estado visual de las estrellas de valoración (1-5).
+ * @param {HTMLElement} contenedor - Elemento #estrellas-interactivas
+ * @param {number} valor - Número de estrellas a marcar como activas (0-5)
+ */
+function pintarEstrellasResena(contenedor, valor) {
+  if (!contenedor) return;
+  const estrellas = contenedor.querySelectorAll('.estrella-seleccionable');
+  const n = Math.max(0, Math.min(5, parseInt(valor, 10) || 0));
+  estrellas.forEach((e) => {
+    const v = parseInt(e.dataset.valor, 10);
+    e.classList.toggle('activa', v <= n);
+  });
+}
+
 function initResenasDetalle(propiedad) {
   const estrellasInteractivas = document.getElementById('estrellas-interactivas');
   const inputCalificacion = document.getElementById('input-calificacion-resena');
   const btnEnviar = document.getElementById('btn-enviar-resena');
-  
+
   if (estrellasInteractivas) {
     const estrellas = estrellasInteractivas.querySelectorAll('.estrella-seleccionable');
-    
-    estrellas.forEach(estrella => {
-      estrella.style.cursor = 'pointer';
-      estrella.style.fontSize = '24px';
-      estrella.style.color = '#ccc';
-      
+
+    estrellasInteractivas.addEventListener('mouseleave', () => {
+      const seleccion = parseInt(estrellasInteractivas.dataset.seleccion, 10) || 0;
+      pintarEstrellasResena(estrellasInteractivas, seleccion);
+    });
+
+    estrellas.forEach((estrella) => {
       estrella.addEventListener('mouseenter', () => {
-        const valor = parseInt(estrella.dataset.valor);
-        estrellas.forEach(e => {
-          e.style.color = parseInt(e.dataset.valor) <= valor ? '#ffc107' : '#ccc';
-        });
+        const valor = parseInt(estrella.dataset.valor, 10);
+        pintarEstrellasResena(estrellasInteractivas, valor);
       });
-      
-      estrella.addEventListener('mouseleave', () => {
-        const seleccion = parseInt(estrellasInteractivas.dataset.seleccion);
-        estrellas.forEach(e => {
-          e.style.color = parseInt(e.dataset.valor) <= seleccion ? '#ffc107' : '#ccc';
-        });
+
+      estrella.addEventListener('click', (e) => {
+        e.preventDefault();
+        const valor = parseInt(estrella.dataset.valor, 10);
+        estrellasInteractivas.dataset.seleccion = String(valor);
+        if (inputCalificacion) inputCalificacion.value = String(valor);
+        pintarEstrellasResena(estrellasInteractivas, valor);
       });
-      
-      estrella.addEventListener('click', () => {
-        const valor = parseInt(estrella.dataset.valor);
-        estrellasInteractivas.dataset.seleccion = valor;
-        if (inputCalificacion) inputCalificacion.value = valor;
-        
-        estrellas.forEach(e => {
-          e.style.color = parseInt(e.dataset.valor) <= valor ? '#ffc107' : '#ccc';
-        });
+
+      estrella.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          estrella.click();
+        }
       });
     });
+
+    pintarEstrellasResena(estrellasInteractivas, 0);
   }
-  
+
   if (btnEnviar) {
     btnEnviar.addEventListener('click', () => {
       const autor = document.getElementById('input-autor-resena').value.trim();
-      const calificacion = parseInt(inputCalificacion?.value) || 0;
+      const calificacion = parseInt(inputCalificacion?.value, 10) || 0;
       const texto = document.getElementById('textarea-resena').value.trim();
-      
+
       const errorResena = document.getElementById('error-resena');
       const mensajeOk = document.getElementById('mensaje-resena-ok');
-      
+
       if (!autor || calificacion === 0 || !texto) {
         if (errorResena) errorResena.hidden = false;
         if (mensajeOk) mensajeOk.hidden = true;
         mostrarNotificacion('warning', 'Campos Incompletos', 'Por favor completa todos los campos y selecciona una calificación.');
         return;
       }
-      
+
       if (errorResena) errorResena.hidden = true;
       if (mensajeOk) mensajeOk.hidden = false;
-      
+
       const nuevaResena = {
         autor,
         rating: calificacion,
         texto,
         fecha: new Date().toISOString().split('T')[0]
       };
-      
+
       propiedad.resenasData.unshift(nuevaResena);
       cargarResenas(propiedad);
-      
+
       document.getElementById('input-autor-resena').value = '';
       document.getElementById('textarea-resena').value = '';
       estrellasInteractivas.dataset.seleccion = '0';
       inputCalificacion.value = '0';
-      estrellasInteractivas.querySelectorAll('.estrella-seleccionable').forEach(e => {
-        e.style.color = '#ccc';
-      });
-      
+      pintarEstrellasResena(estrellasInteractivas, 0);
+
       mostrarNotificacion('success', '¡Reseña Publicada!', 'Gracias por tu reseña. Se ha publicado correctamente.');
-      
+
       setTimeout(() => {
         if (mensajeOk) mensajeOk.hidden = true;
       }, 3000);
@@ -2500,8 +1691,11 @@ function cargarResenas(propiedad) {
   
   if (!listaResenas) return;
   
+  // Marcar contenedor de reseñas para que el sistema de traducción NO modifique el texto de los usuarios
+  listaResenas.dataset.noTranslate = 'true';
+  
   if (propiedad.resenasData.length === 0) {
-    listaResenas.innerHTML = '<p>Aún no hay reseñas para esta propiedad. ¡Sé el primero en dejar una!</p>';
+    listaResenas.innerHTML = '<p>' + traducir('Aún no hay reseñas para esta propiedad. ¡Sé el primero en dejar una!') + '</p>';
     return;
   }
   
@@ -3132,7 +2326,7 @@ function mostrarConfirmacion(reserva) {
   if (resumenRating) {
     resumenRating.dataset.rating = reserva.propiedad.rating;
     setTexto('resumen-estrellas-propiedad', generarEstrellas(reserva.propiedad.rating));
-    setTexto('resumen-num-resenas-propiedad', `(${reserva.propiedad.resenas} reseñas)`);
+    setTexto('resumen-num-resenas-propiedad', `(${reserva.propiedad.resenas} ${traducir('reseñas')})`);
   }
   
   setTexto('resumen-fecha-entrada', formatearFechaCompleta(reserva.fechaEntrada));

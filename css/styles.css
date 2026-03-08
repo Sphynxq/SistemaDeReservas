@@ -188,7 +188,35 @@ body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-heig
 #form-resena label { display: block; margin: 0.5rem 0 0.2rem; }
 #form-resena input[type="text"], #form-resena textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
 #form-resena textarea { min-height: 80px; resize: vertical; }
-#estrellas-interactivas { font-size: 1.5rem; cursor: pointer; }
+/* Estrellas de valoración para reseñas */
+.estrellas-rating {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.estrellas-rating .estrella-seleccionable {
+  display: inline-flex;
+  padding: 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+.estrellas-rating .estrella-seleccionable:hover {
+  transform: scale(1.1);
+}
+.estrellas-rating .estrella-seleccionable.activa {
+  color: #ffc107;
+}
+.estrella-svg {
+  width: 1.5em;
+  height: 1.5em;
+  display: block;
+  pointer-events: none;
+}
 #btn-enviar-resena { padding: 0.5rem 1rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
 #error-resena { color: #c00; }
 #mensaje-resena-ok { color: #060; }

@@ -212,16 +212,24 @@
             />
           </div>
 
-          <!-- COMPAÑERO DE JS: al hacer clic en cada estrella,
-               actualizar data-seleccion y llenar id="input-calificacion-resena" -->
           <div id="campo-estrellas-resena">
             <label>Tu calificación</label>
-            <div id="estrellas-interactivas" data-seleccion="0">
-              <span class="estrella-seleccionable" data-valor="1">&#9733;</span>
-              <span class="estrella-seleccionable" data-valor="2">&#9733;</span>
-              <span class="estrella-seleccionable" data-valor="3">&#9733;</span>
-              <span class="estrella-seleccionable" data-valor="4">&#9733;</span>
-              <span class="estrella-seleccionable" data-valor="5">&#9733;</span>
+            <div id="estrellas-interactivas" class="estrellas-rating" data-seleccion="0" role="group" aria-label="Calificación de 1 a 5 estrellas">
+              <button type="button" class="estrella-seleccionable" data-valor="1" aria-label="1 estrella" title="1 estrella">
+                <svg class="estrella-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+              </button>
+              <button type="button" class="estrella-seleccionable" data-valor="2" aria-label="2 estrellas" title="2 estrellas">
+                <svg class="estrella-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+              </button>
+              <button type="button" class="estrella-seleccionable" data-valor="3" aria-label="3 estrellas" title="3 estrellas">
+                <svg class="estrella-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+              </button>
+              <button type="button" class="estrella-seleccionable" data-valor="4" aria-label="4 estrellas" title="4 estrellas">
+                <svg class="estrella-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+              </button>
+              <button type="button" class="estrella-seleccionable" data-valor="5" aria-label="5 estrellas" title="5 estrellas">
+                <svg class="estrella-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+              </button>
             </div>
             <input type="hidden" id="input-calificacion-resena" name="calificacion" value="0" />
           </div>
@@ -403,41 +411,9 @@
   </footer>
   <!-- FIN FOOTER -->
 
-  <!-- ================================================
-       COMPAÑERO DE JS: enlaza aquí tu archivo
-       <script src="js/script.js"></script>
-
-       Al cargar esta página JS debe:
-         1. Leer la propiedad seleccionada (localStorage o URL params)
-         2. Llenar todos los campos vacíos:
-              id="prop-titulo"         → nombre de la propiedad
-              id="prop-tipo"           → Casa / Apartamento
-              id="prop-cuartos"        → Ej. "3 cuartos"
-              id="prop-huespedes"      → Ej. "6 huéspedes"
-              id="prop-direccion"      → dirección completa
-              id="prop-rating"         → data-rating y estrellas
-              id="prop-descripcion-texto" → descripción
-              id="lista-amenidades"    → generar <li> con title tooltip
-              id="lista-normas"        → generar <li>
-              id="ubicacion-completa"  → dirección
-              id="ubicacion-referencia"→ referencias cercanas
-              id="img-principal"       → src de la foto principal
-              id="galeria-miniaturas"  → generar miniaturas
-              id="precio-noche"        → precio de la propiedad
-              id="max-huespedes-aviso" → Ej. "Máximo 6 huéspedes"
-              id="lista-resenas"       → generar reseñas como article
-              id="calificacion-general", id="total-resenas" → resumen
-         3. Galería: clics en miniaturas cambian id="img-principal"
-         4. Favorito: id="btn-favorito-detalle"
-         5. Estrellas reseña: clics en .estrella-seleccionable
-         6. Enviar reseña: id="btn-enviar-resena"
-         7. Calcular costo: cambios en fechas/huéspedes → actualizar
-              id="texto-noches", id="costo-noches",
-              id="costo-limpieza", id="costo-servicio", id="costo-total"
-         8. Validar fechas: id="error-fechas"
-         9. Reservar: id="btn-reservar" → guardar datos y redirigir
-            a confirmacion.html
-       ================================================ -->
+  <!-- JS -->
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
   <script src="js/script.js"></script>
 
 </body>
