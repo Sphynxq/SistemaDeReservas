@@ -352,7 +352,7 @@ function initSelectorIdioma() {
     ">
       <button id="btn-idioma-es" class="btn-idioma activo" title="Español" style="
         border: none;
-        background: ${idiomaActual === 'es' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0'};
+        background: ${idiomaActual === 'es' ? 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' : '#f0f0f0'};
         color: ${idiomaActual === 'es' ? 'white' : '#333'};
         padding: 8px 15px;
         border-radius: 20px;
@@ -363,7 +363,7 @@ function initSelectorIdioma() {
       ">🇲🇽 ES</button>
       <button id="btn-idioma-en" class="btn-idioma" title="English" style="
         border: none;
-        background: ${idiomaActual === 'en' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0'};
+        background: ${idiomaActual === 'en' ? 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' : '#f0f0f0'};
         color: ${idiomaActual === 'en' ? 'white' : '#333'};
         padding: 8px 15px;
         border-radius: 20px;
@@ -395,9 +395,9 @@ function aplicarIdioma(idioma) {
   const btnEn = document.getElementById('btn-idioma-en');
   
   if (btnEs && btnEn) {
-    btnEs.style.background = idioma === 'es' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0';
+    btnEs.style.background = idioma === 'es' ? 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' : '#f0f0f0';
     btnEs.style.color = idioma === 'es' ? 'white' : '#333';
-    btnEn.style.background = idioma === 'en' ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' : '#f0f0f0';
+    btnEn.style.background = idioma === 'en' ? 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' : '#f0f0f0';
     btnEn.style.color = idioma === 'en' ? 'white' : '#333';
   }
   

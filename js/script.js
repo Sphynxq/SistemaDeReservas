@@ -94,7 +94,7 @@ function crearEstilosModales() {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       border-radius: 12px 12px 0 0;
     }
     
@@ -150,8 +150,8 @@ function crearEstilosModales() {
     
     .modal-campo input:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.25);
     }
     
     .modal-btn {
@@ -166,7 +166,7 @@ function crearEstilosModales() {
     }
     
     .modal-btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--secondary) 0%, #6a0dad 100%);
       color: white;
     }
     
@@ -182,7 +182,7 @@ function crearEstilosModales() {
     }
     
     .modal-footer a {
-      color: #667eea;
+      color: var(--secondary);
       text-decoration: none;
       font-weight: 600;
     }
@@ -253,7 +253,7 @@ function crearEstilosModales() {
     }
     
     .notificacion-header.info {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     }
     
     .notificacion-icono {
@@ -309,7 +309,7 @@ function crearEstilosModales() {
     }
     
     .notificacion-btn.info {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--secondary) 0%, #6a0dad 100%);
       color: white;
     }
     
@@ -688,7 +688,7 @@ function mostrarModalRegistro() {
         </div>
         <div class="modal-checkbox">
           <input type="checkbox" id="registro-terminos">
-          <label for="registro-terminos">Acepto los <a href="#" style="color: #667eea;">términos y condiciones</a></label>
+          <label for="registro-terminos">Acepto los <a href="#" style="color: var(--secondary);">términos y condiciones</a></label>
         </div>
         <button class="modal-btn modal-btn-primary" id="btn-submit-registro">Crear Cuenta</button>
       </div>
@@ -806,7 +806,7 @@ function actualizarUIUsuario(usuario) {
   const botonesSesion = document.getElementById('botones-sesion');
   if (botonesSesion && usuario && usuario.logueado) {
     botonesSesion.innerHTML = `
-      <span style="color: #667eea; font-weight: 600;">Hola, ${usuario.nombre}</span>
+      <span style="color: var(--secondary); font-weight: 600;">Hola, ${usuario.nombre}</span>
       <a href="#" id="btn-cerrar-sesion" style="margin-left: 15px;">Cerrar sesión</a>
     `;
     
@@ -1035,8 +1035,8 @@ function initFiltrosRapidos() {
   
   botonesFilter.forEach(btn => {
     btn.addEventListener('click', () => {
-      botonesFilter.forEach(b => b.classList.remove('filtro-activo'));
-      btn.classList.add('filtro-activo');
+      botonesFilter.forEach(b => b.classList.remove('activo'));
+      btn.classList.add('activo');
       
       const filtro = btn.dataset.filtro;
       
@@ -1557,7 +1557,7 @@ function initGaleria(propiedad) {
     galeriaMiniaturas.innerHTML = propiedad.imagenes.map((img, idx) => `
       <img src="${img}" alt="${propiedad.titulo} - Foto ${idx + 1}" 
            class="miniatura ${idx === 0 ? 'miniatura-activa' : ''}"
-           style="cursor: pointer; width: 80px; height: 60px; object-fit: cover; margin: 5px; border: 2px solid ${idx === 0 ? '#007bff' : 'transparent'};"
+           style="cursor: pointer; width: 80px; height: 60px; object-fit: cover; margin: 5px; border: 2px solid ${idx === 0 ? 'var(--secondary)' : 'transparent'};"
            data-img="${img}">
     `).join('');
     
@@ -1568,7 +1568,7 @@ function initGaleria(propiedad) {
         galeriaMiniaturas.querySelectorAll('.miniatura').forEach(m => {
           m.style.border = '2px solid transparent';
         });
-        mini.style.border = '2px solid #007bff';
+        mini.style.border = '2px solid var(--secondary)';
       });
     });
   }
@@ -1880,16 +1880,7 @@ function initPanelReserva(propiedad) {
       };
 
       localStorage.setItem('reservaActiva', JSON.stringify(reserva));
-
-      mostrarNotificacion('success', '¡Excelente Elección!',
-        `<strong>${propiedad.titulo}</strong><br>
-        Fechas: ${formatearFecha(fechaEntrada.value)} - ${formatearFecha(fechaSalida.value)}<br>
-        Total: ${formatearPrecio(total)}<br><br>
-        Procede a completar tu reserva.`,
-        () => {
-          window.location.href = 'confirmacion.html';
-        }
-      );
+      window.location.href = 'confirmacion.html';
 
       btnReservar.textContent = textoOriginal;
       btnReservar.disabled = false;
@@ -2116,11 +2107,13 @@ function initConfirmacionPage() {
         );
       };
     }
+    renderHistorialReservas();
     return;
   }
 
   if (!reservaActiva) {
     mostrarSinReserva();
+    renderHistorialReservas();
     return;
   }
 
@@ -2138,6 +2131,7 @@ function initConfirmacionPage() {
           localStorage.removeItem('reservaActiva');
           mostrarSinReserva();
           mostrarNotificacion('info', 'Reserva cancelada', 'Tu reserva pendiente ha sido cancelada. Puedes elegir otra propiedad cuando quieras.');
+          renderHistorialReservas();
         }
       );
     };
@@ -2145,6 +2139,7 @@ function initConfirmacionPage() {
 
   cargarMiniResumen(reservaActiva);
   initFormularioHuesped(reservaActiva);
+  renderHistorialReservas();
 }
 
 function cargarMiniResumen(reserva) {
@@ -2272,6 +2267,7 @@ function initFormularioHuesped(reserva) {
 
     localStorage.setItem('reservaConfirmada', JSON.stringify(reservaCompleta));
     localStorage.removeItem('reservaActiva');
+    guardarEnHistorial(reservaCompleta);
 
     mostrarConfirmacion(reservaCompleta);
 
@@ -2362,4 +2358,94 @@ function mostrarConfirmacion(reserva) {
       );
     };
   }
+}
+
+// ============================================================
+// HISTORIAL DE RESERVAS (Mis reservas)
+// ============================================================
+
+function getHistorialReservas() {
+  try {
+    return JSON.parse(localStorage.getItem('reservasHistorial') || '[]');
+  } catch (_) {
+    return [];
+  }
+}
+
+function guardarEnHistorial(reservaCompleta) {
+  const historial = getHistorialReservas();
+  historial.push(reservaCompleta);
+  localStorage.setItem('reservasHistorial', JSON.stringify(historial));
+}
+
+function renderHistorialReservas() {
+  const contenedor = document.getElementById('lista-historial-reservas');
+  const mensajeVacio = document.getElementById('historial-vacio');
+
+  if (!contenedor) return;
+
+  const historial = getHistorialReservas();
+
+  if (!historial.length) {
+    if (mensajeVacio) {
+      mensajeVacio.hidden = false;
+      contenedor.innerHTML = '';
+      contenedor.appendChild(mensajeVacio);
+    }
+    return;
+  }
+
+  if (mensajeVacio) mensajeVacio.hidden = true;
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  contenedor.innerHTML = historial
+    .sort((a, b) => new Date(b.fechaConfirmacion || b.fechaEntrada) - new Date(a.fechaConfirmacion || a.fechaEntrada))
+    .map((r) => {
+      const entrada = new Date(r.fechaEntrada);
+      const salida = new Date(r.fechaSalida);
+      entrada.setHours(0, 0, 0, 0);
+      salida.setHours(0, 0, 0, 0);
+
+      let estado = 'Próxima';
+      if (hoy > salida) estado = 'Finalizada';
+      else if (hoy >= entrada && hoy <= salida) estado = 'En curso';
+
+      return `
+        <article class="card-reserva-historial" style="
+          display:flex;
+          gap:12px;
+          align-items:flex-start;
+          margin:12px 0;
+          padding:12px;
+          border-radius:12px;
+          background:#fff;
+          box-shadow: var(--shadow);
+        ">
+          <img src="${r.propiedad.imagen}" alt="${r.propiedad.titulo}" style="
+            width:96px;
+            height:72px;
+            border-radius:8px;
+            object-fit:cover;
+            flex-shrink:0;
+          ">
+          <div style="flex:1; min-width:0;">
+            <h3 style="margin:0 0 4px; font-size:1rem; color:var(--primary);">${r.propiedad.titulo}</h3>
+            <p style="margin:0 0 4px; font-size:0.9rem; color:#555;">
+              ${formatearFecha(r.fechaEntrada)} – ${formatearFecha(r.fechaSalida)} ·
+              ${r.noches} noche${r.noches > 1 ? 's' : ''} ·
+              ${r.huespedes} huésped${r.huespedes > 1 ? 'es' : ''}
+            </p>
+            <p style="margin:0 0 4px; font-size:0.9rem; color:#555;">
+              Código: <strong>${r.codigo}</strong>
+            </p>
+            <p style="margin:0; font-size:0.9rem; color:var(--secondary); font-weight:600;">
+              ${formatearPrecio(r.costos.total)} · ${estado}
+            </p>
+          </div>
+        </article>
+      `;
+    })
+    .join('');
 }

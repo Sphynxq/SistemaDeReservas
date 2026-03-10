@@ -42,7 +42,13 @@ body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-heig
 #grid-propiedades address { font-style: normal; font-size: 0.85rem; color: #666; margin: 0.25rem 0; }
 #grid-propiedades ul { list-style: none; padding: 0; margin: 0.5rem 0; font-size: 0.9rem; }
 #grid-propiedades ul li { margin: 0.2rem 0; }
-#grid-propiedades [id^="badge"] { display: inline-block; padding: 0.2rem 0.5rem; background: #eee; font-size: 0.8rem; border-radius: 4px; margin: 0.5rem 0; }
+#grid-propiedades [id^="badge"] {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
 #grid-propiedades [id^="btn-ver"] { display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
 #grid-propiedades button[aria-label] { position: absolute; top: 0.5rem; right: 0.5rem; background: #fff; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.25rem; }
 #grid-propiedades article { position: relative; }
@@ -253,3 +259,918 @@ body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-heig
 .btn-cancelar-reserva { margin-top: 1rem; padding: 0.5rem 1rem; background: transparent; color: #666; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
 .btn-cancelar-reserva:hover { background: #f5f5f5; color: #333; }
 #resumen-acciones { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ddd; }
+
+/* =====================================================
+   ESTILOS AVANZADOS NORTHPALACE (UNIFICADOS)
+   Basados en style_index.css, style_propiedad.css,
+   style_detalles.css y style_confirmacion.css
+   ===================================================== */
+
+/* ---------- Paleta y variables globales ---------- */
+:root {
+  --primary: #2c3e50;
+  --secondary: #8e44ad;
+  --accent-casa: #27ae60;
+  --accent-apto: #2980b9;
+  --white: #ffffff;
+  --bg-light: #f4f7f6;
+  --text: #333;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text);
+}
+
+/* ---------- NAVBAR (mejorado, mismos IDs) ---------- */
+#encabezado {
+  background: var(--primary);
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#logo {
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+#menu-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+#menu-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+#menu-nav a:hover {
+  color: var(--secondary);
+}
+
+#botones-sesion {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#botones-sesion a {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+#btn-registro {
+  background: var(--secondary);
+}
+
+/* ---------- HOME: HERO Y BUSCADOR ---------- */
+#hero {
+  height: 70vh;
+  background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)),
+    url("../Imagenes/Casa Campestre.jpg") center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+}
+
+#hero-texto h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#buscador {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 30px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  align-items: flex-end;
+}
+
+#buscador div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 150px;
+  text-align: left;
+}
+
+#buscador label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+#buscador input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#btn-buscar {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ---------- HOME: FILTROS RÁPIDOS ---------- */
+#filtros-rapidos {
+  padding: 40px 5%;
+  text-align: center;
+}
+
+#lista-filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#lista-filtros button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#lista-filtros button:hover,
+#lista-filtros button.activo {
+  background: var(--secondary);
+  color: white;
+  border-color: var(--secondary);
+}
+
+/* ---------- HOME: GRID DE PROPIEDADES DESTACADAS ---------- */
+#propiedades-destacadas {
+  padding: 60px 5%;
+}
+
+#propiedades-destacadas h2 {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+#grid-propiedades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+article {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+}
+
+article:hover {
+  transform: translateY(-10px);
+}
+
+article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+[id^="badge-"],
+[id^="badge-tipo-"] {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--accent-casa);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+article[data-tipo="casa"] [id^="badge"],
+article[data-tipo="casa"] [id^="badge-tipo"] {
+  background: #145a32; /* verde mucho más oscuro para alto contraste */
+  text-transform: uppercase;
+}
+
+article[data-tipo="apartamento"] [id^="badge"],
+article[data-tipo="apartamento"] [id^="badge-tipo"] {
+  background: #0b3c5d; /* azul marino intenso para alto contraste */
+  text-transform: uppercase;
+}
+
+[id^="fav-"] {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+article h3 {
+  font-size: 1.15rem;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+address {
+  font-style: normal;
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+[id^="rating-"] {
+  color: #f39c12;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+[id^="precio-"] {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+[id^="caracteristicas-"] {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+[id^="caracteristicas-"] li {
+  background: #f0f2f5;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: #555;
+}
+
+[id^="btn-ver-"] {
+  display: block;
+  text-align: center;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  margin: 15px 20px 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+[id^="btn-ver-"]:hover {
+  background: #34495e;
+}
+
+/* ---------- HOME: MODAL PUBLICAR PROPIEDAD ---------- */
+#modal-publicar {
+  border: none;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  padding: 0;
+  margin: auto;
+}
+
+#modal-publicar::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modal-encabezado {
+  background: var(--primary);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#modal-cuerpo {
+  padding: 25px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#modal-cuerpo fieldset {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#modal-cuerpo legend {
+  font-weight: bold;
+  padding: 0 10px;
+  color: var(--secondary);
+}
+
+#modal-cuerpo label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
+}
+
+#modal-cuerpo input,
+#modal-cuerpo select,
+#modal-cuerpo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#modal-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#btn-enviar-publicar {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 12px;
+  flex: 2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btn-cancelar-modal {
+  background: #eee;
+  border: none;
+  padding: 12px;
+  flex: 1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ---------- HOME: BANNER CTA Y BENEFICIOS ---------- */
+#banner-cta {
+  background-color: var(--primary);
+  background-image: linear-gradient(
+      rgba(44, 62, 80, 0.9),
+      rgba(44, 62, 80, 0.9)
+    ),
+    url("../Imagenes/Casa Campestre.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 80px 5%;
+  border-radius: 15px;
+  margin: 60px 5%;
+  box-shadow: var(--shadow);
+}
+
+#banner-cta h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#banner-cta p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+#btn-publicar {
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#btn-publicar:hover {
+  background-color: #a55eea;
+  transform: translateY(-3px) scale(1.03);
+}
+
+#beneficios {
+  padding: 60px 5% 80px;
+  background-color: var(--white);
+}
+
+#beneficios h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 50px;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+#beneficios h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: var(--secondary);
+  border-radius: 2px;
+}
+
+#grid-beneficios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#grid-beneficios article {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  transition: box-shadow 0.3s, transform 0.3s;
+  border: 1px solid #eee;
+}
+
+#grid-beneficios article:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+
+#grid-beneficios h3 {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+#grid-beneficios p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ---------- PÁGINA PROPIEDADES: ENCABEZADO Y BÚSQUEDA ---------- */
+#encabezado-pagina {
+  background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)),
+    url("../Imagenes/Casa Campestre.jpg") center/cover;
+  padding: 80px 5%;
+  text-align: center;
+  color: white;
+}
+
+#encabezado-pagina h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+#barra-busqueda {
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 25px 5%;
+  margin: -40px 5% 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  align-items: flex-end;
+  position: relative;
+  z-index: 10;
+}
+
+#barra-busqueda div {
+  flex: 1;
+  min-width: 150px;
+}
+
+#barra-busqueda label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+#barra-busqueda input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+#btn-buscar-prop {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#btn-buscar-prop:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- PÁGINA PROPIEDADES: LAYOUT Y TABLA ---------- */
+#contenido-principal {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 0 5% 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#sidebar-filtros {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  border: 1px solid #eee;
+  box-shadow: var(--shadow);
+}
+
+#sidebar-filtros h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+}
+
+#sidebar-filtros h3 {
+  font-size: 1rem;
+  margin: 20px 0 10px;
+  color: var(--primary);
+}
+
+#tabla-disponibilidad {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.85rem;
+  box-shadow: var(--shadow);
+}
+
+#tabla-disponibilidad thead {
+  background: var(--primary);
+  color: white;
+}
+
+#tabla-disponibilidad th,
+#tabla-disponibilidad td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.disponible {
+  color: var(--accent-casa);
+  font-weight: bold;
+}
+
+.ocupado {
+  color: #e74c3c;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* ---------- PÁGINA DETALLE: LAYOUT PRINCIPAL ---------- */
+#contenido-detalle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px 5% 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+#galeria {
+  flex: 2;
+  min-width: 500px;
+  margin: 0;
+}
+
+#img-principal {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+#panel-reserva {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  color: #333;
+  height: fit-content;
+}
+
+#info-propiedad {
+  flex: 1 1 100%;
+  background: #fafafa;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+}
+
+#info-propiedad h2 {
+  margin: 10px 0 20px;
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+input[type="date"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+#btn-reservar {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, var(--secondary), #6a0dad);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btn-reservar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+/* ---------- PÁGINA CONFIRMACIÓN: BLOQUES PRINCIPALES ---------- */
+#seccion-exito {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 2px solid var(--secondary);
+}
+
+#icono-exito {
+  font-size: 4rem;
+  color: #27ae60;
+  background: white;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+}
+
+#titulo-exito {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+#subtitulo-exito {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+#numero-confirmacion {
+  margin-top: 20px;
+  background: var(--secondary);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+#resumen-reserva h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#resumen-propiedad {
+  display: flex;
+  gap: 20px;
+  background: white;
+  color: #333;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+#resumen-img-propiedad {
+  width: 200px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  background: #fafafa;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  font-weight: 600;
+  color: var(--secondary);
+  width: 40%;
+}
+
+#resumen-costo-total {
+  font-size: 1.4rem;
+  color: #27ae60;
+}
+
+#seccion-formulario-huesped {
+  background: #ffffff;
+  color: #333;
+  padding: 30px 20px;
+  border-radius: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+}
+
+#mini-resumen {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+#mini-img-propiedad {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#seccion-formulario-huesped fieldset {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#seccion-formulario-huesped legend {
+  font-weight: bold;
+  color: var(--secondary);
+  padding: 0 10px;
+}
+
+#seccion-formulario-huesped label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+#campo-terminos {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btn-confirmar-reserva {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(45deg, var(--secondary), #6a0dad);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#btn-confirmar-reserva:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+#error-confirmacion {
+  color: #e74c3c;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+#seccion-sin-reserva {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+#btn-ir-propiedades {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
