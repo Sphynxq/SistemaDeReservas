@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NorthPalace - Tu hogar en Chihuahua</title>
 
-  
-
-       <link rel="stylesheet" href="css/styles.css" />
- 
+  <!-- ================================================
+       COMPAÑERO DE CSS: enlaza aquí tu hoja de estilos
+       ================================================ -->
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
@@ -139,7 +139,7 @@
 
       <!-- CARD 1 -->
       <article id="card-prop-1" data-tipo="casa">
-        <img src="img/casa1.jpg" alt="Casa en Fraccionamiento Campestre Chihuahua" />
+        <img src="Imagenes/Casa Campestre.jpg" alt="Casa en Fraccionamiento Campestre Chihuahua" />
         <button type="button" id="fav-1" data-id="1" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-1">Casa</span>
 
@@ -166,7 +166,7 @@
 
       <!-- CARD 2 -->
       <article id="card-prop-2" data-tipo="apartamento">
-        <img src="img/apartamento1.jpg" alt="Apartamento en Centro Histórico Chihuahua" />
+        <img src="Imagenes/Apatamento Centro Histórico.jpg" alt="Apartamento en Centro Histórico Chihuahua" />
         <button type="button" id="fav-2" data-id="2" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-2">Apartamento</span>
 
@@ -193,7 +193,7 @@
 
       <!-- CARD 3 -->
       <article id="card-prop-3" data-tipo="casa">
-        <img src="img/casa2.jpg" alt="Casa residencial en El Mirador Chihuahua" />
+        <img src="Imagenes/Casa el Mirador.jpg" alt="Casa residencial en El Mirador Chihuahua" />
         <button type="button" id="fav-3" data-id="3" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-3">Casa</span>
 
@@ -221,7 +221,7 @@
 
       <!-- CARD 4 -->
       <article id="card-prop-4" data-tipo="apartamento">
-        <img src="img/apartamento2.jpg" alt="Apartamento moderno en San Felipe Chihuahua" />
+        <img src="Imagenes/Apartamento San Felipe.jpeg" alt="Apartamento moderno en San Felipe Chihuahua" />
         <button type="button" id="fav-4" data-id="4" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-4">Apartamento</span>
 
@@ -249,7 +249,7 @@
 
       <!-- CARD 5 -->
       <article id="card-prop-5" data-tipo="casa">
-        <img src="img/casa3.jpg" alt="Casa amplia en Las Granjas Chihuahua" />
+        <img src="Imagenes/Casa las Granjas.jfif" alt="Casa amplia en Las Granjas Chihuahua" />
         <button type="button" id="fav-5" data-id="5" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-5">Casa</span>
 
@@ -277,7 +277,7 @@
 
       <!-- CARD 6 -->
       <article id="card-prop-6" data-tipo="apartamento">
-        <img src="img/apartamento3.jpg" alt="Penthouse en Zona Dorada Chihuahua" />
+        <img src="Imagenes/Penthouse Zona Dorada.jpg" alt="Penthouse en Zona Dorada Chihuahua" />
         <button type="button" id="fav-6" data-id="6" aria-label="Agregar a favoritos">&#9825;</button>
         <span id="badge-6">Apartamento</span>
 
@@ -591,7 +591,7 @@
       <h4>Soporte</h4>
       <ul>
         <li><a href="#">Ayuda</a></li>
-        <li><a href="#">Términos</a></li>
+        <li><a href="#" class="link-terminos-modal">Términos</a></li>
         <li><a href="#">Privacidad</a></li>
       </ul>
     </div>
@@ -617,21 +617,10 @@
   </footer>
   <!-- FIN FOOTER -->
 
-  <!-- ================================================
-       COMPAÑERO DE JS: enlaza aquí tu archivo
-       <script src="js/script.js"></script>
-
-       Funciones que el HTML espera:
-         - Validar buscador        → id="btn-buscar"
-         - Filtrar cards           → botones id="filtro-*" + data-tipo
-         - Favoritos               → botones id="fav-*"
-         - Newsletter              → id="btn-newsletter"
-         - Abrir modal             → id="btn-publicar" → modal.showModal()
-         - Cerrar modal            → id="btn-cerrar-modal" y id="btn-cancelar-modal" → modal.close()
-         - Validar y enviar modal  → id="btn-enviar-publicar"
-         - Éxito publicar          → mostrar id="mensaje-publicar-ok"
-         - Error publicar          → mostrar id="error-publicar"
-       ================================================ -->
+  <!-- JS -->
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 </html>

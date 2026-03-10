@@ -1,3 +1,4 @@
+ 
 /* ==========================================================================
    NORTHPALACE - ESTILOS BASE CON BOOTSTRAP 5
    ========================================================================== */
@@ -314,3 +315,1180 @@ div[id^="rating"] { color: #ffc107; font-weight: bold; }
     #menu-nav { gap: 0.5rem; font-size: 0.9rem; }
     #sidebar-filtros { flex: 0 0 100%; }
 }
+=======
+/* ============================================
+   NorthPalace - CSS mínimo para pruebas
+   ============================================ */
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-height: 1.5; }
+
+/* ----- NAVBAR ----- */
+#encabezado { background: #eee; padding: 0.5rem 1rem; border-bottom: 1px solid #ccc; }
+#navbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; max-width: 1200px; margin: 0 auto; }
+#logo { font-weight: bold; font-size: 1.25rem; text-decoration: none; color: #333; }
+#menu-nav { display: flex; list-style: none; margin: 0; padding: 0; gap: 1rem; }
+#menu-nav a { color: #333; text-decoration: none; }
+#botones-sesion { display: flex; gap: 0.5rem; }
+#botones-sesion a { padding: 0.4rem 0.8rem; background: #ddd; border-radius: 4px; text-decoration: none; color: #333; }
+
+/* ----- HERO / BUSCADOR ----- */
+#hero { padding: 2rem 1rem; background: #f5f5f5; }
+#hero-texto { text-align: center; margin-bottom: 1.5rem; }
+#hero-texto h1 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+#buscador { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-end; max-width: 900px; margin: 0 auto; }
+#buscador > div { display: flex; flex-direction: column; }
+#buscador label { font-size: 0.85rem; margin-bottom: 0.25rem; }
+#buscador input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#btn-buscar { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#error-busqueda { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+
+/* ----- FILTROS RÁPIDOS ----- */
+#filtros-rapidos { padding: 1rem; border-bottom: 1px solid #ddd; }
+#lista-filtros { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+#lista-filtros button { padding: 0.5rem 1rem; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer; }
+#lista-filtros button.activo { background: #333; color: #fff; border-color: #333; }
+
+/* ----- PROPIEDADES DESTACADAS ----- */
+#propiedades-destacadas { padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; }
+#propiedades-destacadas h2 { margin: 0 0 1rem; }
+#grid-propiedades { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+#grid-propiedades article { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; padding: 1rem; }
+#grid-propiedades article.hidden { display: none; }
+#grid-propiedades img { width: 100%; height: 160px; object-fit: cover; display: block; }
+#grid-propiedades h3 { margin: 0.5rem 0; font-size: 1rem; }
+#grid-propiedades address { font-style: normal; font-size: 0.85rem; color: #666; margin: 0.25rem 0; }
+#grid-propiedades ul { list-style: none; padding: 0; margin: 0.5rem 0; font-size: 0.9rem; }
+#grid-propiedades ul li { margin: 0.2rem 0; }
+#grid-propiedades [id^="badge"] {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+#grid-propiedades [id^="btn-ver"] { display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
+#grid-propiedades button[aria-label] { position: absolute; top: 0.5rem; right: 0.5rem; background: #fff; border: none; font-size: 1.2rem; cursor: pointer; padding: 0.25rem; }
+#grid-propiedades article { position: relative; }
+#ver-todas { text-align: center; margin-top: 2rem; }
+#btn-ver-todas { padding: 0.6rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; }
+
+/* ----- BANNER CTA ----- */
+#banner-cta { padding: 2rem 1rem; text-align: center; background: #e8e8e8; }
+#banner-cta h2 { margin: 0 0 0.5rem; }
+#btn-publicar { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+
+/* ----- MODAL ----- */
+#modal-publicar { max-width: 500px; width: 90%; padding: 0; border: 1px solid #ccc; border-radius: 8px; }
+#modal-encabezado { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #ddd; }
+#modal-encabezado h2 { margin: 0; font-size: 1.1rem; }
+#btn-cerrar-modal { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 0 0.5rem; }
+#modal-cuerpo { padding: 1rem; }
+#modal-cuerpo fieldset { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; }
+#modal-cuerpo legend { padding: 0 0.5rem; }
+#modal-cuerpo label { display: block; margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+#modal-cuerpo input[type="text"],
+#modal-cuerpo input[type="email"],
+#modal-cuerpo input[type="tel"],
+#modal-cuerpo input[type="number"],
+#modal-cuerpo select,
+#modal-cuerpo textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#modal-cuerpo textarea { min-height: 80px; resize: vertical; }
+#modal-cuerpo #fieldset-amenidades div { margin: 0.5rem 0; }
+#modal-cuerpo #fieldset-amenidades label { display: inline; margin-left: 0.5rem; }
+#modal-acciones { display: flex; gap: 0.5rem; margin-top: 1rem; }
+#modal-acciones button { padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+#btn-enviar-publicar { background: #333; color: #fff; border: none; }
+#btn-cancelar-modal { background: #ddd; border: 1px solid #ccc; }
+#mensaje-publicar-ok { color: #060; margin-top: 0.5rem; }
+#error-publicar { color: #c00; margin-top: 0.5rem; }
+
+/* ----- BENEFICIOS ----- */
+#beneficios { padding: 2rem 1rem; background: #f9f9f9; }
+#beneficios h2 { margin: 0 0 1rem; text-align: center; }
+#grid-beneficios { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto; }
+#grid-beneficios article { padding: 1rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+#grid-beneficios h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+
+/* ----- FOOTER ----- */
+#footer-principal { background: #333; color: #eee; padding: 2rem 1rem; margin-top: 2rem; }
+#footer-principal a { color: #ccc; text-decoration: none; }
+#footer-principal a:hover { color: #fff; }
+#footer-descripcion, #footer-nav, #footer-soporte, #footer-newsletter { margin-bottom: 1rem; }
+#footer-principal h3, #footer-principal h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+#footer-principal ul { list-style: none; padding: 0; margin: 0; }
+#footer-principal li { margin: 0.25rem 0; }
+#redes-sociales { display: flex; gap: 1rem; margin-top: 0.5rem; }
+#form-newsletter { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+#form-newsletter input { flex: 1; padding: 0.5rem; border: 1px solid #555; border-radius: 4px; background: #444; color: #fff; }
+#form-newsletter button { padding: 0.5rem 1rem; background: #555; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#footer-copyright { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #555; font-size: 0.85rem; color: #999; }
+
+/* ----- PÁGINA PROPIEDADES ----- */
+#encabezado-pagina { padding: 1.5rem 1rem; text-align: center; }
+#encabezado-pagina h1 { margin: 0 0 0.5rem; }
+#barra-busqueda { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; background: #f5f5f5; justify-content: center; align-items: flex-end; }
+#barra-busqueda > div { display: flex; flex-direction: column; }
+#barra-busqueda input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#barra-busqueda label { font-size: 0.85rem; margin-bottom: 0.25rem; }
+#btn-buscar-prop { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#contenido-principal { display: flex; flex-wrap: wrap; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 1rem; }
+#sidebar-filtros { flex: 0 0 220px; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; height: fit-content; }
+#sidebar-filtros h2 { margin: 0 0 1rem; font-size: 1rem; }
+#sidebar-filtros h3 { margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+#sidebar-filtros div { margin: 0.4rem 0; }
+#sidebar-filtros label { margin-left: 0.5rem; }
+#botones-filtro { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+#botones-filtro button { padding: 0.5rem; border-radius: 4px; cursor: pointer; }
+#btn-aplicar-filtros { background: #333; color: #fff; border: none; }
+#btn-limpiar-filtros { background: #ddd; border: 1px solid #ccc; }
+#area-resultados { flex: 1; min-width: 0; }
+#resultados-encabezado { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+#ordenar-por select { padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; }
+#seccion-disponibilidad { overflow-x: auto; margin-bottom: 1.5rem; }
+#tabla-disponibilidad { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+#tabla-disponibilidad th, #tabla-disponibilidad td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+#tabla-disponibilidad th { background: #f5f5f5; }
+#sin-resultados { padding: 1rem; color: #666; }
+
+/* ----- PÁGINA DETALLE ----- */
+#galeria { padding: 1rem; }
+#foto-principal { max-width: 800px; margin: 0 auto; }
+#img-principal { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; }
+#galeria-miniaturas { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+#galeria-miniaturas img { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 2px solid transparent; }
+#galeria-miniaturas img:hover, #galeria-miniaturas img.activa { border-color: #333; }
+#contenido-detalle { display: flex; flex-wrap: wrap; gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 1rem; }
+#info-propiedad { flex: 1; min-width: 280px; }
+#info-propiedad h2 { margin: 1.5rem 0 0.5rem; font-size: 1.1rem; }
+#prop-encabezado { margin-bottom: 1rem; }
+#prop-subtitulo { display: flex; gap: 1rem; margin: 0.5rem 0; font-size: 0.9rem; color: #666; }
+#btn-favorito-detalle { padding: 0.5rem 1rem; margin-top: 0.5rem; background: #eee; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+#panel-reserva { flex: 0 0 320px; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; height: fit-content; }
+#reserva-formulario label { display: block; margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+#reserva-formulario input { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#reserva-fechas { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+#reserva-desglose { margin: 1rem 0; font-size: 0.9rem; }
+#reserva-desglose hr { margin: 0.5rem 0; border: none; border-top: 1px solid #ddd; }
+#desglose-total { display: flex; justify-content: space-between; margin-top: 0.5rem; }
+#btn-reservar { width: 100%; padding: 0.75rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
+#error-fechas, #error-reserva { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+#disponibilidad-rapida h3 { margin: 1rem 0 0.5rem; font-size: 1rem; }
+#mini-calendario { margin-bottom: 1rem; }
+.calendario-anual-grid { display: flex; flex-wrap: wrap; gap: 1rem; }
+.calendario-mes { border: 1px solid #ddd; border-radius: 8px; padding: 0.5rem; background: #fafafa; min-width: 200px; }
+.calendario-mes-titulo { font-size: 0.85rem; font-weight: bold; margin-bottom: 0.4rem; text-align: center; }
+.calendario-mes-tabla { width: 100%; border-collapse: collapse; font-size: 0.7rem; }
+.calendario-mes-tabla th, .calendario-mes-tabla td { padding: 2px 4px; text-align: center; border: 1px solid #eee; }
+.calendario-mes-tabla th { background: #eee; }
+.calendario-dia { cursor: default; background: #d4edda; color: #155724; }
+.calendario-dia.ocupado { background: #f8d7da; color: #721c24; }
+.calendario-dia.hoy { font-weight: bold; box-shadow: inset 0 0 0 2px #333; background: #c3e6cb; }
+.calendario-dia.hoy.ocupado { background: #f5c6cb; }
+.calendario-dia-vacio { background: #f5f5f5; }
+.calendario-leyenda { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px solid #eee; font-size: 0.8rem; }
+.calendario-leyenda-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+.calendario-leyenda-cuadro { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); }
+.calendario-leyenda-cuadro.disponible { background: #d4edda; }
+.calendario-leyenda-cuadro.ocupado { background: #f8d7da; }
+.calendario-leyenda-cuadro.hoy { background: #c3e6cb; box-shadow: inset 0 0 0 1px #333; }
+#calendario-reservas-acciones { margin: 0.75rem 0; }
+#btn-anadir-reserva-calendario { padding: 0.5rem 1rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+#lista-reservas-calendario { font-size: 0.9rem; }
+.calendario-lista-titulo { margin: 0 0 0.5rem; font-weight: bold; }
+.calendario-lista-ul { list-style: none; padding: 0; margin: 0; }
+.calendario-reserva-item { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.35rem 0; border-bottom: 1px solid #eee; }
+.btn-eliminar-reserva { padding: 0.25rem 0.5rem; font-size: 0.75rem; background: #dc3545; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+.btn-eliminar-reserva:hover { background: #c82333; }
+.calendario-sin-reservas { color: #666; font-size: 0.9rem; margin: 0.5rem 0; }
+.campo-calendario-reserva { margin: 0.5rem 0; }
+.campo-calendario-reserva label { display: block; margin-bottom: 0.2rem; font-size: 0.9rem; }
+.campo-calendario-reserva input { width: 100%; padding: 0.4rem; border: 1px solid #ccc; border-radius: 4px; }
+.calendario-modal-error { color: #c00; font-size: 0.9rem; margin-top: 0.5rem; }
+.terminos-modal-cerrar-btn { padding: 0.5rem 1rem; background: #ddd; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; margin-left: 0.5rem; }
+#categorias-calificacion > div { margin: 0.75rem 0; }
+#categorias-calificacion [role="progressbar"] { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+#categorias-calificacion [id^="progreso"] { height: 100%; background: #333; }
+#form-resena label { display: block; margin: 0.5rem 0 0.2rem; }
+#form-resena input[type="text"], #form-resena textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#form-resena textarea { min-height: 80px; resize: vertical; }
+/* Estrellas de valoración para reseñas */
+.estrellas-rating {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.estrellas-rating .estrella-seleccionable {
+  display: inline-flex;
+  padding: 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+.estrellas-rating .estrella-seleccionable:hover {
+  transform: scale(1.1);
+}
+.estrellas-rating .estrella-seleccionable.activa {
+  color: #ffc107;
+}
+.estrella-svg {
+  width: 1.5em;
+  height: 1.5em;
+  display: block;
+  pointer-events: none;
+}
+#btn-enviar-resena { padding: 0.5rem 1rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 0.5rem; }
+#error-resena { color: #c00; }
+#mensaje-resena-ok { color: #060; }
+
+/* ----- PÁGINA CONFIRMACIÓN ----- */
+#seccion-exito { padding: 2rem 1rem; text-align: center; }
+#icono-exito { font-size: 3rem; color: #060; margin-bottom: 0.5rem; }
+#seccion-exito h1 { margin: 0 0 0.5rem; }
+#numero-confirmacion { margin-top: 1rem; }
+#resumen-reserva { padding: 1rem; max-width: 800px; margin: 0 auto; }
+#resumen-reserva h2 { margin: 0 0 1rem; }
+#contenido-resumen { display: flex; flex-direction: column; gap: 1.5rem; }
+#resumen-propiedad { display: flex; gap: 1rem; }
+#resumen-img-propiedad { width: 120px; height: 90px; object-fit: cover; border-radius: 8px; }
+#resumen-estancia table, #resumen-costo table, #resumen-huesped table { width: 100%; border-collapse: collapse; }
+#resumen-estancia th, #resumen-estancia td, #resumen-costo th, #resumen-costo td, #resumen-huesped th, #resumen-huesped td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+#resumen-estancia th, #resumen-costo th, #resumen-huesped th { background: #f5f5f5; width: 40%; }
+#seccion-formulario-huesped { padding: 1rem; max-width: 500px; margin: 0 auto; }
+#seccion-formulario-huesped h2 { margin: 0 0 1rem; }
+#mini-resumen { display: flex; gap: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; }
+#mini-img-propiedad { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; }
+#seccion-formulario-huesped fieldset { margin: 1rem 0; padding: 1rem; border: 1px solid #ddd; }
+#seccion-formulario-huesped label { display: block; margin: 0.5rem 0 0.2rem; }
+#seccion-formulario-huesped input[type="text"],
+#seccion-formulario-huesped input[type="email"],
+#seccion-formulario-huesped input[type="tel"],
+#seccion-formulario-huesped textarea { width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+#campo-terminos { margin: 1rem 0; }
+#btn-confirmar-reserva { padding: 0.6rem 1.2rem; background: #333; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+#error-confirmacion { color: #c00; margin-top: 0.5rem; }
+#seccion-sin-reserva { padding: 2rem 1rem; text-align: center; }
+#btn-ir-propiedades { display: inline-block; padding: 0.6rem 1rem; background: #333; color: #fff; text-decoration: none; border-radius: 4px; }
+
+.btn-cancelar-reserva { margin-top: 1rem; padding: 0.5rem 1rem; background: transparent; color: #666; border: 1px solid #999; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+.btn-cancelar-reserva:hover { background: #f5f5f5; color: #333; }
+#resumen-acciones { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ddd; }
+
+/* =====================================================
+   ESTILOS AVANZADOS NORTHPALACE (UNIFICADOS)
+   Basados en style_index.css, style_propiedad.css,
+   style_detalles.css y style_confirmacion.css
+   ===================================================== */
+
+/* ---------- Paleta y variables globales ---------- */
+:root {
+  --primary: #2c3e50;
+  --secondary: #8e44ad;
+  --accent-casa: #27ae60;
+  --accent-apto: #2980b9;
+  --white: #ffffff;
+  --bg-light: #f4f7f6;
+  --text: #333;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text);
+}
+
+/* ---------- NAVBAR (mejorado, mismos IDs) ---------- */
+#encabezado {
+  background: var(--primary);
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#logo {
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+#menu-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+#menu-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+#menu-nav a:hover {
+  color: var(--secondary);
+}
+
+#botones-sesion {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#botones-sesion a {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+#btn-registro {
+  background: var(--secondary);
+}
+
+/* ---------- HOME: HERO Y BUSCADOR ---------- */
+#hero {
+  height: 70vh;
+  background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)),
+    url("../Imagenes/Casa Campestre.jpg") center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+}
+
+#hero-texto h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#buscador {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 30px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  align-items: flex-end;
+}
+
+#buscador div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 150px;
+  text-align: left;
+}
+
+#buscador label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+#buscador input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#btn-buscar {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ---------- HOME: FILTROS RÁPIDOS ---------- */
+#filtros-rapidos {
+  padding: 40px 5%;
+  text-align: center;
+}
+
+#lista-filtros {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#lista-filtros button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#lista-filtros button:hover,
+#lista-filtros button.activo {
+  background: var(--secondary);
+  color: white;
+  border-color: var(--secondary);
+}
+
+/* ---------- HOME: GRID DE PROPIEDADES DESTACADAS ---------- */
+#propiedades-destacadas {
+  padding: 60px 5%;
+}
+
+#propiedades-destacadas h2 {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+#grid-propiedades {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+article {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+}
+
+article:hover {
+  transform: translateY(-10px);
+}
+
+article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+[id^="badge-"],
+[id^="badge-tipo-"] {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--accent-casa);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+article[data-tipo="casa"] [id^="badge"],
+article[data-tipo="casa"] [id^="badge-tipo"] {
+  background: #145a32; /* verde mucho más oscuro para alto contraste */
+  text-transform: uppercase;
+}
+
+article[data-tipo="apartamento"] [id^="badge"],
+article[data-tipo="apartamento"] [id^="badge-tipo"] {
+  background: #0b3c5d; /* azul marino intenso para alto contraste */
+  text-transform: uppercase;
+}
+
+[id^="fav-"] {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+article h3 {
+  font-size: 1.15rem;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+address {
+  font-style: normal;
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+[id^="rating-"] {
+  color: #f39c12;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+[id^="precio-"] {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+[id^="caracteristicas-"] {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+[id^="caracteristicas-"] li {
+  background: #f0f2f5;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: #555;
+}
+
+[id^="btn-ver-"] {
+  display: block;
+  text-align: center;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  margin: 15px 20px 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+[id^="btn-ver-"]:hover {
+  background: #34495e;
+}
+
+/* ---------- HOME: MODAL PUBLICAR PROPIEDAD ---------- */
+#modal-publicar {
+  border: none;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  padding: 0;
+  margin: auto;
+}
+
+#modal-publicar::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modal-encabezado {
+  background: var(--primary);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#modal-cuerpo {
+  padding: 25px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#modal-cuerpo fieldset {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#modal-cuerpo legend {
+  font-weight: bold;
+  padding: 0 10px;
+  color: var(--secondary);
+}
+
+#modal-cuerpo label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
+}
+
+#modal-cuerpo input,
+#modal-cuerpo select,
+#modal-cuerpo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#modal-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#btn-enviar-publicar {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 12px;
+  flex: 2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btn-cancelar-modal {
+  background: #eee;
+  border: none;
+  padding: 12px;
+  flex: 1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ---------- HOME: BANNER CTA Y BENEFICIOS ---------- */
+#banner-cta {
+  background-color: var(--primary);
+  background-image: linear-gradient(
+      rgba(44, 62, 80, 0.9),
+      rgba(44, 62, 80, 0.9)
+    ),
+    url("../Imagenes/Casa Campestre.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 80px 5%;
+  border-radius: 15px;
+  margin: 60px 5%;
+  box-shadow: var(--shadow);
+}
+
+#banner-cta h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#banner-cta p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  opacity: 0.9;
+}
+
+#btn-publicar {
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#btn-publicar:hover {
+  background-color: #a55eea;
+  transform: translateY(-3px) scale(1.03);
+}
+
+#beneficios {
+  padding: 60px 5% 80px;
+  background-color: var(--white);
+}
+
+#beneficios h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 50px;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+#beneficios h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: var(--secondary);
+  border-radius: 2px;
+}
+
+#grid-beneficios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#grid-beneficios article {
+  background: var(--bg-light);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  transition: box-shadow 0.3s, transform 0.3s;
+  border: 1px solid #eee;
+}
+
+#grid-beneficios article:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+
+#grid-beneficios h3 {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+#grid-beneficios p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ---------- PÁGINA PROPIEDADES: ENCABEZADO Y BÚSQUEDA ---------- */
+#encabezado-pagina {
+  background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)),
+    url("../Imagenes/Casa Campestre.jpg") center/cover;
+  padding: 80px 5%;
+  text-align: center;
+  color: white;
+}
+
+#encabezado-pagina h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+#barra-busqueda {
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 25px 5%;
+  margin: -40px 5% 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  align-items: flex-end;
+  position: relative;
+  z-index: 10;
+}
+
+#barra-busqueda div {
+  flex: 1;
+  min-width: 150px;
+}
+
+#barra-busqueda label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+#barra-busqueda input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+#btn-buscar-prop {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#btn-buscar-prop:hover {
+  transform: scale(1.05);
+}
+
+/* ---------- PÁGINA PROPIEDADES: LAYOUT Y TABLA ---------- */
+#contenido-principal {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 0 5% 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#sidebar-filtros {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  border: 1px solid #eee;
+  box-shadow: var(--shadow);
+}
+
+#sidebar-filtros h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+}
+
+#sidebar-filtros h3 {
+  font-size: 1rem;
+  margin: 20px 0 10px;
+  color: var(--primary);
+}
+
+#tabla-disponibilidad {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.85rem;
+  box-shadow: var(--shadow);
+}
+
+#tabla-disponibilidad thead {
+  background: var(--primary);
+  color: white;
+}
+
+#tabla-disponibilidad th,
+#tabla-disponibilidad td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.disponible {
+  color: var(--accent-casa);
+  font-weight: bold;
+}
+
+.ocupado {
+  color: #e74c3c;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* ---------- PÁGINA DETALLE: LAYOUT PRINCIPAL ---------- */
+#contenido-detalle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px 5% 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+#galeria {
+  flex: 2;
+  min-width: 500px;
+  margin: 0;
+}
+
+#img-principal {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+#panel-reserva {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  color: #333;
+  height: fit-content;
+}
+
+#info-propiedad {
+  flex: 1 1 100%;
+  background: #fafafa;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+}
+
+#info-propiedad h2 {
+  margin: 10px 0 20px;
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+input[type="date"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+#btn-reservar {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, var(--secondary), #6a0dad);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btn-reservar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+/* ---------- PÁGINA CONFIRMACIÓN: BLOQUES PRINCIPALES ---------- */
+#seccion-exito {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 2px solid var(--secondary);
+}
+
+#icono-exito {
+  font-size: 4rem;
+  color: #27ae60;
+  background: white;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+}
+
+#titulo-exito {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+#subtitulo-exito {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+#numero-confirmacion {
+  margin-top: 20px;
+  background: var(--secondary);
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+#resumen-reserva h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#resumen-propiedad {
+  display: flex;
+  gap: 20px;
+  background: white;
+  color: #333;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+#resumen-img-propiedad {
+  width: 200px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 25px;
+  background: #fafafa;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  font-weight: 600;
+  color: var(--secondary);
+  width: 40%;
+}
+
+#resumen-costo-total {
+  font-size: 1.4rem;
+  color: #27ae60;
+}
+
+#seccion-formulario-huesped {
+  background: #ffffff;
+  color: #333;
+  padding: 30px 20px;
+  border-radius: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+}
+
+#mini-resumen {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+#mini-img-propiedad {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#seccion-formulario-huesped fieldset {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#seccion-formulario-huesped legend {
+  font-weight: bold;
+  color: var(--secondary);
+  padding: 0 10px;
+}
+
+#seccion-formulario-huesped label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+#campo-terminos {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btn-confirmar-reserva {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(45deg, var(--secondary), #6a0dad);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#btn-confirmar-reserva:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+#error-confirmacion {
+  color: #e74c3c;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+#seccion-sin-reserva {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+#btn-ir-propiedades {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+} 
