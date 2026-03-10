@@ -1,0 +1,258 @@
+/* ================================================
+   0. VARIABLES Y CONFIGURACIÓN BASE
+   ================================================ */
+:root {
+    --primary: #2c3e50;
+    --secondary: #8e44ad; /* Morado NorthPalace */
+    --accent-casa: #27ae60;
+    --accent-apto: #2980b9;
+    --white: #ffffff;
+    --bg-light: #f4f7f6;
+    --text: #333;
+    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gris-fondo);
+    color: var(--texto-oscuro);
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+/* ================================================
+   2. NAVBAR
+   ================================================ */
+#encabezado {
+    background: var(--primary);
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#menu-nav {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+#menu-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+#menu-nav a:hover { color: var(--secondary); }
+
+#btn-registro {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* ================================================
+   2. HERO Y BÚSQUEDA (Título de sección)
+   ================================================ */
+#encabezado-pagina {
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)), 
+                url('../img/hero-chihuahua.jpg') center/cover;
+    padding: 80px 5%;
+    text-align: center;
+    color: white;
+}
+
+#encabezado-pagina h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+#barra-busqueda {
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 25px 5%;
+    margin: -40px 5% 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+}
+
+#barra-busqueda div { flex: 1; min-width: 150px; }
+#barra-busqueda label { display: block; font-size: 0.8rem; font-weight: bold; color: #666; margin-bottom: 5px; }
+#barra-busqueda input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+
+#btn-buscar-prop {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#btn-buscar-prop:hover { transform: scale(1.05); }
+
+/* ================================================
+   3. LAYOUT PRINCIPAL (Sidebar + Resultados)
+   ================================================ */
+#contenido-principal {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    padding: 0 5% 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#sidebar-filtros {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    border: 1px solid #eee;
+    box-shadow: var(--shadow);
+}
+
+#sidebar-filtros h2 { font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+#sidebar-filtros h3 { font-size: 1rem; margin: 20px 0 10px; color: var(--primary); }
+
+/* ================================================
+   4. TABLA DE DISPONIBILIDAD
+   ================================================ */
+#tabla-disponibilidad {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.85rem;
+    box-shadow: var(--shadow);
+}
+
+#tabla-disponibilidad thead { background: var(--primary); color: white; }
+#tabla-disponibilidad th, #tabla-disponibilidad td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+
+.disponible { color: var(--accent-casa); font-weight: bold; }
+.ocupado { color: #e74c3c; font-style: italic; font-weight: bold; }
+
+/* ================================================
+   5. GRID DE PROPIEDADES (Cards)
+   ================================================ */
+#grid-propiedades {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+#grid-propiedades article {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
+
+#grid-propiedades article:hover { transform: translateY(-5px); }
+#grid-propiedades article img { width: 100%; height: 220px; object-fit: cover; }
+
+[id^="btn-ver-"] {
+    margin: 0 20px 20px;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* ================================================
+   7. PIE DE PÁGINA (Footer)
+   ================================================ */
+#pie-pagina {
+    background-color: var(--primary); /* Azul medianoche para seriedad */
+    color: var(--white);
+    padding: 60px 5% 20px;
+    margin-top: 50px;
+}
+
+#contenedor-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.columna-footer h4 {
+    color: var(--secondary); /* Morado para resaltar títulos */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#logo-footer {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.columna-footer p, 
+.columna-footer address {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bdc3c7; /* Gris claro para lectura suave */
+    font-style: normal;
+}
+
+.columna-footer ul {
+    list-style: none;
+}
+
+.columna-footer ul li {
+    margin-bottom: 10px;
+}
+
+.columna-footer ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.columna-footer ul li a:hover {
+    color: var(--secondary); /* Feedback visual al pasar el mouse */
+}
+
+#copyright {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}

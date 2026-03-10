@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NorthPalace - Detalle de propiedad</title>
+
+ 
+       <link rel="stylesheet" href="css/style_detalles.css" />
+
+</head>
+
+<body>
+
+  <!-- ================================================
+       SECCIÓN 1: NAVBAR
+       ================================================ -->
+  <header id="encabezado">
+    <nav id="navbar">
+
+      <a href="index.html" id="logo">NorthPalace</a>
+
+      <ul id="menu-nav">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="propiedades.html">Propiedades</a></li>
+        <li><a href="detalle.html">Ver detalle</a></li>
+        <li><a href="confirmacion.html">Mis reservas</a></li>
+      </ul>
+
+      <div id="botones-sesion">
+        <a href="#" id="btn-login">Iniciar sesión</a>
+        <a href="#" id="btn-registro">Registrarse</a>
+      </div>
+
+    </nav>
+  </header>
+  <!-- FIN NAVBAR -->
+
+
+  <!-- ================================================
+       SECCIÓN 2: GALERÍA DE FOTOS
+       COMPAÑERO DE JS: llenar src de las imágenes
+       con los datos de la propiedad seleccionada.
+       Al hacer clic en una miniatura, cambiar
+       el src de id="img-principal"
+       ================================================ -->
+  <section id="galeria">
+
+    <div id="foto-principal">
+      <!-- JS llena el src y alt según la propiedad seleccionada -->
+      <img src="Imagenes/Icono Casa.jpg" alt="" id="img-principal" />
+    </div>
+
+    <div id="galeria-miniaturas">
+      <!-- JS genera estas miniaturas dinámicamente -->
+    </div>
+
+  </section>
+  <!-- FIN GALERÍA -->
+
+
+  <!-- ================================================
+       SECCIÓN 3: INFORMACIÓN PRINCIPAL + RESERVA
+       ================================================ -->
+  <div id="contenido-detalle">
+
+
+    <!-- ============================================
+         COLUMNA IZQUIERDA: INFORMACIÓN DE LA PROPIEDAD
+         COMPAÑERO DE JS: llenar todos los campos vacíos
+         con los datos de la propiedad que el usuario
+         seleccionó en propiedades.html
+         ============================================ -->
+    <main id="info-propiedad">
+
+      <!-- Encabezado: JS llena título, tipo, cuartos, huéspedes, dirección y rating -->
+      <div id="prop-encabezado">
+        <h1 id="prop-titulo"></h1>
+
+        <div id="prop-subtitulo">
+          <span id="prop-tipo"></span>
+          <span id="prop-cuartos"></span>
+          <span id="prop-huespedes"></span>
+        </div>
+
+        <!-- JS llena la dirección de la propiedad seleccionada -->
+        <address id="prop-direccion"></address>
+
+        <!-- JS llena la calificación y genera las estrellas con data-rating -->
+        <div id="prop-rating" data-rating="">
+          <span id="prop-estrellas"></span>
+          <span id="prop-rating-numero"></span>
+          <a href="#seccion-resenas" id="link-resenas"></a>
+        </div>
+
+        <!-- COMPAÑERO DE JS: alternar corazón vacío/lleno -->
+        <button type="button" id="btn-favorito-detalle" aria-label="Guardar en favoritos">
+          &#9825; Guardar
+        </button>
+      </div>
+      <!-- FIN ENCABEZADO -->
+
+
+      <!-- Descripción: JS llena el texto según la propiedad -->
+      <div id="prop-descripcion">
+        <h2>Sobre esta propiedad</h2>
+        <!-- JS inserta aquí el texto de descripción de la propiedad -->
+        <p id="prop-descripcion-texto"></p>
+      </div>
+
+
+      <!-- Amenidades: JS genera los <li> según la propiedad seleccionada -->
+      <!-- Cada <li> debe tener atributo title="" para el tooltip -->
+      <div id="prop-amenidades">
+        <h2>Amenidades</h2>
+        <ul id="lista-amenidades">
+          <!-- JS llena esta lista dinámicamente -->
+        </ul>
+      </div>
+
+
+      <!-- Normas: JS puede llenar según la propiedad o dejarlo fijo -->
+      <div id="prop-normas">
+        <h2>Normas de la casa</h2>
+        <ul id="lista-normas">
+          <!-- JS llena esta lista dinámicamente -->
+        </ul>
+      </div>
+
+
+      <!-- Ubicación: JS llena dirección y referencias -->
+      <div id="prop-ubicacion">
+        <h2>Ubicación</h2>
+        <address id="ubicacion-completa"></address>
+        <p id="ubicacion-referencia"></p>
+        <!-- Contenedor para mapa (JS o CSS pueden insertar iframe aquí) -->
+        <div id="mapa-ubicacion"></div>
+      </div>
+
+
+      <!-- ==========================================
+           SECCIÓN DE RESEÑAS
+           COMPAÑERO DE JS:
+             - Generar reseñas con data-rating
+             - Estrellas interactivas del formulario
+             - Validar y agregar nueva reseña a la lista
+           ========================================== -->
+      <div id="seccion-resenas">
+        <h2>Reseñas de huéspedes</h2>
+
+        <!-- Resumen general: JS llena calificación y total -->
+        <div id="resumen-calificacion">
+          <p id="calificacion-general"></p>
+          <div id="resumen-estrellas" data-rating=""></div>
+          <p id="total-resenas"></p>
+        </div>
+
+        <!-- Barras por categoría: JS puede animar el ancho con data-valor -->
+        <div id="categorias-calificacion">
+
+          <div id="cat-limpieza">
+            <span>Limpieza</span>
+            <div id="barra-limpieza" data-valor="" role="progressbar" aria-valuemin="0" aria-valuemax="5">
+              <div id="progreso-limpieza"></div>
+            </div>
+            <span id="valor-limpieza"></span>
+          </div>
+
+          <div id="cat-comunicacion">
+            <span>Comunicación</span>
+            <div id="barra-comunicacion" data-valor="" role="progressbar" aria-valuemin="0" aria-valuemax="5">
+              <div id="progreso-comunicacion"></div>
+            </div>
+            <span id="valor-comunicacion"></span>
+          </div>
+
+          <div id="cat-ubicacion-rating">
+            <span>Ubicación</span>
+            <div id="barra-ubicacion-rating" data-valor="" role="progressbar" aria-valuemin="0" aria-valuemax="5">
+              <div id="progreso-ubicacion-rating"></div>
+            </div>
+            <span id="valor-ubicacion-rating"></span>
+          </div>
+
+          <div id="cat-valor">
+            <span>Valor</span>
+            <div id="barra-valor" data-valor="" role="progressbar" aria-valuemin="0" aria-valuemax="5">
+              <div id="progreso-valor"></div>
+            </div>
+            <span id="valor-categoria-valor"></span>
+          </div>
+
+        </div>
+
+        <!-- Lista de reseñas: JS genera los article dinámicamente -->
+        <div id="lista-resenas">
+          <!-- JS inserta aquí cada reseña como un article -->
+        </div>
+
+        <!-- Formulario para dejar reseña -->
+        <div id="form-resena">
+          <h3>Deja tu reseña</h3>
+
+          <div id="campo-autor-resena">
+            <label for="input-autor-resena">Tu nombre</label>
+            <input
+              type="text"
+              id="input-autor-resena"
+              name="autorResena"
+              placeholder="Ej. Juan Pérez"
+            />
+          </div>
+
+          <!-- COMPAÑERO DE JS: al hacer clic en cada estrella,
+               actualizar data-seleccion y llenar id="input-calificacion-resena" -->
+          <div id="campo-estrellas-resena">
+            <label>Tu calificación</label>
+            <div id="estrellas-interactivas" data-seleccion="0">
+              <span class="estrella-seleccionable" data-valor="1">&#9733;</span>
+              <span class="estrella-seleccionable" data-valor="2">&#9733;</span>
+              <span class="estrella-seleccionable" data-valor="3">&#9733;</span>
+              <span class="estrella-seleccionable" data-valor="4">&#9733;</span>
+              <span class="estrella-seleccionable" data-valor="5">&#9733;</span>
+            </div>
+            <input type="hidden" id="input-calificacion-resena" name="calificacion" value="0" />
+          </div>
+
+          <div id="campo-texto-resena">
+            <label for="textarea-resena">Tu comentario</label>
+            <textarea
+              id="textarea-resena"
+              name="textoResena"
+              rows="4"
+              placeholder="Cuéntanos tu experiencia en esta propiedad..."
+            ></textarea>
+          </div>
+
+          <button type="button" id="btn-enviar-resena">Publicar reseña</button>
+
+          <p id="error-resena" hidden>
+            Por favor completa todos los campos y selecciona una calificación.
+          </p>
+          <p id="mensaje-resena-ok" hidden>
+            ¡Gracias por tu reseña! Se publicará en breve.
+          </p>
+
+        </div>
+        <!-- FIN FORM RESEÑA -->
+
+      </div>
+      <!-- FIN SECCIÓN RESEÑAS -->
+
+    </main>
+    <!-- FIN COLUMNA IZQUIERDA -->
+
+
+    <!-- ============================================
+         COLUMNA DERECHA: PANEL DE RESERVA
+         COMPAÑERO DE JS:
+           - Llenar id="precio-noche" con el precio
+             de la propiedad seleccionada
+           - Calcular total al cambiar fechas o huéspedes
+           - Validar que fecha salida > fecha entrada
+           - Al reservar, guardar datos y redirigir
+             a confirmacion.html
+         ============================================ -->
+    <aside id="panel-reserva">
+
+      <div id="reserva-precio">
+        <!-- JS llena el precio según la propiedad seleccionada -->
+        <p><strong id="precio-noche"></strong> / noche</p>
+        <div id="reserva-rating" data-rating="">
+          <span id="reserva-estrellas"></span>
+          <span id="reserva-num-resenas"></span>
+        </div>
+      </div>
+
+      <div id="reserva-formulario">
+
+        <div id="reserva-fechas">
+          <div id="reserva-campo-entrada">
+            <label for="reserva-fecha-entrada">Llegada</label>
+            <input type="date" id="reserva-fecha-entrada" name="reservaEntrada" />
+          </div>
+          <div id="reserva-campo-salida">
+            <label for="reserva-fecha-salida">Salida</label>
+            <input type="date" id="reserva-fecha-salida" name="reservaSalida" />
+          </div>
+        </div>
+
+        <div id="reserva-campo-huespedes">
+          <label for="reserva-huespedes">Huéspedes</label>
+          <input
+            type="number"
+            id="reserva-huespedes"
+            name="reservaHuespedes"
+            min="1"
+            placeholder="1"
+          />
+          <!-- JS llena el máximo según la propiedad seleccionada -->
+          <p id="max-huespedes-aviso"></p>
+        </div>
+
+        <p id="error-fechas" hidden>
+          La fecha de salida debe ser posterior a la de entrada.
+        </p>
+
+        <!-- Desglose: JS calcula y actualiza estos valores -->
+        <div id="reserva-desglose">
+          <div id="desglose-noches">
+            <span id="texto-noches"></span>
+            <span id="costo-noches"></span>
+          </div>
+          <div id="desglose-limpieza">
+            <span>Tarifa de limpieza</span>
+            <span id="costo-limpieza"></span>
+          </div>
+          <div id="desglose-servicio">
+            <span>Tarifa de servicio NorthPalace</span>
+            <span id="costo-servicio"></span>
+          </div>
+          <hr />
+          <div id="desglose-total">
+            <strong>Total</strong>
+            <strong id="costo-total"></strong>
+          </div>
+        </div>
+
+        <button type="button" id="btn-reservar">Reservar ahora</button>
+        <p id="aviso-cobro">No se te cobrará nada por ahora</p>
+
+        <p id="error-reserva" hidden>
+          Por favor selecciona las fechas y el número de huéspedes.
+        </p>
+
+      </div>
+
+      <!-- Mini calendario: JS renderiza aquí la disponibilidad -->
+      <div id="disponibilidad-rapida">
+        <h3>Disponibilidad del mes</h3>
+        <div id="mini-calendario"></div>
+      </div>
+
+    </aside>
+    <!-- FIN PANEL RESERVA -->
+
+  </div>
+  <!-- FIN CONTENIDO DETALLE -->
+
+<!-- ================================================
+       SECCIÓN 4: FOOTER
+       COMPAÑERO DE JS: id="btn-newsletter" → validar
+       email y mostrar id="mensaje-newsletter"
+       ================================================ -->
+
+       <footer id="pie-pagina">
+    <div id="contenedor-footer">
+        <div class="columna-footer">
+            <a href="#" id="logo-footer">NorthPalace</a>
+            <p>Tu hogar ideal en la ciudad más grande del norte. Seguridad, confianza y las mejores propiedades en Chihuahua.</p>
+        </div>
+
+        <div class="columna-footer">
+            <h4>Explorar</h4>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Propiedades</a></li>
+                <li><a href="#">Zonas Populares</a></li>
+                <li><a href="#">Publicar</a></li>
+            </ul>
+        </div>
+
+        <div class="columna-footer">
+            <h4>Contacto</h4>
+            <address>
+                Chihuahua, Chih.<br>
+                Email: contacto@northpalace.com<br>
+                Tel: (614) 123-4567
+            </address>
+        </div>
+    </div>
+
+    <div id="copyright">
+        <p>&copy; 2026 Angel_caotick. Todos los derechos reservados.</p>
+    </div>
+</footer>
+  <!-- FIN FOOTER -->
+
+
+  <!-- ================================================
+       COMPAÑERO DE JS: enlaza aquí tu archivo
+       <script src="js/script.js"></script>
+
+       Al cargar esta página JS debe:
+         1. Leer la propiedad seleccionada (localStorage o URL params)
+         2. Llenar todos los campos vacíos:
+              id="prop-titulo"         → nombre de la propiedad
+              id="prop-tipo"           → Casa / Apartamento
+              id="prop-cuartos"        → Ej. "3 cuartos"
+              id="prop-huespedes"      → Ej. "6 huéspedes"
+              id="prop-direccion"      → dirección completa
+              id="prop-rating"         → data-rating y estrellas
+              id="prop-descripcion-texto" → descripción
+              id="lista-amenidades"    → generar <li> con title tooltip
+              id="lista-normas"        → generar <li>
+              id="ubicacion-completa"  → dirección
+              id="ubicacion-referencia"→ referencias cercanas
+              id="img-principal"       → src de la foto principal
+              id="galeria-miniaturas"  → generar miniaturas
+              id="precio-noche"        → precio de la propiedad
+              id="max-huespedes-aviso" → Ej. "Máximo 6 huéspedes"
+              id="lista-resenas"       → generar reseñas como article
+              id="calificacion-general", id="total-resenas" → resumen
+         3. Galería: clics en miniaturas cambian id="img-principal"
+         4. Favorito: id="btn-favorito-detalle"
+         5. Estrellas reseña: clics en .estrella-seleccionable
+         6. Enviar reseña: id="btn-enviar-resena"
+         7. Calcular costo: cambios en fechas/huéspedes → actualizar
+              id="texto-noches", id="costo-noches",
+              id="costo-limpieza", id="costo-servicio", id="costo-total"
+         8. Validar fechas: id="error-fechas"
+         9. Reservar: id="btn-reservar" → guardar datos y redirigir
+            a confirmacion.html
+       ================================================ -->
+
+</body>
+</html>

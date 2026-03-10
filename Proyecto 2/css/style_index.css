@@ -1,0 +1,504 @@
+/* ================================================
+   1. VARIABLES Y RESET (Base para todo el sitio)
+   ================================================ */
+:root {
+    --primary: #2c3e50;
+    --secondary: #8e44ad; /* Morado NorthPalace */
+    --accent-casa: #27ae60;
+    --accent-apto: #2980b9;
+    --white: #ffffff;
+    --bg-light: #f4f7f6;
+    --text: #333;
+    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text);
+}
+
+/* ================================================
+   2. NAVBAR
+   ================================================ */
+#encabezado {
+    background: var(--primary);
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#menu-nav {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+#menu-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+#menu-nav a:hover { color: var(--secondary); }
+
+#btn-registro {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* ================================================
+   3. HERO Y BUSCADOR
+   ================================================ */
+#hero {
+    height: 70vh;
+     background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)), 
+                url('../Imagenes/hero-chihuahua.jpg') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+#hero-texto h1 { font-size: 3rem; margin-bottom: 10px; }
+
+#buscador {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 90%;
+    max-width: 1000px;
+    margin-top: 30px;
+    box-shadow: var(--shadow);
+    color: var(--text);
+    align-items: flex-end;
+}
+
+#buscador div { display: flex; flex-direction: column; flex: 1; min-width: 150px; text-align: left; }
+
+#buscador label { font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #666; }
+
+#buscador input { padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+
+#btn-buscar {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ================================================
+   4. FILTROS RÁPIDOS
+   ================================================ */
+#filtros-rapidos { padding: 40px 5%; text-align: center; }
+
+#lista-filtros { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+#lista-filtros button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#lista-filtros button:hover { background: var(--secondary); color: white; }
+
+/* ================================================
+   5. GRID DE PROPIEDADES (Destacadas)
+   ================================================ */
+#propiedades-destacadas { 
+    padding: 60px 5%; 
+}
+
+#propiedades-destacadas h2 { 
+    margin-bottom: 40px; 
+    text-align: center;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+#grid-propiedades {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo de la Card */
+article {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Alineación vertical de contenido */
+    border: 1px solid #eee;
+}
+
+article:hover { transform: translateY(-10px); }
+
+/* Contenedor de Imagen */
+article img { 
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+}
+
+/* Badges sobre la imagen */
+[id^="badge-"] {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+article[data-tipo="casa"] [id^="badge-"] { background: var(--accent-casa); }
+article[data-tipo="apartamento"] [id^="badge-"] { background: var(--accent-apto); }
+
+[id^="fav-"] {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Información interna de la Card */
+.info-card {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+article h3 { 
+    font-size: 1.15rem;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+address { 
+    font-style: normal; 
+    color: #777; 
+    font-size: 0.85rem; 
+    margin-bottom: 10px;
+}
+
+[id^="rating-"] {
+    color: #f39c12;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+[id^="precio-"] {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+/* Características como Etiquetas (Tags) */
+[id^="caracteristicas-"] {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+[id^="caracteristicas-"] li {
+    background: #f0f2f5;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: #555;
+}
+
+/* Botón Ver Propiedad */
+[id^="btn-ver-"] {
+    display: block;
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+[id^="btn-ver-"]:hover { background: #34495e; }
+/* ================================================
+   6. MODAL (Dialog)
+   ================================================ */
+#modal-publicar {
+    border: none;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    padding: 0;
+    margin: auto;
+}
+
+#modal-publicar::backdrop { background: rgba(0,0,0,0.6); }
+
+#modal-encabezado {
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-cuerpo { padding: 25px; max-height: 70vh; overflow-y: auto; }
+
+fieldset { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+
+legend { font-weight: bold; padding: 0 10px; color: var(--secondary); }
+
+#modal-cuerpo label { display: block; margin: 10px 0 5px; font-size: 0.9rem; }
+
+#modal-cuerpo input, #modal-cuerpo select, #modal-cuerpo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#modal-acciones { display: flex; gap: 10px; margin-top: 20px; }
+
+#btn-enviar-publicar { background: var(--secondary); color: white; border: none; padding: 12px; flex: 2; border-radius: 5px; cursor: pointer; }
+
+#btn-cancelar-modal { background: #eee; border: none; padding: 12px; flex: 1; border-radius: 5px; cursor: pointer; }
+
+/* ================================================
+   1. MEJORA DE SECCIÓN CTA (Banner "Publicar Propiedad")
+   ================================================ */
+#banner-cta {
+    background-color: var(--primary); /* Azul medianoche para contraste */
+    background-image: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)),
+                      url('../Imagenes/hero-chihuahua.jpg'); /* Imagen de fondo con overlay */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 80px 5%; /* Espaciado interno amplio */
+    border-radius: 15px; /* Bordes redondeados modernos */
+    margin: 60px 5%; /* Espacio exterior para que no pegue a los bordes */
+    box-shadow: var(--shadow);
+}
+
+#banner-cta h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#banner-cta p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px; /* Centrado horizontal y espacio abajo */
+    opacity: 0.9; /* Un toque de transparencia */
+}
+
+/* Botón Publicar moderno */
+#btn-publicar {
+    background-color: var(--secondary); /* Morado NorthPalace */
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px; /* Totalmente redondeado */
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+#btn-publicar:hover {
+    background-color: #a55eea; /* Un morado un poco más claro */
+    transform: translateY(-3px) scale(1.03); /* Efecto de elevación y zoom */
+}
+
+/* ================================================
+   2. MEJORA DE SECCIÓN BENEFICIOS ("Por qué elegirnos")
+   ================================================ */
+#beneficios {
+    padding: 60px 5% 80px;
+    background-color: var(--white); /* Fondo blanco para limpieza */
+}
+
+#beneficios h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 50px;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* Línea decorativa bajo el título */
+#beneficios h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary);
+    border-radius: 2px;
+}
+
+/* Grid de beneficios */
+#grid-beneficios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsivo automático */
+    gap: 30px; /* Espacio entre columnas */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#grid-beneficios article {
+    background: var(--bg-light); /* Fondo gris muy suave */
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 1px solid #eee;
+}
+
+/* Efecto hover suave para los beneficios */
+#grid-beneficios article:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transform: translateY(-5px);
+}
+
+/* Títulos y textos dentro de cada beneficio */
+#grid-beneficios h3 {
+    color: var(--secondary); /* Títulos en morado */
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+#grid-beneficios p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ================================================
+   7. PIE DE PÁGINA (Footer)
+   ================================================ */
+#pie-pagina {
+    background-color: var(--primary); /* Azul medianoche para seriedad */
+    color: var(--white);
+    padding: 60px 5% 20px;
+    margin-top: 50px;
+}
+
+#contenedor-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.columna-footer h4 {
+    color: var(--secondary); /* Morado para resaltar títulos */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#logo-footer {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.columna-footer p, 
+.columna-footer address {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bdc3c7; /* Gris claro para lectura suave */
+    font-style: normal;
+}
+
+.columna-footer ul {
+    list-style: none;
+}
+
+.columna-footer ul li {
+    margin-bottom: 10px;
+}
+
+.columna-footer ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.columna-footer ul li a:hover {
+    color: var(--secondary); /* Feedback visual al pasar el mouse */
+}
+
+#copyright {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}

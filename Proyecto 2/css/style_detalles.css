@@ -1,0 +1,235 @@
+/* ================================================
+   1. RESET Y VARIABLES (Aesthetic NorthPalace)
+   ================================================ */
+:root {
+    --primary: #2c3e50;
+    --secondary: #8e44ad; /* Morado NorthPalace */
+    --accent-casa: #27ae60;
+    --accent-apto: #2980b9;
+    --white: rgba(255, 255, 255, 0.95); 
+    --bg-light: #f4f7f6;
+    --text: #ffffff; /* Texto claro para el fondo degradado */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', sans-serif; 
+}
+
+body {
+    /* Tu nuevo color de fondo con degradado */
+    background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(106, 13, 173, 0.5)), 
+                url('tu-imagen-de-fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ================================================
+   2. NAVBAR
+   ================================================ */
+#encabezado {
+    background: var(--primary);
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#menu-nav {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+#menu-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+#menu-nav a:hover { color: var(--secondary); }
+
+#btn-registro {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+/* ================================================
+   3. ESTRUCTURA: 1 (Imagen) y 2 (Card) ARRIBA, 3 (Texto) ABAJO
+   ================================================ */
+#contenido-detalle {
+    display: flex;
+    flex-wrap: wrap; /* El truco para que el texto baje */
+    gap: 30px;
+    padding: 30px 5% 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* Imagen (1) */
+#galeria {
+    flex: 2; /* Más ancho */
+    min-width: 500px;
+    margin: 0;
+}
+
+#img-principal {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Card de Reserva (2) */
+#panel-reserva {
+    flex: 1; /* Más angosto */
+    min-width: 350px;
+    background: var(--white);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    color: #333; /* Texto oscuro para legibilidad en el card blanco */
+    height: fit-content;
+}
+
+/* Texto Detallado (3) */
+#info-propiedad {
+    flex: 1 1 100%; /* Ocupa el 100% del ancho y baja */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+#info-propiedad h2 {
+    color: white;
+    margin: 10px 0 20px;
+    border-bottom: 2px solid var(--secondary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* ================================================
+   4. FORMULARIOS Y RESEÑAS
+   ================================================ */
+.reserva-campo-entrada, #reserva-campo-salida {
+    margin-bottom: 15px;
+}
+
+input[type="date"], input[type="number"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+#btn-reservar {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, var(--secondary), #6a0dad);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btn-reservar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4);
+}
+
+/* ================================================
+   7. PIE DE PÁGINA (Footer)
+   ================================================ */
+#pie-pagina {
+    background-color: var(--primary); /* Azul medianoche para seriedad */
+    color: var(--white);
+    padding: 60px 5% 20px;
+    margin-top: 50px;
+}
+
+#contenedor-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.columna-footer h4 {
+    color: var(--secondary); /* Morado para resaltar títulos */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#logo-footer {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.columna-footer p, 
+.columna-footer address {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #bdc3c7; /* Gris claro para lectura suave */
+    font-style: normal;
+}
+
+.columna-footer ul {
+    list-style: none;
+}
+
+.columna-footer ul li {
+    margin-bottom: 10px;
+}
+
+.columna-footer ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.columna-footer ul li a:hover {
+    color: var(--secondary); /* Feedback visual al pasar el mouse */
+}
+
+#copyright {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
