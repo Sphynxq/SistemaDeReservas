@@ -6,3 +6,16 @@ Se ha consolidado una estructura robusta en HTML5 con páginas para el inicio, c
 
 3/7/2026 8:47 pm actualice el javascript  
 3/7/2026 11:25 pm js con algo de css temporal, falta corregir reseñas traducidas, falta la traduccion de ventanas flotantes
+
+Christian y Moroni ---> HTML
+Se ha desarrollado la estructura base del proyecto empleando HTML5, consolidando el flujo de navegación a través de cuatro vistas principales:
+
+1. **Inicio:** Interfaz principal para la presentación y bienvenida al sistema.
+2. **Catálogo de propiedades:** Listado general y visual de los alojamientos disponibles.
+3. **Detalles de alojamiento:** Vista específica que muestra la información detallada de una propiedad seleccionada.
+4. **Confirmación de reservas:** Pantalla destinada al flujo de validación y confirmación de la reserva.
+
+**Implementación y Funcionamiento:**
+Para el desarrollo de estas interfaces, se implementó el framework Bootstrap 5, asegurando un diseño formal y completamente responsivo. El funcionamiento de las vistas se apoya en el uso de un sistema de *grids* para la distribución del contenido, *cards* para la presentación de las propiedades, y ventanas modales interactivas.
+
+En conjunto, estos cuatro archivos establecen la base estructural de la aplicación, lista para la integración con hojas de estilo dinámicas y la lógica de JavaScript.
