@@ -1,6 +1,17 @@
 /**
- * NorthPalace - Sistema de traducción e internacionalización
- * Extraído desde script.js para organizar mejor el código.
+ * ============================================================
+ * ARCHIVO: js/i18n.js (Internacionalización ES/EN)
+ *
+ * Este archivo define:
+ * - `TIPO_CAMBIO_USD`: tipo de cambio usado para mostrar USD
+ * - `traducciones`: pares ES → EN (ordenadas de frases largas a cortas)
+ * - `catalogos` + helper `t(clave)`: lookup por idioma
+ * - `initSelectorIdioma()` + `aplicarIdioma()`: UI flotante para ES/EN
+ * - `traducirPagina()`: traduce contenido visible (excepto reseñas/direcciones)
+ * - `convertirPreciosADolares()`: reescribe precios y data-precio
+ *
+ * Nota: `js/script.js` llama a `initSelectorIdioma()` y usa `traducir()`.
+ * ============================================================
  */
 
 // ============================================================
@@ -329,12 +340,14 @@ let idiomaActual = 'es';
  * Devuelve el texto traducido según el idioma actual.
  * La clave es el texto original en español.
  */
+// Traduce una clave (texto ES) al idioma activo.
 function t(clave) {
   const lang = idiomaActual || localStorage.getItem('idioma') || 'es';
   const bundle = catalogos[lang] || catalogos.es;
   return bundle[clave] || clave;
 }
 
+// Inserta el selector flotante ES/EN y conecta sus eventos.
 function initSelectorIdioma() {
   // Crear el botón selector de idioma
   const selectorHTML = `
@@ -386,6 +399,7 @@ function initSelectorIdioma() {
   });
 }
 
+// Cambia idioma, traduce la página y convierte precios si aplica.
 function aplicarIdioma(idioma) {
   idiomaActual = idioma;
   localStorage.setItem('idioma', idioma);
@@ -410,6 +424,7 @@ function aplicarIdioma(idioma) {
   }
 }
 
+// Aplica traducciones de abreviaturas solo cuando son palabra completa.
 function aplicarTraduccionSoloPalabraCompleta(texto) {
   let resultado = texto;
   traduccionesSoloPalabraCompleta.forEach(([es, en]) => {
@@ -419,6 +434,7 @@ function aplicarTraduccionSoloPalabraCompleta(texto) {
   return resultado;
 }
 
+// Recorre el DOM y traduce textos, placeholders y titles.
 function traducirPagina() {
   // Traducir elementos de texto
   const elementosTexto = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, label, th, td, li, legend, option, address, caption');
@@ -506,6 +522,7 @@ function traducirPagina() {
   }
 }
 
+// Convierte precios visibles y data-precio usando el tipo de cambio.
 function convertirPreciosADolares() {
   // Buscar todos los elementos que contienen precios en MXN
   const elementosConPrecio = document.querySelectorAll('p, span, td, strong, div');
@@ -546,14 +563,17 @@ function convertirPreciosADolares() {
   });
 }
 
+// Escapa caracteres especiales para construir RegExp segura.
 function escapeRegex(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Alias para traducción (compatibilidad con script.js).
 function traducir(texto) {
   return t(texto);
 }
 
+// Formatea precios según idiomaActual (MXN/USD).
 function formatearPrecioIdioma(precio) {
   if (idiomaActual === 'en') {
     const precioUsd = Math.round(precio / TIPO_CAMBIO_USD);

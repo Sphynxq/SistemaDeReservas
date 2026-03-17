@@ -1,6 +1,16 @@
  
 /* ==========================================================================
-   NORTHPALACE - ESTILOS BASE CON BOOTSTRAP 5
+   ARCHIVO: css/styles.css (Hoja de estilos global)
+
+   Este archivo contiene los estilos globales del proyecto:
+   - Variables de color (paleta), tipografías y resets
+   - Layout y componentes compartidos (navbar, footer, cards, botones)
+   - Estilos específicos por página (index, propiedades, detalle, confirmación)
+   - Clases/IDs consumidos por el HTML y por componentes generados vía JS
+
+   Nota importante:
+   - Algunos estilos se basan en variables CSS (por ejemplo: --primary/--secondary)
+     que también son usadas por elementos inyectados por `js/script.js` y `js/i18n.js`.
    ========================================================================== */
 
 /* Importación de Bootstrap 5 desde CDN para asegurar disponibilidad de variables */
@@ -315,7 +325,7 @@ div[id^="rating"] { color: #ffc107; font-weight: bold; }
     #menu-nav { gap: 0.5rem; font-size: 0.9rem; }
     #sidebar-filtros { flex: 0 0 100%; }
 }
-=======
+
 /* ============================================
    NorthPalace - CSS mínimo para pruebas
    ============================================ */

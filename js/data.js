@@ -1,6 +1,17 @@
 /**
- * NorthPalace - Datos de propiedades y reservas
- * Extraído desde script.js para organizar mejor el código.
+ * ============================================================
+ * ARCHIVO: js/data.js (Datos y “base de datos” simulada)
+ *
+ * Este archivo define:
+ * - `propiedadesData`: catálogo de propiedades (cards, detalle, confirmación)
+ * - `reservasHardcodeadas`: reservas pre-cargadas para el calendario
+ * - Helpers de persistencia en localStorage para el calendario:
+ *     - STORAGE_CALENDARIO / STORAGE_ELIMINADOS
+ *     - getReservasPropiedad(), isDiaOcupado(), haySolapamientoReserva()
+ *     - addReservaPropiedad(), removeReservaPropiedad()
+ *
+ * Todo lo que se define aquí se consume desde `js/script.js`.
+ * ============================================================
  */
 
 // ============================================================
@@ -247,6 +258,7 @@ const reservasHardcodeadas = {
   ]
 };
 
+// Lee reservas de usuario (calendario) desde localStorage.
 function getCalendarioReservas() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_CALENDARIO) || '{}');
@@ -255,6 +267,7 @@ function getCalendarioReservas() {
   }
 }
 
+// Lee IDs de reservas hardcodeadas eliminadas por el usuario.
 function getCalendarioEliminados() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_ELIMINADOS) || '{}');
@@ -263,6 +276,7 @@ function getCalendarioEliminados() {
   }
 }
 
+// Devuelve todas las reservas (hardcodeadas + usuario) filtrando eliminadas.
 function getReservasPropiedad(propiedadId) {
   const id = Number(propiedadId);
   const hardcodeadas = (reservasHardcodeadas[id] || []).map(r => ({ ...r, esHardcodeada: true }));
@@ -271,6 +285,7 @@ function getReservasPropiedad(propiedadId) {
   return [...hardcodeadas.filter(r => !eliminados.includes(r.id)), ...usuario];
 }
 
+// Indica si una fecha está ocupada según el calendario de la propiedad.
 function isDiaOcupado(propiedadId, fechaStr) {
   const reservas = getReservasPropiedad(propiedadId);
   const d = fechaStr.replace(/-/g, '');
@@ -282,6 +297,7 @@ function isDiaOcupado(propiedadId, fechaStr) {
 }
 
 /** Devuelve true si el rango [fechaEntrada, fechaSalida) se solapa con alguna reserva existente de la propiedad. */
+// Verifica si un rango de fechas se solapa con reservas existentes.
 function haySolapamientoReserva(propiedadId, fechaEntrada, fechaSalida) {
   const reservas = getReservasPropiedad(propiedadId);
   const ent = fechaEntrada.replace(/-/g, '');
@@ -293,6 +309,7 @@ function haySolapamientoReserva(propiedadId, fechaEntrada, fechaSalida) {
   });
 }
 
+// Determina si una reserva ya terminó o está en curso (comparando con hoy).
 function isReservaPasadaOEnCurso(reserva) {
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
@@ -305,6 +322,7 @@ function isReservaPasadaOEnCurso(reserva) {
   return false;
 }
 
+// Devuelve estado textual de una reserva: pasada / en_curso / futura.
 function estadoReserva(reserva) {
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
@@ -317,10 +335,12 @@ function estadoReserva(reserva) {
   return 'futura';
 }
 
+// Permite eliminar solo reservas futuras.
 function puedeEliminarReserva(reserva) {
   return estadoReserva(reserva) === 'futura';
 }
 
+// Agrega una reserva de usuario al calendario de una propiedad.
 function addReservaPropiedad(propiedadId, fechaEntrada, fechaSalida) {
   const data = getCalendarioReservas();
   const id = Number(propiedadId);
@@ -335,6 +355,7 @@ function addReservaPropiedad(propiedadId, fechaEntrada, fechaSalida) {
   return nueva;
 }
 
+// Elimina una reserva (usuario) o marca hardcodeada como eliminada.
 function removeReservaPropiedad(propiedadId, reservaId) {
   if (String(reservaId).startsWith('u-')) {
     const data = getCalendarioReservas();

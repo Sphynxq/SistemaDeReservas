@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- ================================================
+       ARCHIVO: confirmacion.html (Mis reservas / Confirmación)
+
+       Este documento contiene:
+       - Navbar global
+       - Sección de éxito (se muestra cuando existe `reservaConfirmada`)
+       - Resumen de reserva confirmada (tablas + datos del huésped)
+       - Formulario para confirmar (se muestra cuando existe `reservaActiva`)
+       - Sección "sin reserva" (cuando no hay `reservaActiva` ni confirmada)
+       - Historial de reservas confirmadas (`reservasHistorial` en localStorage)
+       - Footer global
+
+       Toda la lógica de mostrar/ocultar secciones y rellenar datos
+       está en `js/script.js`.
+       ================================================ -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NorthPalace - Confirmación de reserva</title>

@@ -1,6 +1,23 @@
 /**
- * NorthPalace - Sistema de Reservas
- * JavaScript principal para todas las páginas
+ * ============================================================
+ * ARCHIVO: js/script.js (Lógica principal del sitio)
+ *
+ * Este archivo implementa:
+ * - Inicialización global (DOMContentLoaded): tooltips, newsletter, auth,
+ *   estilos/ventanas flotantes, términos y selector de idioma.
+ * - Enrutado por página (`getCurrentPage()`):
+ *     - index: buscador, filtros rápidos, favoritos, modal publicar
+ *     - propiedades: buscador, filtros avanzados, ordenar, tabla disponibilidad
+ *     - detalle: carga de propiedad, galería, reseñas, panel reserva, calendario
+ *     - confirmación: flujo de confirmar + historial de reservas
+ *
+ * También define utilidades compartidas:
+ * - Notificaciones flotantes / confirmaciones modales (overlay)
+ * - Validaciones (email/teléfono), formateos (fecha/precio), favoritos, etc.
+ *
+ * Los datos de propiedades y calendario viven en `js/data.js`.
+ * La traducción y selector ES/EN viven en `js/i18n.js`.
+ * ============================================================
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Detecta qué página HTML está abierta para inicializar su lógica.
 function getCurrentPage() {
   const path = window.location.pathname;
   if (path.includes('propiedades')) return 'propiedades';
@@ -47,6 +65,7 @@ function getCurrentPage() {
 // SISTEMA DE MODALES Y NOTIFICACIONES
 // ============================================================
 
+// Inyecta estilos CSS para modales/notificaciones generados por JS.
 function crearEstilosModales() {
   if (document.getElementById('estilos-modales')) return;
   
@@ -378,6 +397,7 @@ function crearEstilosModales() {
   document.head.appendChild(estilos);
 }
 
+// Muestra una notificación flotante (overlay) con botón “Aceptar”.
 function mostrarNotificacion(tipo, titulo, mensaje, callback = null) {
   const iconos = {
     success: '✓',
@@ -426,6 +446,7 @@ function mostrarNotificacion(tipo, titulo, mensaje, callback = null) {
   });
 }
 
+// Muestra un modal de confirmación (Confirmar/Cancelar) y ejecuta callbacks.
 function mostrarConfirmacionModal(titulo, mensaje, onConfirm, onCancel = null) {
   const overlay = document.createElement('div');
   overlay.className = 'notificacion-overlay';
@@ -463,6 +484,7 @@ function mostrarConfirmacionModal(titulo, mensaje, onConfirm, onCancel = null) {
   });
 }
 
+// Abre el modal flotante de “Términos y condiciones”.
 function mostrarModalTerminos() {
   const contenidoTerminos = `
     <h3>1. Aceptación</h3>
@@ -520,6 +542,7 @@ function mostrarModalTerminos() {
   document.body.appendChild(overlay);
 }
 
+// Conecta los links de términos para abrir el modal correspondiente.
 function initTerminosModal() {
   document.querySelectorAll('.link-terminos-modal').forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -529,6 +552,7 @@ function initTerminosModal() {
   });
 }
 
+// Conecta botones de navbar para abrir login/registro.
 function initModalesAuth() {
   const btnLogin = document.getElementById('btn-login');
   const btnRegistro = document.getElementById('btn-registro');
@@ -548,6 +572,7 @@ function initModalesAuth() {
   }
 }
 
+// Renderiza y controla el modal flotante de inicio de sesión.
 function mostrarModalLogin() {
   cerrarModalesAuth();
   
@@ -653,6 +678,7 @@ function mostrarModalLogin() {
   });
 }
 
+// Renderiza y controla el modal flotante de creación de cuenta.
 function mostrarModalRegistro() {
   cerrarModalesAuth();
   
@@ -794,6 +820,7 @@ function mostrarModalRegistro() {
   });
 }
 
+// Cierra cualquier modal de auth abierto y restaura el scroll.
 function cerrarModalesAuth() {
   const loginModal = document.getElementById('modal-login-overlay');
   const registroModal = document.getElementById('modal-registro-overlay');
@@ -802,6 +829,7 @@ function cerrarModalesAuth() {
   document.body.style.overflow = '';
 }
 
+// Actualiza el navbar cuando existe un usuario logueado.
 function actualizarUIUsuario(usuario) {
   const botonesSesion = document.getElementById('botones-sesion');
   if (botonesSesion && usuario && usuario.logueado) {
@@ -834,6 +862,7 @@ function actualizarUIUsuario(usuario) {
 // UTILIDADES COMUNES
 // ============================================================
 
+// Inicializa tooltips simples basados en el atributo title.
 function initTooltips() {
   const elementsWithTitle = document.querySelectorAll('[title]');
   elementsWithTitle.forEach(el => {
@@ -846,6 +875,7 @@ function initTooltips() {
   });
 }
 
+// Valida el email del newsletter y muestra confirmación.
 function initNewsletter() {
   const btnNewsletter = document.getElementById('btn-newsletter');
   const inputNewsletter = document.getElementById('input-newsletter');
@@ -872,16 +902,19 @@ function initNewsletter() {
   }
 }
 
+// Valida formato básico de correo.
 function isValidEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
 
+// Valida teléfono por cantidad mínima de dígitos.
 function isValidPhone(phone) {
   const cleaned = phone.replace(/\D/g, '');
   return cleaned.length >= 10;
 }
 
+// Genera un código aleatorio de reserva (NP-XXXXXXXX).
 function generarCodigoReserva() {
   const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let codigo = 'NP-';
@@ -891,18 +924,21 @@ function generarCodigoReserva() {
   return codigo;
 }
 
+// Formatea fecha corta (día/mes) en español.
 function formatearFecha(fechaStr) {
   const fecha = new Date(fechaStr + 'T00:00:00');
   const opciones = { day: 'numeric', month: 'short' };
   return fecha.toLocaleDateString('es-MX', opciones);
 }
 
+// Formatea fecha larga (día de semana, día, mes, año) en español.
 function formatearFechaCompleta(fechaStr) {
   const fecha = new Date(fechaStr + 'T00:00:00');
   const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return fecha.toLocaleDateString('es-MX', opciones);
 }
 
+// Calcula número de noches entre dos fechas.
 function calcularNoches(fechaEntrada, fechaSalida) {
   const entrada = new Date(fechaEntrada);
   const salida = new Date(fechaSalida);
@@ -911,6 +947,7 @@ function calcularNoches(fechaEntrada, fechaSalida) {
   return diffDays;
 }
 
+// Formatea precio según idioma (MXN o USD).
 function formatearPrecio(precio) {
   const idioma = localStorage.getItem('idioma') || 'es';
   if (idioma === 'en') {
@@ -920,6 +957,7 @@ function formatearPrecio(precio) {
   return '$' + precio.toLocaleString('es-MX');
 }
 
+// Devuelve una representación de estrellas (★/☆) según rating.
 function generarEstrellas(rating) {
   const llenas = Math.floor(rating);
   const media = rating % 1 >= 0.5 ? 1 : 0;
@@ -933,6 +971,7 @@ function generarEstrellas(rating) {
   return estrellas;
 }
 
+// Alterna el ID en la lista de favoritos (localStorage).
 function guardarFavorito(id) {
   let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
   const index = favoritos.indexOf(id);
@@ -948,11 +987,13 @@ function guardarFavorito(id) {
   localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
+// Verifica si un ID está marcado como favorito.
 function esFavorito(id) {
   const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
   return favoritos.includes(id);
 }
 
+// Alterna favorito y actualiza el estado visual del botón.
 function toggleFavorito(btn, id) {
   let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
   const index = favoritos.indexOf(id);
@@ -976,6 +1017,7 @@ function toggleFavorito(btn, id) {
 // INDEX.HTML - Página Principal
 // ============================================================
 
+// Inicializa la página de inicio (index.html).
 function initIndexPage() {
   initBuscadorIndex();
   initFiltrosRapidos();
@@ -983,6 +1025,7 @@ function initIndexPage() {
   initModalPublicar();
 }
 
+// Controla el buscador del hero y guarda la búsqueda en localStorage.
 function initBuscadorIndex() {
   const btnBuscar = document.getElementById('btn-buscar');
   const errorBusqueda = document.getElementById('error-busqueda');
@@ -1027,6 +1070,7 @@ function initBuscadorIndex() {
   });
 }
 
+// Activa filtros rápidos en index (clase .activo y filtro por data-tipo).
 function initFiltrosRapidos() {
   const botonesFilter = document.querySelectorAll('#lista-filtros button');
   const cards = document.querySelectorAll('#grid-propiedades article');
@@ -1055,6 +1099,7 @@ function initFiltrosRapidos() {
   });
 }
 
+// Maneja favoritos en cards del index (corazón).
 function initFavoritosIndex() {
   const botonesFav = document.querySelectorAll('[id^="fav-"]');
   
@@ -1088,6 +1133,7 @@ function initFavoritosIndex() {
   });
 }
 
+// Controla el modal (dialog) para publicar una propiedad.
 function initModalPublicar() {
   const modal = document.getElementById('modal-publicar');
   const btnPublicar = document.getElementById('btn-publicar');
@@ -1173,6 +1219,7 @@ function initModalPublicar() {
 // PROPIEDADES.HTML - Listado de Propiedades
 // ============================================================
 
+// Inicializa la página de catálogo (propiedades.html).
 function initPropiedadesPage() {
   initBuscadorPropiedades();
   initFiltrosAvanzados();
@@ -1182,6 +1229,7 @@ function initPropiedadesPage() {
   initSeleccionPropiedad();
 }
 
+// Controla la barra de búsqueda y dispara el filtrado.
 function initBuscadorPropiedades() {
   const btnBuscar = document.getElementById('btn-buscar-prop');
   const errorBusqueda = document.getElementById('error-busqueda-prop');
@@ -1222,6 +1270,7 @@ function initBuscadorPropiedades() {
   });
 }
 
+// Conecta botones “Aplicar filtros” y “Limpiar filtros”.
 function initFiltrosAvanzados() {
   const btnAplicar = document.getElementById('btn-aplicar-filtros');
   const btnLimpiar = document.getElementById('btn-limpiar-filtros');
@@ -1235,6 +1284,7 @@ function initFiltrosAvanzados() {
   }
 }
 
+// Aplica filtros del sidebar sobre las cards usando data-*.
 function aplicarFiltros() {
   const cards = document.querySelectorAll('#grid-propiedades article[id^="card-"]');
   const sinResultados = document.getElementById('sin-resultados');
@@ -1320,6 +1370,7 @@ function aplicarFiltros() {
   }
 }
 
+// Restaura filtros a valores por defecto y muestra todas las cards.
 function limpiarFiltros() {
   document.querySelectorAll('#sidebar-filtros input[type="checkbox"]').forEach(cb => cb.checked = false);
   document.querySelectorAll('#sidebar-filtros input[type="number"]').forEach(input => input.value = '');
@@ -1341,6 +1392,7 @@ function limpiarFiltros() {
   }
 }
 
+// Ordena las cards según el select (precio/rating).
 function initOrdenarPropiedades() {
   const selectOrden = document.getElementById('select-orden');
   
@@ -1373,10 +1425,12 @@ function initOrdenarPropiedades() {
   });
 }
 
+// Reutiliza lógica de favoritos dentro de propiedades.html.
 function initFavoritosPropiedades() {
   initFavoritosIndex();
 }
 
+// Renderiza la tabla de disponibilidad semanal.
 function initTablaDisponibilidad() {
   const tbody = document.getElementById('tabla-disponibilidad-body');
   const theadDias = document.querySelectorAll('#tabla-disponibilidad thead th.tabla-disp-dia');
@@ -1420,6 +1474,7 @@ function initTablaDisponibilidad() {
   });
 }
 
+// Guarda la propiedad seleccionada y navega a detalle.html.
 function initSeleccionPropiedad() {
   const botonesVer = document.querySelectorAll('[id^="btn-ver-"]');
   
@@ -1441,6 +1496,7 @@ function initSeleccionPropiedad() {
 // DETALLE.HTML - Detalle de Propiedad
 // ============================================================
 
+// Inicializa el detalle de propiedad (detalle.html).
 function initDetallePage() {
   const propiedadId = parseInt(localStorage.getItem('propiedadSeleccionada')) || 1;
   const propiedad = propiedadesData.find(p => p.id === propiedadId) || propiedadesData[0];
@@ -1453,6 +1509,7 @@ function initDetallePage() {
   initMiniCalendario(propiedad);
 }
 
+// Rellena el DOM del detalle con los datos de la propiedad.
 function cargarDatosPropiedad(propiedad) {
   const setTexto = (id, texto) => {
     const el = document.getElementById(id);
@@ -1544,6 +1601,7 @@ function cargarDatosPropiedad(propiedad) {
   cargarResenas(propiedad);
 }
 
+// Construye la galería (principal + miniaturas) y maneja clics.
 function initGaleria(propiedad) {
   const imgPrincipal = document.getElementById('img-principal');
   const galeriaMiniaturas = document.getElementById('galeria-miniaturas');
@@ -1574,6 +1632,7 @@ function initGaleria(propiedad) {
   }
 }
 
+// Maneja el botón de favorito en la página de detalle.
 function initFavoritoDetalle(propiedad) {
   const btnFavorito = document.getElementById('btn-favorito-detalle');
   
@@ -1594,6 +1653,7 @@ function initFavoritoDetalle(propiedad) {
  * @param {HTMLElement} contenedor - Elemento #estrellas-interactivas
  * @param {number} valor - Número de estrellas a marcar como activas (0-5)
  */
+// Pinta estrellas interactivas (reseñas) según selección.
 function pintarEstrellasResena(contenedor, valor) {
   if (!contenedor) return;
   const estrellas = contenedor.querySelectorAll('.estrella-seleccionable');
@@ -1604,6 +1664,7 @@ function pintarEstrellasResena(contenedor, valor) {
   });
 }
 
+// Inicializa UI de reseñas: estrellas, validación y agregado.
 function initResenasDetalle(propiedad) {
   const estrellasInteractivas = document.getElementById('estrellas-interactivas');
   const inputCalificacion = document.getElementById('input-calificacion-resena');
@@ -1686,6 +1747,7 @@ function initResenasDetalle(propiedad) {
   }
 }
 
+// Renderiza la lista de reseñas en el DOM.
 function cargarResenas(propiedad) {
   const listaResenas = document.getElementById('lista-resenas');
   
@@ -1711,6 +1773,7 @@ function cargarResenas(propiedad) {
   `).join('');
 }
 
+// Controla el panel de reserva: fechas, desglose, validaciones y navegación.
 function initPanelReserva(propiedad) {
   const fechaEntrada = document.getElementById('reserva-fecha-entrada');
   const fechaSalida = document.getElementById('reserva-fecha-salida');
@@ -1888,6 +1951,7 @@ function initPanelReserva(propiedad) {
   }
 }
 
+// Renderiza el mini-calendario del mes y lista reservas (calendario).
 function initMiniCalendario(propiedad) {
   const contenedor = document.getElementById('mini-calendario');
   const acciones = document.getElementById('calendario-reservas-acciones');
@@ -2070,6 +2134,7 @@ function initMiniCalendario(propiedad) {
 // CONFIRMACION.HTML - Confirmación de Reserva
 // ============================================================
 
+// Controla confirmación: formulario, resumen, éxito, “sin reserva” e historial.
 function initConfirmacionPage() {
   const reservaActiva = JSON.parse(localStorage.getItem('reservaActiva'));
   const reservaConfirmada = JSON.parse(localStorage.getItem('reservaConfirmada'));
@@ -2142,6 +2207,7 @@ function initConfirmacionPage() {
   renderHistorialReservas();
 }
 
+// Rellena el mini-resumen superior de la reserva pendiente.
 function cargarMiniResumen(reserva) {
   const miniImg = document.getElementById('mini-img-propiedad');
   const miniTitulo = document.getElementById('mini-titulo-propiedad');
@@ -2168,6 +2234,7 @@ function cargarMiniResumen(reserva) {
   }
 }
 
+// Valida el formulario del huésped y confirma la reserva.
 function initFormularioHuesped(reserva) {
   const btnConfirmar = document.getElementById('btn-confirmar-reserva');
   const campoNombre = document.getElementById('campo-nombre-huesped');
@@ -2287,6 +2354,7 @@ function initFormularioHuesped(reserva) {
   });
 }
 
+// Muestra y rellena el resumen final de reserva confirmada.
 function mostrarConfirmacion(reserva) {
   const seccionFormulario = document.getElementById('seccion-formulario-huesped');
   const seccionExito = document.getElementById('seccion-exito');
@@ -2364,6 +2432,7 @@ function mostrarConfirmacion(reserva) {
 // HISTORIAL DE RESERVAS (Mis reservas)
 // ============================================================
 
+// Lee el historial de reservas confirmadas desde localStorage.
 function getHistorialReservas() {
   try {
     return JSON.parse(localStorage.getItem('reservasHistorial') || '[]');
@@ -2372,12 +2441,14 @@ function getHistorialReservas() {
   }
 }
 
+// Agrega una reserva confirmada al historial en localStorage.
 function guardarEnHistorial(reservaCompleta) {
   const historial = getHistorialReservas();
   historial.push(reservaCompleta);
   localStorage.setItem('reservasHistorial', JSON.stringify(historial));
 }
 
+// Renderiza el historial de reservas en confirmacion.html.
 function renderHistorialReservas() {
   const contenedor = document.getElementById('lista-historial-reservas');
   const mensajeVacio = document.getElementById('historial-vacio');
